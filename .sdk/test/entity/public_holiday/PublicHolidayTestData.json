@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "public_holiday": {
+      "PUBLIC_HOLIDAY00": {
+        "country_code": "s5a",
+        "county": [],
+        "date": "s5c",
+        "fixed": false,
+        "global": true,
+        "launch_year": "s5f",
+        "local_name": "s60",
+        "name": "s61",
+        "type": [],
+        "year": "YEAR01"
+      },
+      "PUBLIC_HOLIDAY01": {
+        "country_code": "sb4",
+        "county": [],
+        "date": "sb6",
+        "fixed": false,
+        "global": true,
+        "launch_year": "sb9",
+        "local_name": "sba",
+        "name": "sbb",
+        "type": [],
+        "year": "YEAR01"
+      },
+      "PUBLIC_HOLIDAY02": {
+        "country_code": "s10e",
+        "county": [],
+        "date": "s110",
+        "fixed": false,
+        "global": true,
+        "launch_year": "s113",
+        "local_name": "s114",
+        "name": "s115",
+        "type": [],
+        "year": "YEAR01"
+      }
+    }
+  },
+  "new": {
+    "public_holiday": {
+      "public_holiday_ref01": {
+        "country_code": "s168",
+        "county": [],
+        "date": "s16a",
+        "fixed": false,
+        "global": true,
+        "launch_year": "s16d",
+        "local_name": "s16e",
+        "name": "s16f",
+        "type": []
+      }
+    }
+  }
+}

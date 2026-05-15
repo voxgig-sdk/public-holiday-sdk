@@ -1,0 +1,48 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 7
+  metrics: count: method: 7
+
+  entity: available_country: {
+    path: "/AvailableCountries": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: country_info: {
+    path: "/CountryInfo/{CountryCode}": {
+      rename: param: "CountryCode": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: long_weekend: {
+    path: "/LongWeekend/{Year}/{CountryCode}": {
+      rename: param: "CountryCode": *"country_code"
+      rename: param: "Year": *"year"
+      op: list: method: *GET
+    }
+  }
+
+  entity: public_holiday: {
+    path: "/IsTodayPublicHoliday/{CountryCode}": {
+      rename: param: "CountryCode": *"country_code"
+      op: load: method: *GET
+    }
+    path: "/NextPublicHolidays/{CountryCode}": {
+      rename: param: "CountryCode": *"country_code"
+      op: load: method: *GET
+    }
+    path: "/NextPublicHolidaysWorldwide": {
+      op: list: method: *GET
+    }
+    path: "/PublicHolidays/{Year}/{CountryCode}": {
+      rename: param: "CountryCode": *"country_code"
+      rename: param: "Year": *"year"
+      op: list: method: *GET
+    }
+  }
+
+}

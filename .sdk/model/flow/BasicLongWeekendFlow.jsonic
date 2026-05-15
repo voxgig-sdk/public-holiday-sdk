@@ -1,0 +1,27 @@
+# BasicLongWeekendFlow
+
+main: kit: flow: BasicLongWeekendFlow:
+{
+  entity: "long_weekend",
+  kind: "basic",
+  name: "BasicLongWeekendFlow",
+  step: [
+    {
+      match: {
+        country_code: "country_code01",
+        year: "year01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "long_weekend_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLongWeekendFlow"
+}

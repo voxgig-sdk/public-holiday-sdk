@@ -1,0 +1,32 @@
+# BasicCountryInfoFlow
+
+main: kit: flow: BasicCountryInfoFlow:
+{
+  entity: "country_info",
+  kind: "basic",
+  name: "BasicCountryInfoFlow",
+  step: [
+    {
+      input: {
+        ref: "country_info_ref01",
+        srcdatavar: "country_info_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "country_info01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-country_info_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCountryInfoFlow"
+}

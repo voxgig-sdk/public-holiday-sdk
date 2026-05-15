@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "country_info": {
+      "COUNTRY_INFO00": {
+        "border": [],
+        "common_name": "s33",
+        "country_code": "s34",
+        "official_name": "s35",
+        "region": "s36"
+      },
+      "COUNTRY_INFO01": {
+        "border": [],
+        "common_name": "s65",
+        "country_code": "s66",
+        "official_name": "s67",
+        "region": "s68"
+      },
+      "COUNTRY_INFO02": {
+        "border": [],
+        "common_name": "s97",
+        "country_code": "s98",
+        "official_name": "s99",
+        "region": "s9a"
+      }
+    }
+  },
+  "new": {
+    "country_info": {
+      "country_info_ref01": {
+        "border": [],
+        "common_name": "sc9",
+        "country_code": "sca",
+        "official_name": "scb",
+        "region": "scc"
+      }
+    }
+  }
+}

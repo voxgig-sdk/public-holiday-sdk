@@ -1,0 +1,483 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Public Holiday API",
+    "description": "An API for public holiday data. Supports over 100 countries. Provides information on holidays and long weekends. The API provides a simple way to query the holidays of over 100 countries, including long weekends. For IoT devices, there's an endpoint to check if today is a holiday.",
+    "version": "3.0.0",
+    "contact": {
+      "url": "https://date.nager.at/Api"
+    },
+    "termsOfService": "https://date.nager.at"
+  },
+  "servers": [
+    {
+      "url": "https://date.nager.at/api/v3",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/PublicHolidays/{Year}/{CountryCode}": {
+      "get": {
+        "summary": "Get public holidays",
+        "description": "Get the public holidays from the given year and country",
+        "operationId": "getPublicHolidays",
+        "tags": [
+          "Public Holidays"
+        ],
+        "parameters": [
+          {
+            "name": "Year",
+            "in": "path",
+            "description": "The year to retrieve holidays for",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2026
+            }
+          },
+          {
+            "name": "CountryCode",
+            "in": "path",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "AT"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of public holidays",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicHoliday"
+                  }
+                },
+                "example": [
+                  {
+                    "date": "2017-01-01",
+                    "localName": "Neujahr",
+                    "name": "New Year's Day",
+                    "countryCode": "AT",
+                    "fixed": true,
+                    "global": true,
+                    "counties": null,
+                    "launchYear": 1967,
+                    "types": [
+                      "Public"
+                    ]
+                  },
+                  {
+                    "date": "2017-01-06",
+                    "localName": "Heilige Drei Könige",
+                    "name": "Epiphany",
+                    "countryCode": "AT",
+                    "fixed": true,
+                    "global": true,
+                    "counties": null,
+                    "launchYear": null,
+                    "types": [
+                      "Public"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid year or country code format"
+          },
+          "404": {
+            "description": "Country not found or no holidays available for the specified year"
+          }
+        }
+      }
+    },
+    "/AvailableCountries": {
+      "get": {
+        "summary": "Get available countries",
+        "description": "Get all available countries supported by the API",
+        "operationId": "getAvailableCountries",
+        "tags": [
+          "Countries"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of available countries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Country"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CountryInfo/{CountryCode}": {
+      "get": {
+        "summary": "Get country info",
+        "description": "Get information about a specific country",
+        "operationId": "getCountryInfo",
+        "tags": [
+          "Countries"
+        ],
+        "parameters": [
+          {
+            "name": "CountryCode",
+            "in": "path",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "AT"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with country information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountryInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Country not found"
+          }
+        }
+      }
+    },
+    "/IsTodayPublicHoliday/{CountryCode}": {
+      "get": {
+        "summary": "Check if today is a public holiday",
+        "description": "Check if today is a public holiday in the given country. Useful for IoT devices.",
+        "operationId": "isTodayPublicHoliday",
+        "tags": [
+          "Public Holidays"
+        ],
+        "parameters": [
+          {
+            "name": "CountryCode",
+            "in": "path",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "AT"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Timezone offset in hours",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Today is a public holiday"
+          },
+          "204": {
+            "description": "Today is not a public holiday"
+          },
+          "404": {
+            "description": "Country not found"
+          }
+        }
+      }
+    },
+    "/NextPublicHolidays/{CountryCode}": {
+      "get": {
+        "summary": "Get next public holidays",
+        "description": "Get the next upcoming public holidays for a country",
+        "operationId": "getNextPublicHolidays",
+        "tags": [
+          "Public Holidays"
+        ],
+        "parameters": [
+          {
+            "name": "CountryCode",
+            "in": "path",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "AT"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with next public holidays",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicHoliday"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Country not found"
+          }
+        }
+      }
+    },
+    "/NextPublicHolidaysWorldwide": {
+      "get": {
+        "summary": "Get next public holidays worldwide",
+        "description": "Get the next upcoming public holidays for all countries worldwide",
+        "operationId": "getNextPublicHolidaysWorldwide",
+        "tags": [
+          "Public Holidays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with next public holidays worldwide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicHoliday"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/LongWeekend/{Year}/{CountryCode}": {
+      "get": {
+        "summary": "Get long weekends",
+        "description": "Get long weekends for a given year and country",
+        "operationId": "getLongWeekends",
+        "tags": [
+          "Long Weekends"
+        ],
+        "parameters": [
+          {
+            "name": "Year",
+            "in": "path",
+            "description": "The year to retrieve long weekends for",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2026
+            }
+          },
+          {
+            "name": "CountryCode",
+            "in": "path",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "AT"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of long weekends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LongWeekend"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Country not found or no long weekends available"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PublicHoliday": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date of the holiday",
+            "example": "2017-01-01"
+          },
+          "localName": {
+            "type": "string",
+            "description": "Local name of the holiday",
+            "example": "Neujahr"
+          },
+          "name": {
+            "type": "string",
+            "description": "English name of the holiday",
+            "example": "New Year's Day"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "example": "AT"
+          },
+          "fixed": {
+            "type": "boolean",
+            "description": "Is this public holiday every year on the same date",
+            "example": true
+          },
+          "global": {
+            "type": "boolean",
+            "description": "Is this public holiday in every county (federal state)",
+            "example": true
+          },
+          "counties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "If it is not global you found here the Federal states (ISO-3166-2)"
+          },
+          "launchYear": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The launch year of the public holiday",
+            "example": 1967
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Public",
+                "Bank",
+                "School",
+                "Authorities",
+                "Optional",
+                "Observance"
+              ]
+            },
+            "description": "The types of the public holiday. Public (Bank holiday, banks and offices are closed), Bank (Bank holiday, banks and offices are closed), School (School holiday, schools are closed), Authorities (Authorities are closed), Optional (Majority of people take a day off), Observance (Optional festivity, no paid day off)"
+          }
+        }
+      },
+      "Country": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "example": "AT"
+          },
+          "name": {
+            "type": "string",
+            "description": "Country name",
+            "example": "Austria"
+          }
+        }
+      },
+      "CountryInfo": {
+        "type": "object",
+        "properties": {
+          "commonName": {
+            "type": "string",
+            "description": "Common name of the country",
+            "example": "Austria"
+          },
+          "officialName": {
+            "type": "string",
+            "description": "Official name of the country",
+            "example": "Republic of Austria"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "example": "AT"
+          },
+          "region": {
+            "type": "string",
+            "description": "Region of the country",
+            "example": "Europe"
+          },
+          "borders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Country"
+            },
+            "description": "Bordering countries"
+          }
+        }
+      },
+      "LongWeekend": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Start date of the long weekend"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "description": "End date of the long weekend"
+          },
+          "dayCount": {
+            "type": "integer",
+            "description": "Number of days in the long weekend"
+          },
+          "needBridgeDay": {
+            "type": "boolean",
+            "description": "Whether a bridge day is needed"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Public Holidays",
+      "description": "Operations related to public holidays"
+    },
+    {
+      "name": "Countries",
+      "description": "Operations related to country information"
+    },
+    {
+      "name": "Long Weekends",
+      "description": "Operations related to long weekends"
+    }
+  ]
+}

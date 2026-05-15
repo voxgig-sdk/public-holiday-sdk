@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "long_weekend": {
+      "LONG_WEEKEND00": {
+        "day_count": "s28",
+        "end_date": "s29",
+        "need_bridge_day": true,
+        "start_date": "s2b",
+        "country_code": "COUNTRY_CODE01",
+        "year": "YEAR01"
+      },
+      "LONG_WEEKEND01": {
+        "day_count": "s50",
+        "end_date": "s51",
+        "need_bridge_day": true,
+        "start_date": "s53",
+        "country_code": "COUNTRY_CODE01",
+        "year": "YEAR01"
+      },
+      "LONG_WEEKEND02": {
+        "day_count": "s78",
+        "end_date": "s79",
+        "need_bridge_day": true,
+        "start_date": "s7b",
+        "country_code": "COUNTRY_CODE01",
+        "year": "YEAR01"
+      }
+    }
+  },
+  "new": {
+    "long_weekend": {
+      "long_weekend_ref01": {
+        "day_count": "sa0",
+        "end_date": "sa1",
+        "need_bridge_day": true,
+        "start_date": "sa3"
+      }
+    }
+  }
+}

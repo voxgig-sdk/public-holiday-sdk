@@ -1,0 +1,80 @@
+# Entity: country_info
+
+main: kit: entity: country_info: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "border"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "common_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "country_code"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "official_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "region"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "country_info"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "AT"
+                kind: "param"
+                name: "id"
+                orig: "country_code"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/CountryInfo/{CountryCode}"
+          parts: [
+            "CountryInfo"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              CountryCode: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

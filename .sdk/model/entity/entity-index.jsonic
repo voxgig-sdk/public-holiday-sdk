@@ -1,0 +1,6 @@
+# Entity Models
+
+@"available_country.jsonic"
+@"country_info.jsonic"
+@"long_weekend.jsonic"
+@"public_holiday.jsonic"

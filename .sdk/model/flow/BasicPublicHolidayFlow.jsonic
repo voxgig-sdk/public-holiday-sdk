@@ -1,0 +1,44 @@
+# BasicPublicHolidayFlow
+
+main: kit: flow: BasicPublicHolidayFlow:
+{
+  entity: "public_holiday",
+  kind: "basic",
+  name: "BasicPublicHolidayFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "public_holiday_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "public_holiday_ref01",
+        srcdatavar: "public_holiday_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "public_holiday01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-public_holiday_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPublicHolidayFlow"
+}

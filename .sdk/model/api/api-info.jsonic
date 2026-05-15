@@ -1,0 +1,24 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://date.nager.at/Api"
+      }
+      description: "An API for public holiday data. Supports over 100 countries. Provides information on holidays and long weekends. The API provides a simple way to query the holidays of over 100 countries, including long weekends. For IoT devices, there's an endpoint to check if today is a holiday."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://date.nager.at/api/v3"
+        }
+      ]
+      termsOfService: "https://date.nager.at"
+      title: "Public Holiday API"
+      version: "3.0.0"
+    }
+  }
+}
+
+}
