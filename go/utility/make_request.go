@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/public-holiday-sdk/core"
+import "github.com/voxgig-sdk/public-holiday-sdk/go/core"
 
 func makeRequestUtil(ctx *core.Context) (*core.Response, error) {
 	if ctx.Out["request"] != nil {

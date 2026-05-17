@@ -29,7 +29,7 @@ class Config {
 
 
   options = {
-    base: 'https://date.nager.at/api/v3',
+    base: '$$main.kit.info.servers.0.url$$',
 
     'AUTHBLOCK'headers: 'HEADERS',
 

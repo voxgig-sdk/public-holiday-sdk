@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/public-holiday-sdk/core"
+	"github.com/voxgig-sdk/public-holiday-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/public-holiday-sdk/go/utility/struct"
 )
 
 type PublicHolidayEntity struct {

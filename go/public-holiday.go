@@ -1,10 +1,10 @@
 package voxgigpublicholidaysdk
 
 import (
-	"github.com/voxgig-sdk/public-holiday-sdk/core"
-	"github.com/voxgig-sdk/public-holiday-sdk/entity"
-	"github.com/voxgig-sdk/public-holiday-sdk/feature"
-	_ "github.com/voxgig-sdk/public-holiday-sdk/utility"
+	"github.com/voxgig-sdk/public-holiday-sdk/go/core"
+	"github.com/voxgig-sdk/public-holiday-sdk/go/entity"
+	"github.com/voxgig-sdk/public-holiday-sdk/go/feature"
+	_ "github.com/voxgig-sdk/public-holiday-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

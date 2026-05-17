@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/public-holiday-sdk/core"
+	"github.com/voxgig-sdk/public-holiday-sdk/go/core"
 )
 
 type BaseFeature struct {

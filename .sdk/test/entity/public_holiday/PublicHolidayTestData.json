@@ -11,7 +11,8 @@
         "local_name": "s60",
         "name": "s61",
         "type": [],
-        "year": "YEAR01"
+        "year": "YEAR01",
+        "id": "PUBLIC_HOLIDAY00"
       },
       "PUBLIC_HOLIDAY01": {
         "country_code": "sb4",
@@ -23,7 +24,8 @@
         "local_name": "sba",
         "name": "sbb",
         "type": [],
-        "year": "YEAR01"
+        "year": "YEAR01",
+        "id": "PUBLIC_HOLIDAY01"
       },
       "PUBLIC_HOLIDAY02": {
         "country_code": "s10e",
@@ -35,7 +37,8 @@
         "local_name": "s114",
         "name": "s115",
         "type": [],
-        "year": "YEAR01"
+        "year": "YEAR01",
+        "id": "PUBLIC_HOLIDAY02"
       }
     }
   },

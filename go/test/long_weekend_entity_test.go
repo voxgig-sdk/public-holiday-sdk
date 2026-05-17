@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/public-holiday-sdk"
-	"github.com/voxgig-sdk/public-holiday-sdk/core"
+	sdk "github.com/voxgig-sdk/public-holiday-sdk/go"
+	"github.com/voxgig-sdk/public-holiday-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/public-holiday-sdk/go/utility/struct"
 )
 
 func TestLongWeekendEntity(t *testing.T) {
