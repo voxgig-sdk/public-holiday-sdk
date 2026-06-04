@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://date.nager.at/api/v3",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },

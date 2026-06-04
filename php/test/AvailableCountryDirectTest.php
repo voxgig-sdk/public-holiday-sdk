@@ -68,14 +68,12 @@ function available_country_direct_setup($mockres)
     $env = Runner::env_override([
         "PUBLICHOLIDAY_TEST_AVAILABLE_COUNTRY_ENTID" => [],
         "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
-        "PUBLICHOLIDAY_APIKEY" => "NONE",
     ]);
 
     $live = $env["PUBLICHOLIDAY_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["PUBLICHOLIDAY_APIKEY"],
         ];
         $client = new PublicHolidaySDK($merged_opts);
         return [

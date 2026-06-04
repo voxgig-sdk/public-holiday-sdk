@@ -17,8 +17,32 @@ main: {
       termsOfService: "https://date.nager.at"
       title: "Public Holiday API"
       version: "3.0.0"
+      tagline: "Look up public holidays, country info, and long weekends for 100+ countries"
+      homepage: "https://date.nager.at"
+      docs_url: "https://date.nager.at/Api"
+      license_short: "Open-source, community-driven project; review Terms of Service before use"
+      license_md: `- Community-driven open-source project maintained by [Nager.Date](https://date.nager.at)
+- Review the [Terms of Service](https://date.nager.at) and Privacy Policy before use
+- Contributions, issue reports, and sponsorship are accepted via GitHub
+- No explicit data-source attribution is published; verify holiday dates against authoritative sources where correctness matters`
+      about_md: `[Nager.Date](https://date.nager.at) is an open-source service that publishes public holiday data for over 100 countries through a small JSON API. The project is community-maintained and hosted at \`date.nager.at\`, with contributions and sponsorship handled via GitHub.
+
+What you get from the API:
+
+- Public holidays for a given year and ISO 3166-1 alpha-2 country code (e.g. \`GET /api/v3/PublicHolidays/{year}/{countryCode}\`)
+- The list of supported countries
+- Per-country metadata such as region and bordering countries
+- Long weekend computations for a given year and country
+- Holiday records typically include the date, local name, English name, subdivision codes, and a type classification (Public, Bank, School, Authorities, Optional, Observance)
+
+Operational notes: the API is served over HTTPS at \`https://date.nager.at/api/v3\`, requires no authentication, and has CORS enabled so it can be called directly from browsers. No rate limits are published, but please be a polite client.`
+      entity_desc: {
+        available_country: "The list of countries supported by the API, identified by ISO 3166-1 alpha-2 code and English name."
+        country_info: "Per-country metadata such as common name, official name, region, and bordering countries."
+        long_weekend: "Computed long-weekend periods (a public holiday adjacent to a weekend, optionally with a bridge day) for a given year and country."
+        public_holiday: "Public holidays for a given year and country, available at `/api/v3/PublicHolidays/{year}/{countryCode}`, with fields like date, localName, name, countryCode, fixed flag, global flag, counties, launchYear, and types."
+      }
+      auth: false
     }
   }
-}
-
 }

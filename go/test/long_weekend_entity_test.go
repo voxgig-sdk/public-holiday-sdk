@@ -122,7 +122,6 @@ func long_weekendBasicSetup(extra map[string]any) *entityTestSetup {
 		"PUBLICHOLIDAY_TEST_LONG_WEEKEND_ENTID": idmap,
 		"PUBLICHOLIDAY_TEST_LIVE":      "FALSE",
 		"PUBLICHOLIDAY_TEST_EXPLAIN":   "FALSE",
-		"PUBLICHOLIDAY_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["PUBLICHOLIDAY_TEST_LONG_WEEKEND_ENTID"])
@@ -133,7 +132,6 @@ func long_weekendBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["PUBLICHOLIDAY_APIKEY"],
 			},
 			extra,
 		})

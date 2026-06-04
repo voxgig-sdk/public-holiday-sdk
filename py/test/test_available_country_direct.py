@@ -61,14 +61,12 @@ def _available_country_direct_setup(mockres):
     env = runner.env_override({
         "PUBLICHOLIDAY_TEST_AVAILABLE_COUNTRY_ENTID": {},
         "PUBLICHOLIDAY_TEST_LIVE": "FALSE",
-        "PUBLICHOLIDAY_APIKEY": "NONE",
     })
 
     live = env.get("PUBLICHOLIDAY_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("PUBLICHOLIDAY_APIKEY"),
         }
         client = PublicHolidaySDK(merged_opts)
         return {

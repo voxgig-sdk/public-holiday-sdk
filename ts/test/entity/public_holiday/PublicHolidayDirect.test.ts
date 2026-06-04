@@ -127,14 +127,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID': {},
     'PUBLICHOLIDAY_TEST_LIVE': 'FALSE',
-    'PUBLICHOLIDAY_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.PUBLICHOLIDAY_TEST_LIVE
 
   if (live) {
     const client = new PublicHolidaySDK({
-      apikey: env.PUBLICHOLIDAY_APIKEY,
     })
 
     let idmap: any = env['PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID']
