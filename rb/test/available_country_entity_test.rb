@@ -83,6 +83,7 @@ def available_country_basic_setup(extra)
     "PUBLICHOLIDAY_TEST_AVAILABLE_COUNTRY_ENTID" => idmap,
     "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
     "PUBLICHOLIDAY_TEST_EXPLAIN" => "FALSE",
+    "PUBLICHOLIDAY_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,6 +95,7 @@ def available_country_basic_setup(extra)
   if env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["PUBLICHOLIDAY_APIKEY"],
       },
       extra || {},
     ])

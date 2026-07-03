@@ -20,6 +20,9 @@ class PublicHolidayConfig
             ],
             "options" => [
                 "base" => "https://date.nager.at/api/v3",
+                "auth" => [
+                    "prefix" => "Bearer",
+                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -34,42 +37,42 @@ class PublicHolidayConfig
         'available_country' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'country_code',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'name',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
           ],
           'name' => 'available_country',
           'op' => [
             'list' => [
+              'input' => 'data',
               'name' => 'list',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/AvailableCountries',
                   'parts' => [
                     'AvailableCountries',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'list',
             ],
           ],
@@ -80,57 +83,59 @@ class PublicHolidayConfig
         'country_info' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'border',
               'req' => false,
               'type' => '`$ARRAY`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'common_name',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'country_code',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'official_name',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'region',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 4,
             ],
           ],
           'name' => 'country_info',
           'op' => [
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'params' => [
                       [
+                        'active' => true,
                         'example' => 'AT',
                         'kind' => 'param',
                         'name' => 'id',
                         'orig' => 'country_code',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -154,11 +159,9 @@ class PublicHolidayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -169,59 +172,61 @@ class PublicHolidayConfig
         'long_weekend' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'day_count',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'end_date',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'need_bridge_day',
               'req' => false,
               'type' => '`$BOOLEAN`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'start_date',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 3,
             ],
           ],
           'name' => 'long_weekend',
           'op' => [
             'list' => [
+              'input' => 'data',
               'name' => 'list',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'params' => [
                       [
+                        'active' => true,
                         'example' => 'AT',
                         'kind' => 'param',
                         'name' => 'country_code',
                         'orig' => 'country_code',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                       [
+                        'active' => true,
                         'example' => 2026,
                         'kind' => 'param',
                         'name' => 'year',
                         'orig' => 'year',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -248,11 +253,9 @@ class PublicHolidayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'list',
             ],
           ],
@@ -267,94 +270,96 @@ class PublicHolidayConfig
         'public_holiday' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'country_code',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'county',
               'req' => false,
               'type' => '`$ARRAY`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'date',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'fixed',
               'req' => false,
               'type' => '`$BOOLEAN`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'global',
               'req' => false,
               'type' => '`$BOOLEAN`',
-              'active' => true,
               'index$' => 4,
             ],
             [
+              'active' => true,
               'name' => 'launch_year',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 5,
             ],
             [
+              'active' => true,
               'name' => 'local_name',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 6,
             ],
             [
+              'active' => true,
               'name' => 'name',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 7,
             ],
             [
+              'active' => true,
               'name' => 'type',
               'req' => false,
               'type' => '`$ARRAY`',
-              'active' => true,
               'index$' => 8,
             ],
           ],
           'name' => 'public_holiday',
           'op' => [
             'list' => [
+              'input' => 'data',
               'name' => 'list',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'params' => [
                       [
+                        'active' => true,
                         'example' => 'AT',
                         'kind' => 'param',
                         'name' => 'country_code',
                         'orig' => 'country_code',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                       [
+                        'active' => true,
                         'example' => 2026,
                         'kind' => 'param',
                         'name' => 'year',
                         'orig' => 'year',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -381,52 +386,52 @@ class PublicHolidayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/NextPublicHolidaysWorldwide',
                   'parts' => [
                     'NextPublicHolidaysWorldwide',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 1,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'list',
             ],
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'params' => [
                       [
+                        'active' => true,
                         'example' => 'AT',
                         'kind' => 'param',
                         'name' => 'country_code',
                         'orig' => 'country_code',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                     'query' => [
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'offset',
                         'orig' => 'offset',
                         'reqd' => false,
                         'type' => '`$INTEGER`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -451,20 +456,20 @@ class PublicHolidayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
                 [
+                  'active' => true,
                   'args' => [
                     'params' => [
                       [
+                        'active' => true,
                         'example' => 'AT',
                         'kind' => 'param',
                         'name' => 'country_code',
                         'orig' => 'country_code',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -488,11 +493,9 @@ class PublicHolidayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 1,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],

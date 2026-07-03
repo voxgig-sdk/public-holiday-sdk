@@ -208,12 +208,14 @@ func public_holidayDirectSetup(mockres any) *public_holidayDirectSetupResult {
 	env := envOverride(map[string]any{
 		"PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID": map[string]any{},
 		"PUBLICHOLIDAY_TEST_LIVE":    "FALSE",
+		"PUBLICHOLIDAY_APIKEY":       "NONE",
 	})
 
 	live := env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["PUBLICHOLIDAY_APIKEY"],
 		}
 		client := sdk.NewPublicHolidaySDK(mergedOpts)
 

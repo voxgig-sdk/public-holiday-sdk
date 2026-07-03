@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -113,7 +113,7 @@ local available_country = client:AvailableCountry(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:AvailableCountry(nil):list(nil, nil)
+local results, err = client:AvailableCountry():list()
 ```
 
 ### Common Methods
@@ -169,7 +169,7 @@ local country_info = client:CountryInfo(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:CountryInfo(nil):load({ id = "country_info_id" }, nil)
+local result, err = client:CountryInfo():load({ id = "country_info_id" })
 ```
 
 ### Common Methods
@@ -224,7 +224,7 @@ local long_weekend = client:LongWeekend(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:LongWeekend(nil):list(nil, nil)
+local results, err = client:LongWeekend():list()
 ```
 
 ### Common Methods
@@ -284,7 +284,7 @@ local public_holiday = client:PublicHoliday(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:PublicHoliday(nil):list(nil, nil)
+local results, err = client:PublicHoliday():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -292,7 +292,7 @@ local results, err = client:PublicHoliday(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:PublicHoliday(nil):load({ id = "public_holiday_id" }, nil)
+local result, err = client:PublicHoliday():load({ id = "public_holiday_id" })
 ```
 
 ### Common Methods

@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://date.nager.at/api/v3",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -29,42 +32,42 @@ def make_config():
       "available_country": {
         "fields": [
           {
+            "active": True,
             "name": "country_code",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "name",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
         ],
         "name": "available_country",
         "op": {
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/AvailableCountries",
                 "parts": [
                   "AvailableCountries",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
         },
@@ -75,57 +78,59 @@ def make_config():
       "country_info": {
         "fields": [
           {
+            "active": True,
             "name": "border",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "common_name",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "country_code",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "official_name",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "region",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 4,
           },
         ],
         "name": "country_info",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "AT",
                       "kind": "param",
                       "name": "id",
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -149,11 +154,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },
@@ -164,59 +167,61 @@ def make_config():
       "long_weekend": {
         "fields": [
           {
+            "active": True,
             "name": "day_count",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "end_date",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "need_bridge_day",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "start_date",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 3,
           },
         ],
         "name": "long_weekend",
         "op": {
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "AT",
                       "kind": "param",
                       "name": "country_code",
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 2026,
                       "kind": "param",
                       "name": "year",
                       "orig": "year",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                   ],
                 },
@@ -243,11 +248,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
         },
@@ -262,94 +265,96 @@ def make_config():
       "public_holiday": {
         "fields": [
           {
+            "active": True,
             "name": "country_code",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "county",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "date",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "fixed",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "global",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "launch_year",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "local_name",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "name",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "type",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 8,
           },
         ],
         "name": "public_holiday",
         "op": {
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "AT",
                       "kind": "param",
                       "name": "country_code",
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 2026,
                       "kind": "param",
                       "name": "year",
                       "orig": "year",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                   ],
                 },
@@ -376,52 +381,52 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/NextPublicHolidaysWorldwide",
                 "parts": [
                   "NextPublicHolidaysWorldwide",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 1,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "AT",
                       "kind": "param",
                       "name": "country_code",
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                   "query": [
                     {
+                      "active": True,
                       "kind": "query",
                       "name": "offset",
                       "orig": "offset",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                   ],
                 },
@@ -446,20 +451,20 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "AT",
                       "kind": "param",
                       "name": "country_code",
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -483,11 +488,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 1,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },

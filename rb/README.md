@@ -1,6 +1,11 @@
 # PublicHoliday Ruby SDK
 
-The Ruby SDK for the PublicHoliday API. Provides an entity-oriented interface using idiomatic Ruby conventions.
+
+
+The Ruby SDK for the PublicHoliday API — an entity-oriented client using idiomatic Ruby conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -31,13 +36,15 @@ loading a specific record.
 ```ruby
 require_relative "PublicHoliday_sdk"
 
-client = PublicHolidaySDK.new({})
+client = PublicHolidaySDK.new({
+  "apikey" => ENV["PUBLIC-HOLIDAY_APIKEY"],
+})
 ```
 
 ### 2. List availablecountrys
 
 ```ruby
-result, err = client.AvailableCountry(nil).list(nil, nil)
+result, err = client.AvailableCountry().list
 raise err if err
 
 if result.is_a?(Array)
@@ -89,11 +96,9 @@ puts fetchdef["headers"]
 Create a mock client for unit testing — no server required:
 
 ```ruby
-client = PublicHolidaySDK.test(nil, nil)
+client = PublicHolidaySDK.test
 
-result, err = client.PublicHoliday(nil).load(
-  { "id" => "test01" }, nil
-)
+result, err = client.PublicHoliday().load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -125,6 +130,7 @@ Create a `.env.local` file at the project root:
 
 ```
 PUBLIC-HOLIDAY_TEST_LIVE=TRUE
+PUBLIC-HOLIDAY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -147,6 +153,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

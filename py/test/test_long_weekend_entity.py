@@ -95,6 +95,7 @@ def _long_weekend_basic_setup(extra):
         "PUBLICHOLIDAY_TEST_LONG_WEEKEND_ENTID": idmap,
         "PUBLICHOLIDAY_TEST_LIVE": "FALSE",
         "PUBLICHOLIDAY_TEST_EXPLAIN": "FALSE",
+        "PUBLICHOLIDAY_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -105,6 +106,7 @@ def _long_weekend_basic_setup(extra):
     if env.get("PUBLICHOLIDAY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("PUBLICHOLIDAY_APIKEY"),
             },
             extra or {},
         ])
