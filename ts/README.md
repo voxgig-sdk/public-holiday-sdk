@@ -10,7 +10,7 @@ The TypeScript SDK for the PublicHoliday API — a type-safe, entity-oriented cl
 
 ## Install
 ```bash
-npm install public-holiday
+npm install @voxgig-sdk/public-holiday
 ```
 ## Tutorial: your first API call
 

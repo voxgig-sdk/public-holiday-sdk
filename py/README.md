@@ -10,7 +10,7 @@ The Python SDK for the PublicHoliday API — an entity-oriented client following
 
 ## Install
 ```bash
-pip install public-holiday-sdk
+pip install voxgig-sdk-public-holiday
 ```
 
 Or install from source:

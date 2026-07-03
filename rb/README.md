@@ -10,13 +10,13 @@ The Ruby SDK for the PublicHoliday API — an entity-oriented client using idiom
 
 ## Install
 ```bash
-gem install public-holiday-sdk
+gem install voxgig-sdk-public-holiday
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "public-holiday-sdk"
+gem "voxgig-sdk-public-holiday"
 ```
 
 Then run:

@@ -10,7 +10,7 @@ The Lua SDK for the PublicHoliday API — an entity-oriented client using Lua co
 
 ## Install
 ```bash
-luarocks install public-holiday-sdk
+luarocks install voxgig-sdk-public-holiday
 ```
 
 If the module is not yet published, add the source directory to

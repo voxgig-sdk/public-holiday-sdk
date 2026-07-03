@@ -10,7 +10,7 @@ The PHP SDK for the PublicHoliday API — an entity-oriented client using PHP co
 
 ## Install
 ```bash
-composer require voxgig/public-holiday-sdk
+composer require voxgig-sdk/public-holiday
 ```
 
 

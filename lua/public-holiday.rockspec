@@ -8,12 +8,14 @@ source = {
   dir = "public-holiday-sdk/lua"
 }
 description = {
-  summary = "PublicHoliday SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Public Holiday public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/public-holiday-sdk",
+  issues_url = "https://github.com/voxgig-sdk/public-holiday-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "public-holiday" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {
