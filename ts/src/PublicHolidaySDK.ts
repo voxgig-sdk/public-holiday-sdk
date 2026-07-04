@@ -5,6 +5,8 @@ import { CountryInfoEntity } from './entity/CountryInfoEntity'
 import { LongWeekendEntity } from './entity/LongWeekendEntity'
 import { PublicHolidayEntity } from './entity/PublicHolidayEntity'
 
+export type * from './PublicHolidayTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -205,24 +207,56 @@ class PublicHolidaySDK {
 
 
 
+  _available_country?: AvailableCountryEntity
+
+  // Idiomatic facade: `client.available_country.list()` / `client.available_country.load({ id })`.
+  get available_country(): AvailableCountryEntity {
+    return (this._available_country ??= new AvailableCountryEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.available_country` instead. */
   AvailableCountry(data?: any) {
     const self = this
     return new AvailableCountryEntity(self,data)
   }
 
 
+  _country_info?: CountryInfoEntity
+
+  // Idiomatic facade: `client.country_info.list()` / `client.country_info.load({ id })`.
+  get country_info(): CountryInfoEntity {
+    return (this._country_info ??= new CountryInfoEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.country_info` instead. */
   CountryInfo(data?: any) {
     const self = this
     return new CountryInfoEntity(self,data)
   }
 
 
+  _long_weekend?: LongWeekendEntity
+
+  // Idiomatic facade: `client.long_weekend.list()` / `client.long_weekend.load({ id })`.
+  get long_weekend(): LongWeekendEntity {
+    return (this._long_weekend ??= new LongWeekendEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.long_weekend` instead. */
   LongWeekend(data?: any) {
     const self = this
     return new LongWeekendEntity(self,data)
   }
 
 
+  _public_holiday?: PublicHolidayEntity
+
+  // Idiomatic facade: `client.public_holiday.list()` / `client.public_holiday.load({ id })`.
+  get public_holiday(): PublicHolidayEntity {
+    return (this._public_holiday ??= new PublicHolidayEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.public_holiday` instead. */
   PublicHoliday(data?: any) {
     const self = this
     return new PublicHolidayEntity(self,data)

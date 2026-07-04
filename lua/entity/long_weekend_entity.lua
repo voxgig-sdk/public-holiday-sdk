@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch LongWeekendListMatch
+---@param ctrl? table
+---@return LongWeekend[]
+---@return string? err
 function LongWeekendEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

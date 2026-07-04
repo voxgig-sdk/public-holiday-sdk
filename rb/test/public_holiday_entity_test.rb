@@ -43,14 +43,12 @@ class PublicHolidayEntityTest < Minitest::Test
     public_holiday_ref01_ent = client.PublicHoliday(nil)
     public_holiday_ref01_match = {}
 
-    public_holiday_ref01_list_result, err = public_holiday_ref01_ent.list(public_holiday_ref01_match, nil)
-    assert_nil err
+    public_holiday_ref01_list_result = public_holiday_ref01_ent.list(public_holiday_ref01_match, nil)
     assert public_holiday_ref01_list_result.is_a?(Array)
 
     # LOAD
     public_holiday_ref01_match_dt0 = {}
-    public_holiday_ref01_data_dt0_loaded, err = public_holiday_ref01_ent.load(public_holiday_ref01_match_dt0, nil)
-    assert_nil err
+    public_holiday_ref01_data_dt0_loaded = public_holiday_ref01_ent.load(public_holiday_ref01_match_dt0, nil)
     assert !public_holiday_ref01_data_dt0_loaded.nil?
 
   end
@@ -89,7 +87,6 @@ def public_holiday_basic_setup(extra)
     "PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID" => idmap,
     "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
     "PUBLICHOLIDAY_TEST_EXPLAIN" => "FALSE",
-    "PUBLICHOLIDAY_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -101,7 +98,6 @@ def public_holiday_basic_setup(extra)
   if env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["PUBLICHOLIDAY_APIKEY"],
       },
       extra || {},
     ])

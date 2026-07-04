@@ -45,6 +45,7 @@ class LongWeekendEntity
     end
   end
 
+  # @return [LongWeekend, Hash] the current LongWeekend data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class LongWeekendEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of LongWeekend fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class LongWeekendEntity
   
 
   
+  # List LongWeekend items matching the given filter.
+  #
+  # @param reqmatch [LongWeekendListMatch, Hash, nil] match filter (any subset of LongWeekend fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<LongWeekend>, Array] the matching LongWeekend items; raises PublicHolidayError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

@@ -50,14 +50,12 @@ class PublicHolidayEntityTest extends TestCase
         $public_holiday_ref01_ent = $client->PublicHoliday(null);
         $public_holiday_ref01_match = [];
 
-        [$public_holiday_ref01_list_result, $err] = $public_holiday_ref01_ent->list($public_holiday_ref01_match, null);
-        $this->assertNull($err);
+        $public_holiday_ref01_list_result = $public_holiday_ref01_ent->list($public_holiday_ref01_match, null);
         $this->assertIsArray($public_holiday_ref01_list_result);
 
         // LOAD
         $public_holiday_ref01_match_dt0 = [];
-        [$public_holiday_ref01_data_dt0_loaded, $err] = $public_holiday_ref01_ent->load($public_holiday_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $public_holiday_ref01_data_dt0_loaded = $public_holiday_ref01_ent->load($public_holiday_ref01_match_dt0, null);
         $this->assertNotNull($public_holiday_ref01_data_dt0_loaded);
 
     }
@@ -92,7 +90,6 @@ function public_holiday_basic_setup($extra)
         "PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID" => $idmap,
         "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
         "PUBLICHOLIDAY_TEST_EXPLAIN" => "FALSE",
-        "PUBLICHOLIDAY_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,7 +101,6 @@ function public_holiday_basic_setup($extra)
     if ($env["PUBLICHOLIDAY_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["PUBLICHOLIDAY_APIKEY"],
             ],
             $extra ?? [],
         ]);

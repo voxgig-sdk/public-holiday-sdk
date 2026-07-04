@@ -49,8 +49,7 @@ class TestCountryInfoEntity:
         # LOAD
         country_info_ref01_ent = client.CountryInfo(None)
         country_info_ref01_match_dt0 = {}
-        country_info_ref01_data_dt0_loaded, err = country_info_ref01_ent.load(country_info_ref01_match_dt0, None)
-        assert err is None
+        country_info_ref01_data_dt0_loaded = country_info_ref01_ent.load(country_info_ref01_match_dt0, None)
         assert country_info_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _country_info_basic_setup(extra):
         "PUBLICHOLIDAY_TEST_COUNTRY_INFO_ENTID": idmap,
         "PUBLICHOLIDAY_TEST_LIVE": "FALSE",
         "PUBLICHOLIDAY_TEST_EXPLAIN": "FALSE",
-        "PUBLICHOLIDAY_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _country_info_basic_setup(extra):
     if env.get("PUBLICHOLIDAY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("PUBLICHOLIDAY_APIKEY"),
             },
             extra or {},
         ])

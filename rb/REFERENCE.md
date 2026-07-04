@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `Hash` | SDK configuration options. |
-| `options["apikey"]` | `String` | API key for authentication. |
 | `options["base"]` | `String` | Base URL for API requests. |
 | `options["prefix"]` | `String` | URL prefix appended after base. |
 | `options["suffix"]` | `String` | URL suffix appended after path. |
@@ -66,9 +65,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -82,14 +83,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -97,7 +98,7 @@ same parameters as `direct()`.
 ## AvailableCountryEntity
 
 ```ruby
-available_country = client.AvailableCountry
+available_country = client.available_country
 ```
 
 ### Fields
@@ -109,12 +110,12 @@ available_country = client.AvailableCountry
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.AvailableCountry.list(nil)
+results = client.available_country.list(nil)
 ```
 
 ### Common Methods
@@ -150,7 +151,7 @@ Return the entity name.
 ## CountryInfoEntity
 
 ```ruby
-country_info = client.CountryInfo
+country_info = client.country_info
 ```
 
 ### Fields
@@ -165,12 +166,12 @@ country_info = client.CountryInfo
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.CountryInfo.load({ "id" => "country_info_id" })
+result = client.country_info.load({ "id" => "country_info_id" })
 ```
 
 ### Common Methods
@@ -206,7 +207,7 @@ Return the entity name.
 ## LongWeekendEntity
 
 ```ruby
-long_weekend = client.LongWeekend
+long_weekend = client.long_weekend
 ```
 
 ### Fields
@@ -220,12 +221,12 @@ long_weekend = client.LongWeekend
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.LongWeekend.list(nil)
+results = client.long_weekend.list(nil)
 ```
 
 ### Common Methods
@@ -261,7 +262,7 @@ Return the entity name.
 ## PublicHolidayEntity
 
 ```ruby
-public_holiday = client.PublicHoliday
+public_holiday = client.public_holiday
 ```
 
 ### Fields
@@ -280,20 +281,20 @@ public_holiday = client.PublicHoliday
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.PublicHoliday.list(nil)
+results = client.public_holiday.list(nil)
 ```
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.PublicHoliday.load({ "id" => "public_holiday_id" })
+result = client.public_holiday.load({ "id" => "public_holiday_id" })
 ```
 
 ### Common Methods

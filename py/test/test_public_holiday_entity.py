@@ -50,14 +50,12 @@ class TestPublicHolidayEntity:
         public_holiday_ref01_ent = client.PublicHoliday(None)
         public_holiday_ref01_match = {}
 
-        public_holiday_ref01_list_result, err = public_holiday_ref01_ent.list(public_holiday_ref01_match, None)
-        assert err is None
+        public_holiday_ref01_list_result = public_holiday_ref01_ent.list(public_holiday_ref01_match, None)
         assert isinstance(public_holiday_ref01_list_result, list)
 
         # LOAD
         public_holiday_ref01_match_dt0 = {}
-        public_holiday_ref01_data_dt0_loaded, err = public_holiday_ref01_ent.load(public_holiday_ref01_match_dt0, None)
-        assert err is None
+        public_holiday_ref01_data_dt0_loaded = public_holiday_ref01_ent.load(public_holiday_ref01_match_dt0, None)
         assert public_holiday_ref01_data_dt0_loaded is not None
 
 
@@ -98,7 +96,6 @@ def _public_holiday_basic_setup(extra):
         "PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID": idmap,
         "PUBLICHOLIDAY_TEST_LIVE": "FALSE",
         "PUBLICHOLIDAY_TEST_EXPLAIN": "FALSE",
-        "PUBLICHOLIDAY_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +106,6 @@ def _public_holiday_basic_setup(extra):
     if env.get("PUBLICHOLIDAY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("PUBLICHOLIDAY_APIKEY"),
             },
             extra or {},
         ])

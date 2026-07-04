@@ -144,16 +144,23 @@ class PublicHolidaySDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class PublicHolidaySDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,30 +212,74 @@ class PublicHolidaySDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def available_country(self):
+        """Idiomatic facade: client.available_country.list() / client.available_country.load({"id": ...})."""
+        from entity.available_country_entity import AvailableCountryEntity
+        cached = getattr(self, "_available_country", None)
+        if cached is None:
+            cached = AvailableCountryEntity(self, None)
+            self._available_country = cached
+        return cached
 
     def AvailableCountry(self, data=None):
+        # Deprecated: use client.available_country instead.
         from entity.available_country_entity import AvailableCountryEntity
         return AvailableCountryEntity(self, data)
 
 
+    @property
+    def country_info(self):
+        """Idiomatic facade: client.country_info.list() / client.country_info.load({"id": ...})."""
+        from entity.country_info_entity import CountryInfoEntity
+        cached = getattr(self, "_country_info", None)
+        if cached is None:
+            cached = CountryInfoEntity(self, None)
+            self._country_info = cached
+        return cached
+
     def CountryInfo(self, data=None):
+        # Deprecated: use client.country_info instead.
         from entity.country_info_entity import CountryInfoEntity
         return CountryInfoEntity(self, data)
 
 
+    @property
+    def long_weekend(self):
+        """Idiomatic facade: client.long_weekend.list() / client.long_weekend.load({"id": ...})."""
+        from entity.long_weekend_entity import LongWeekendEntity
+        cached = getattr(self, "_long_weekend", None)
+        if cached is None:
+            cached = LongWeekendEntity(self, None)
+            self._long_weekend = cached
+        return cached
+
     def LongWeekend(self, data=None):
+        # Deprecated: use client.long_weekend instead.
         from entity.long_weekend_entity import LongWeekendEntity
         return LongWeekendEntity(self, data)
 
 
+    @property
+    def public_holiday(self):
+        """Idiomatic facade: client.public_holiday.list() / client.public_holiday.load({"id": ...})."""
+        from entity.public_holiday_entity import PublicHolidayEntity
+        cached = getattr(self, "_public_holiday", None)
+        if cached is None:
+            cached = PublicHolidayEntity(self, None)
+            self._public_holiday = cached
+        return cached
+
     def PublicHoliday(self, data=None):
+        # Deprecated: use client.public_holiday instead.
         from entity.public_holiday_entity import PublicHolidayEntity
         return PublicHolidayEntity(self, data)
 

@@ -50,8 +50,7 @@ class TestAvailableCountryEntity:
         available_country_ref01_ent = client.AvailableCountry(None)
         available_country_ref01_match = {}
 
-        available_country_ref01_list_result, err = available_country_ref01_ent.list(available_country_ref01_match, None)
-        assert err is None
+        available_country_ref01_list_result = available_country_ref01_ent.list(available_country_ref01_match, None)
         assert isinstance(available_country_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _available_country_basic_setup(extra):
         "PUBLICHOLIDAY_TEST_AVAILABLE_COUNTRY_ENTID": idmap,
         "PUBLICHOLIDAY_TEST_LIVE": "FALSE",
         "PUBLICHOLIDAY_TEST_EXPLAIN": "FALSE",
-        "PUBLICHOLIDAY_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _available_country_basic_setup(extra):
     if env.get("PUBLICHOLIDAY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("PUBLICHOLIDAY_APIKEY"),
             },
             extra or {},
         ])

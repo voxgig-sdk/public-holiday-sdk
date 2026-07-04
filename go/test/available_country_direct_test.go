@@ -93,14 +93,12 @@ func available_countryDirectSetup(mockres any) *available_countryDirectSetupResu
 	env := envOverride(map[string]any{
 		"PUBLICHOLIDAY_TEST_AVAILABLE_COUNTRY_ENTID": map[string]any{},
 		"PUBLICHOLIDAY_TEST_LIVE":    "FALSE",
-		"PUBLICHOLIDAY_APIKEY":       "NONE",
 	})
 
 	live := env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["PUBLICHOLIDAY_APIKEY"],
 		}
 		client := sdk.NewPublicHolidaySDK(mergedOpts)
 

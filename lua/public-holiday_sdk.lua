@@ -244,24 +244,76 @@ end
 
 
 
+-- Idiomatic facade: client:available_country():list() / client:available_country():load({ id = ... })
+function PublicHolidaySDK:available_country(data)
+  local EntityMod = require("entity.available_country_entity")
+  if data == nil then
+    if self._available_country == nil then
+      self._available_country = EntityMod.new(self, nil)
+    end
+    return self._available_country
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:available_country() instead.
 function PublicHolidaySDK:AvailableCountry(data)
   local EntityMod = require("entity.available_country_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:country_info():list() / client:country_info():load({ id = ... })
+function PublicHolidaySDK:country_info(data)
+  local EntityMod = require("entity.country_info_entity")
+  if data == nil then
+    if self._country_info == nil then
+      self._country_info = EntityMod.new(self, nil)
+    end
+    return self._country_info
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:country_info() instead.
 function PublicHolidaySDK:CountryInfo(data)
   local EntityMod = require("entity.country_info_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:long_weekend():list() / client:long_weekend():load({ id = ... })
+function PublicHolidaySDK:long_weekend(data)
+  local EntityMod = require("entity.long_weekend_entity")
+  if data == nil then
+    if self._long_weekend == nil then
+      self._long_weekend = EntityMod.new(self, nil)
+    end
+    return self._long_weekend
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:long_weekend() instead.
 function PublicHolidaySDK:LongWeekend(data)
   local EntityMod = require("entity.long_weekend_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:public_holiday():list() / client:public_holiday():load({ id = ... })
+function PublicHolidaySDK:public_holiday(data)
+  local EntityMod = require("entity.public_holiday_entity")
+  if data == nil then
+    if self._public_holiday == nil then
+      self._public_holiday = EntityMod.new(self, nil)
+    end
+    return self._public_holiday
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:public_holiday() instead.
 function PublicHolidaySDK:PublicHoliday(data)
   local EntityMod = require("entity.public_holiday_entity")
   return EntityMod.new(self, data)

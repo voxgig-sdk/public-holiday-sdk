@@ -9,12 +9,9 @@ The Lua SDK for the PublicHoliday API — an entity-oriented client using Lua co
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-public-holiday
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/public-holiday-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("public-holiday_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("PUBLIC-HOLIDAY_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List availablecountrys
 
 ```lua
-local result, err = client:AvailableCountry():list()
+local result, err = client:availablecountry():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -93,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:PublicHoliday():load({ id = "test01" })
+local result, err = client:availablecountry():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -126,8 +121,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-PUBLIC-HOLIDAY_TEST_LIVE=TRUE
-PUBLIC-HOLIDAY_APIKEY=<your-key>
+PUBLIC_HOLIDAY_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -150,7 +144,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -276,7 +269,7 @@ API path: `/PublicHolidays/{Year}/{CountryCode}`
 
 ### AvailableCountry
 
-Create an instance: `const available_country = client.AvailableCountry()`
+Create an instance: `const available_country = client.available_country`
 
 #### Operations
 
@@ -294,13 +287,13 @@ Create an instance: `const available_country = client.AvailableCountry()`
 #### Example: List
 
 ```ts
-const available_countrys = await client.AvailableCountry().list()
+const available_countrys = await client.available_country.list()
 ```
 
 
 ### CountryInfo
 
-Create an instance: `const country_info = client.CountryInfo()`
+Create an instance: `const country_info = client.country_info`
 
 #### Operations
 
@@ -321,13 +314,13 @@ Create an instance: `const country_info = client.CountryInfo()`
 #### Example: Load
 
 ```ts
-const country_info = await client.CountryInfo().load({ id: 'country_info_id' })
+const country_info = await client.country_info.load({ id: 'country_info_id' })
 ```
 
 
 ### LongWeekend
 
-Create an instance: `const long_weekend = client.LongWeekend()`
+Create an instance: `const long_weekend = client.long_weekend`
 
 #### Operations
 
@@ -347,13 +340,13 @@ Create an instance: `const long_weekend = client.LongWeekend()`
 #### Example: List
 
 ```ts
-const long_weekends = await client.LongWeekend().list()
+const long_weekends = await client.long_weekend.list()
 ```
 
 
 ### PublicHoliday
 
-Create an instance: `const public_holiday = client.PublicHoliday()`
+Create an instance: `const public_holiday = client.public_holiday`
 
 #### Operations
 
@@ -379,13 +372,13 @@ Create an instance: `const public_holiday = client.PublicHoliday()`
 #### Example: Load
 
 ```ts
-const public_holiday = await client.PublicHoliday().load({ id: 'public_holiday_id' })
+const public_holiday = await client.public_holiday.load({ id: 'public_holiday_id' })
 ```
 
 #### Example: List
 
 ```ts
-const public_holidays = await client.PublicHoliday().list()
+const public_holidays = await client.public_holiday.list()
 ```
 
 
@@ -460,11 +453,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local availablecountry = client:availablecountry()
+availablecountry:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- availablecountry:data_get() now returns the loaded availablecountry data
+-- availablecountry:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

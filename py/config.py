@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://date.nager.at/api/v3",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -131,6 +128,7 @@ def make_config():
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },
@@ -213,6 +211,7 @@ def make_config():
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -222,6 +221,7 @@ def make_config():
                       "orig": "year",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 1,
                     },
                   ],
                 },
@@ -346,6 +346,7 @@ def make_config():
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -355,6 +356,7 @@ def make_config():
                       "orig": "year",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 1,
                     },
                   ],
                 },
@@ -417,6 +419,7 @@ def make_config():
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                   "query": [
@@ -465,6 +468,7 @@ def make_config():
                       "orig": "country_code",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  AvailableCountry,
+  AvailableCountryListMatch,
+} from '../PublicHolidayTypes'
 
 // TODO: needs Entity superclass
-class AvailableCountryEntity extends PublicHolidayEntityBase {
+class AvailableCountryEntity extends PublicHolidayEntityBase<AvailableCountry> {
 
   constructor(client: PublicHolidaySDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class AvailableCountryEntity extends PublicHolidayEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: AvailableCountryListMatch, ctrl?: Control): Promise<AvailableCountry[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class AvailableCountryEntity extends PublicHolidayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<AvailableCountry[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

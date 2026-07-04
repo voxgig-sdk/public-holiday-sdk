@@ -98,7 +98,6 @@ function public_holiday_basic_setup(extra)
     ["PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID"] = idmap,
     ["PUBLICHOLIDAY_TEST_LIVE"] = "FALSE",
     ["PUBLICHOLIDAY_TEST_EXPLAIN"] = "FALSE",
-    ["PUBLICHOLIDAY_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -110,7 +109,6 @@ function public_holiday_basic_setup(extra)
   if env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["PUBLICHOLIDAY_APIKEY"],
       },
       extra or {},
     })

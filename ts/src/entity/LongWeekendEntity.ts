@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  LongWeekend,
+  LongWeekendListMatch,
+} from '../PublicHolidayTypes'
 
 // TODO: needs Entity superclass
-class LongWeekendEntity extends PublicHolidayEntityBase {
+class LongWeekendEntity extends PublicHolidayEntityBase<LongWeekend> {
 
   constructor(client: PublicHolidaySDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class LongWeekendEntity extends PublicHolidayEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: LongWeekendListMatch, ctrl?: Control): Promise<LongWeekend[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class LongWeekendEntity extends PublicHolidayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<LongWeekend[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -53,8 +53,7 @@ class LongWeekendEntityTest extends TestCase
             "year" => $setup["idmap"]["year01"],
         ];
 
-        [$long_weekend_ref01_list_result, $err] = $long_weekend_ref01_ent->list($long_weekend_ref01_match, null);
-        $this->assertNull($err);
+        $long_weekend_ref01_list_result = $long_weekend_ref01_ent->list($long_weekend_ref01_match, null);
         $this->assertIsArray($long_weekend_ref01_list_result);
 
     }
@@ -89,7 +88,6 @@ function long_weekend_basic_setup($extra)
         "PUBLICHOLIDAY_TEST_LONG_WEEKEND_ENTID" => $idmap,
         "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
         "PUBLICHOLIDAY_TEST_EXPLAIN" => "FALSE",
-        "PUBLICHOLIDAY_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -101,7 +99,6 @@ function long_weekend_basic_setup($extra)
     if ($env["PUBLICHOLIDAY_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["PUBLICHOLIDAY_APIKEY"],
             ],
             $extra ?? [],
         ]);

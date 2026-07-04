@@ -114,7 +114,6 @@ function basicSetup(extra?: any) {
     'PUBLIC_HOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID': idmap,
     'PUBLIC_HOLIDAY_TEST_LIVE': 'FALSE',
     'PUBLIC_HOLIDAY_TEST_EXPLAIN': 'FALSE',
-    'PUBLIC_HOLIDAY_APIKEY': 'NONE',
   })
 
   idmap = env['PUBLIC_HOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID']
@@ -124,7 +123,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new PublicHolidaySDK(merge([
       {
-        apikey: env.PUBLIC_HOLIDAY_APIKEY,
       },
       extra
     ]))

@@ -42,8 +42,7 @@ class CountryInfoEntityTest < Minitest::Test
     # LOAD
     country_info_ref01_ent = client.CountryInfo(nil)
     country_info_ref01_match_dt0 = {}
-    country_info_ref01_data_dt0_loaded, err = country_info_ref01_ent.load(country_info_ref01_match_dt0, nil)
-    assert_nil err
+    country_info_ref01_data_dt0_loaded = country_info_ref01_ent.load(country_info_ref01_match_dt0, nil)
     assert !country_info_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def country_info_basic_setup(extra)
     "PUBLICHOLIDAY_TEST_COUNTRY_INFO_ENTID" => idmap,
     "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
     "PUBLICHOLIDAY_TEST_EXPLAIN" => "FALSE",
-    "PUBLICHOLIDAY_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def country_info_basic_setup(extra)
   if env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["PUBLICHOLIDAY_APIKEY"],
       },
       extra || {},
     ])

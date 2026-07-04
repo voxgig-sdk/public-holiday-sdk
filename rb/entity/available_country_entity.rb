@@ -45,6 +45,7 @@ class AvailableCountryEntity
     end
   end
 
+  # @return [AvailableCountry, Hash] the current AvailableCountry data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class AvailableCountryEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of AvailableCountry fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class AvailableCountryEntity
   
 
   
+  # List AvailableCountry items matching the given filter.
+  #
+  # @param reqmatch [AvailableCountryListMatch, Hash, nil] match filter (any subset of AvailableCountry fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<AvailableCountry>, Array] the matching AvailableCountry items; raises PublicHolidayError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

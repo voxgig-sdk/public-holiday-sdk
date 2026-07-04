@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -146,7 +145,7 @@ Alias for `PublicHolidaySDK.test()`.
 ## AvailableCountryEntity
 
 ```ts
-const available_country = client.AvailableCountry()
+const available_country = client.available_country
 ```
 
 ### Fields
@@ -163,7 +162,7 @@ const available_country = client.AvailableCountry()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.AvailableCountry().list()
+const results = await client.available_country.list()
 ```
 
 ### Common Methods
@@ -197,7 +196,7 @@ Return a copy of the entity options.
 ## CountryInfoEntity
 
 ```ts
-const country_info = client.CountryInfo()
+const country_info = client.country_info
 ```
 
 ### Fields
@@ -217,7 +216,7 @@ const country_info = client.CountryInfo()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.CountryInfo().load({ id: 'country_info_id' })
+const result = await client.country_info.load({ id: 'country_info_id' })
 ```
 
 ### Common Methods
@@ -251,7 +250,7 @@ Return a copy of the entity options.
 ## LongWeekendEntity
 
 ```ts
-const long_weekend = client.LongWeekend()
+const long_weekend = client.long_weekend
 ```
 
 ### Fields
@@ -270,7 +269,7 @@ const long_weekend = client.LongWeekend()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.LongWeekend().list()
+const results = await client.long_weekend.list()
 ```
 
 ### Common Methods
@@ -304,7 +303,7 @@ Return a copy of the entity options.
 ## PublicHolidayEntity
 
 ```ts
-const public_holiday = client.PublicHoliday()
+const public_holiday = client.public_holiday
 ```
 
 ### Fields
@@ -328,7 +327,7 @@ const public_holiday = client.PublicHoliday()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.PublicHoliday().list()
+const results = await client.public_holiday.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -336,7 +335,7 @@ const results = await client.PublicHoliday().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.PublicHoliday().load({ id: 'public_holiday_id' })
+const result = await client.public_holiday.load({ id: 'public_holiday_id' })
 ```
 
 ### Common Methods

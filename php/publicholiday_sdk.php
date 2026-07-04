@@ -103,7 +103,7 @@ class PublicHolidaySDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class PublicHolidaySDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class PublicHolidaySDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,45 +216,89 @@ class PublicHolidaySDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function AvailableCountry($data = null)
+    private $_available_country = null;
+
+    // Idiomatic facade: $client->available_country()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias AvailableCountry() (PHP method
+    // names are case-insensitive).
+    public function available_country($data = null)
     {
         require_once __DIR__ . '/entity/available_country_entity.php';
+        if ($data === null) {
+            if ($this->_available_country === null) {
+                $this->_available_country = new AvailableCountryEntity($this, null);
+            }
+            return $this->_available_country;
+        }
         return new AvailableCountryEntity($this, $data);
     }
 
 
-    public function CountryInfo($data = null)
+    private $_country_info = null;
+
+    // Idiomatic facade: $client->country_info()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias CountryInfo() (PHP method
+    // names are case-insensitive).
+    public function country_info($data = null)
     {
         require_once __DIR__ . '/entity/country_info_entity.php';
+        if ($data === null) {
+            if ($this->_country_info === null) {
+                $this->_country_info = new CountryInfoEntity($this, null);
+            }
+            return $this->_country_info;
+        }
         return new CountryInfoEntity($this, $data);
     }
 
 
-    public function LongWeekend($data = null)
+    private $_long_weekend = null;
+
+    // Idiomatic facade: $client->long_weekend()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias LongWeekend() (PHP method
+    // names are case-insensitive).
+    public function long_weekend($data = null)
     {
         require_once __DIR__ . '/entity/long_weekend_entity.php';
+        if ($data === null) {
+            if ($this->_long_weekend === null) {
+                $this->_long_weekend = new LongWeekendEntity($this, null);
+            }
+            return $this->_long_weekend;
+        }
         return new LongWeekendEntity($this, $data);
     }
 
 
-    public function PublicHoliday($data = null)
+    private $_public_holiday = null;
+
+    // Idiomatic facade: $client->public_holiday()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias PublicHoliday() (PHP method
+    // names are case-insensitive).
+    public function public_holiday($data = null)
     {
         require_once __DIR__ . '/entity/public_holiday_entity.php';
+        if ($data === null) {
+            if ($this->_public_holiday === null) {
+                $this->_public_holiday = new PublicHolidayEntity($this, null);
+            }
+            return $this->_public_holiday;
+        }
         return new PublicHolidayEntity($this, $data);
     }
 

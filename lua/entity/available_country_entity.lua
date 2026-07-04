@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch AvailableCountryListMatch
+---@param ctrl? table
+---@return AvailableCountry[]
+---@return string? err
 function AvailableCountryEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://date.nager.at/api/v3",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },
@@ -130,6 +127,7 @@ local function make_config()
                       ["orig"] = "country_code",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                   },
                 },
@@ -212,6 +210,7 @@ local function make_config()
                       ["orig"] = "country_code",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                     {
                       ["active"] = true,
@@ -221,6 +220,7 @@ local function make_config()
                       ["orig"] = "year",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
+                      ["index$"] = 1,
                     },
                   },
                 },
@@ -345,6 +345,7 @@ local function make_config()
                       ["orig"] = "country_code",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                     {
                       ["active"] = true,
@@ -354,6 +355,7 @@ local function make_config()
                       ["orig"] = "year",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
+                      ["index$"] = 1,
                     },
                   },
                 },
@@ -416,6 +418,7 @@ local function make_config()
                       ["orig"] = "country_code",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                   },
                   ["query"] = {
@@ -464,6 +467,7 @@ local function make_config()
                       ["orig"] = "country_code",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
+                      ["index$"] = 0,
                     },
                   },
                 },

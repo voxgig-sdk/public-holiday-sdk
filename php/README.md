@@ -9,9 +9,10 @@ The PHP SDK for the PublicHoliday API — an entity-oriented client using PHP co
 
 
 ## Install
-```bash
-composer require voxgig-sdk/public-holiday
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/public-holiday-sdk/releases](https://github.com/voxgig-sdk/public-holiday-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,22 +26,22 @@ loading a specific record.
 <?php
 require_once 'publicholiday_sdk.php';
 
-$client = new PublicHolidaySDK([
-    "apikey" => getenv("PUBLIC-HOLIDAY_APIKEY"),
-]);
+$client = new PublicHolidaySDK();
 ```
 
 ### 2. List availablecountrys
 
 ```php
-[$result, $err] = $client->AvailableCountry()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->availablecountry()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
@@ -52,28 +53,31 @@ if (is_array($result)) {
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -87,7 +91,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = PublicHolidaySDK::test();
 
-[$result, $err] = $client->PublicHoliday()->load(["id" => "test01"]);
+$result = $client->availablecountry()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -121,8 +125,7 @@ $client = new PublicHolidaySDK([
 Create a `.env.local` file at the project root:
 
 ```
-PUBLIC-HOLIDAY_TEST_LIVE=TRUE
-PUBLIC-HOLIDAY_APIKEY=<your-key>
+PUBLIC_HOLIDAY_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -145,7 +148,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -194,8 +196,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -271,7 +277,7 @@ API path: `/PublicHolidays/{Year}/{CountryCode}`
 
 ### AvailableCountry
 
-Create an instance: `const available_country = client.AvailableCountry()`
+Create an instance: `const available_country = client.available_country`
 
 #### Operations
 
@@ -289,13 +295,13 @@ Create an instance: `const available_country = client.AvailableCountry()`
 #### Example: List
 
 ```ts
-const available_countrys = await client.AvailableCountry().list()
+const available_countrys = await client.available_country.list()
 ```
 
 
 ### CountryInfo
 
-Create an instance: `const country_info = client.CountryInfo()`
+Create an instance: `const country_info = client.country_info`
 
 #### Operations
 
@@ -316,13 +322,13 @@ Create an instance: `const country_info = client.CountryInfo()`
 #### Example: Load
 
 ```ts
-const country_info = await client.CountryInfo().load({ id: 'country_info_id' })
+const country_info = await client.country_info.load({ id: 'country_info_id' })
 ```
 
 
 ### LongWeekend
 
-Create an instance: `const long_weekend = client.LongWeekend()`
+Create an instance: `const long_weekend = client.long_weekend`
 
 #### Operations
 
@@ -342,13 +348,13 @@ Create an instance: `const long_weekend = client.LongWeekend()`
 #### Example: List
 
 ```ts
-const long_weekends = await client.LongWeekend().list()
+const long_weekends = await client.long_weekend.list()
 ```
 
 
 ### PublicHoliday
 
-Create an instance: `const public_holiday = client.PublicHoliday()`
+Create an instance: `const public_holiday = client.public_holiday`
 
 #### Operations
 
@@ -374,13 +380,13 @@ Create an instance: `const public_holiday = client.PublicHoliday()`
 #### Example: Load
 
 ```ts
-const public_holiday = await client.PublicHoliday().load({ id: 'public_holiday_id' })
+const public_holiday = await client.public_holiday.load({ id: 'public_holiday_id' })
 ```
 
 #### Example: List
 
 ```ts
-const public_holidays = await client.PublicHoliday().list()
+const public_holidays = await client.public_holiday.list()
 ```
 
 
@@ -455,11 +461,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$availablecountry = $client->availablecountry();
+$availablecountry->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $availablecountry->dataGet() now returns the loaded availablecountry data
+// $availablecountry->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -245,21 +245,33 @@ func (sdk *PublicHolidaySDK) Direct(fetchargs map[string]any) (map[string]any, e
 }
 
 
+// AvailableCountry returns a AvailableCountry entity bound to this client.
+// Idiomatic usage: client.AvailableCountry(nil).List(nil, nil) or
+// client.AvailableCountry(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *PublicHolidaySDK) AvailableCountry(data map[string]any) PublicHolidayEntity {
 	return NewAvailableCountryEntityFunc(sdk, data)
 }
 
 
+// CountryInfo returns a CountryInfo entity bound to this client.
+// Idiomatic usage: client.CountryInfo(nil).List(nil, nil) or
+// client.CountryInfo(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *PublicHolidaySDK) CountryInfo(data map[string]any) PublicHolidayEntity {
 	return NewCountryInfoEntityFunc(sdk, data)
 }
 
 
+// LongWeekend returns a LongWeekend entity bound to this client.
+// Idiomatic usage: client.LongWeekend(nil).List(nil, nil) or
+// client.LongWeekend(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *PublicHolidaySDK) LongWeekend(data map[string]any) PublicHolidayEntity {
 	return NewLongWeekendEntityFunc(sdk, data)
 }
 
 
+// PublicHoliday returns a PublicHoliday entity bound to this client.
+// Idiomatic usage: client.PublicHoliday(nil).List(nil, nil) or
+// client.PublicHoliday(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *PublicHolidaySDK) PublicHoliday(data map[string]any) PublicHolidayEntity {
 	return NewPublicHolidayEntityFunc(sdk, data)
 }

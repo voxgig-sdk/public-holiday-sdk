@@ -38,7 +38,7 @@ class LongWeekendDirectTest < Minitest::Test
       params["year"] = "direct01"
     end
 
-    result, err = client.direct({
+    result = client.direct({
       "path" => "LongWeekend/{year}/{country_code}",
       "method" => "GET",
       "params" => params,
@@ -47,8 +47,8 @@ class LongWeekendDirectTest < Minitest::Test
       # Live mode is lenient: synthetic IDs frequently 4xx and the list-
       # response shape varies wildly across public APIs. Skip rather than
       # fail when the call doesn't return a usable list.
-      if !err.nil?
-        skip("list call failed (likely synthetic IDs against live API): #{err}")
+      if !result["err"].nil?
+        skip("list call failed (likely synthetic IDs against live API): #{result["err"]}")
         return
       end
       unless result["ok"]
@@ -61,7 +61,7 @@ class LongWeekendDirectTest < Minitest::Test
         return
       end
     else
-      assert_nil err
+      assert_nil result["err"]
       assert result["ok"]
       assert_equal 200, Helpers.to_int(result["status"])
       assert result["data"].is_a?(Array)
@@ -81,14 +81,12 @@ def long_weekend_direct_setup(mockres)
   env = Runner.env_override({
     "PUBLICHOLIDAY_TEST_LONG_WEEKEND_ENTID" => {},
     "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
-    "PUBLICHOLIDAY_APIKEY" => "NONE",
   })
 
   live = env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["PUBLICHOLIDAY_APIKEY"],
     }
     client = PublicHolidaySDK.new(merged_opts)
     return {

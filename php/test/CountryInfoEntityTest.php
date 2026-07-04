@@ -49,8 +49,7 @@ class CountryInfoEntityTest extends TestCase
         // LOAD
         $country_info_ref01_ent = $client->CountryInfo(null);
         $country_info_ref01_match_dt0 = [];
-        [$country_info_ref01_data_dt0_loaded, $err] = $country_info_ref01_ent->load($country_info_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $country_info_ref01_data_dt0_loaded = $country_info_ref01_ent->load($country_info_ref01_match_dt0, null);
         $this->assertNotNull($country_info_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function country_info_basic_setup($extra)
         "PUBLICHOLIDAY_TEST_COUNTRY_INFO_ENTID" => $idmap,
         "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
         "PUBLICHOLIDAY_TEST_EXPLAIN" => "FALSE",
-        "PUBLICHOLIDAY_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function country_info_basic_setup($extra)
     if ($env["PUBLICHOLIDAY_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["PUBLICHOLIDAY_APIKEY"],
             ],
             $extra ?? [],
         ]);

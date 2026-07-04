@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch PublicHolidayLoadMatch
+---@param ctrl? table
+---@return PublicHoliday
+---@return string? err
 function PublicHolidayEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch PublicHolidayListMatch
+---@param ctrl? table
+---@return PublicHoliday[]
+---@return string? err
 function PublicHolidayEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

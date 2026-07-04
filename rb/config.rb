@@ -15,9 +15,6 @@ module PublicHolidayConfig
       },
       "options" => {
         "base" => "https://date.nager.at/api/v3",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -131,6 +128,7 @@ module PublicHolidayConfig
                         "orig" => "country_code",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },
@@ -213,6 +211,7 @@ module PublicHolidayConfig
                         "orig" => "country_code",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -222,6 +221,7 @@ module PublicHolidayConfig
                         "orig" => "year",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
+                        "index$" => 1,
                       },
                     ],
                   },
@@ -346,6 +346,7 @@ module PublicHolidayConfig
                         "orig" => "country_code",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -355,6 +356,7 @@ module PublicHolidayConfig
                         "orig" => "year",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
+                        "index$" => 1,
                       },
                     ],
                   },
@@ -417,6 +419,7 @@ module PublicHolidayConfig
                         "orig" => "country_code",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                     "query" => [
@@ -465,6 +468,7 @@ module PublicHolidayConfig
                         "orig" => "country_code",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },

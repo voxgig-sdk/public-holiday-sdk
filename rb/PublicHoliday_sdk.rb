@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'PublicHoliday_types'
+
 
 class PublicHolidaySDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class PublicHolidaySDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class PublicHolidaySDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue PublicHolidayError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = PublicHolidayHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class PublicHolidaySDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,34 +198,62 @@ class PublicHolidaySDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.available_country.list / client.available_country.load({ "id" => ... })
+  def available_country
+    require_relative 'entity/available_country_entity'
+    @available_country ||= AvailableCountryEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.available_country instead.
   def AvailableCountry(data = nil)
     require_relative 'entity/available_country_entity'
     AvailableCountryEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.country_info.list / client.country_info.load({ "id" => ... })
+  def country_info
+    require_relative 'entity/country_info_entity'
+    @country_info ||= CountryInfoEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.country_info instead.
   def CountryInfo(data = nil)
     require_relative 'entity/country_info_entity'
     CountryInfoEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.long_weekend.list / client.long_weekend.load({ "id" => ... })
+  def long_weekend
+    require_relative 'entity/long_weekend_entity'
+    @long_weekend ||= LongWeekendEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.long_weekend instead.
   def LongWeekend(data = nil)
     require_relative 'entity/long_weekend_entity'
     LongWeekendEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.public_holiday.list / client.public_holiday.load({ "id" => ... })
+  def public_holiday
+    require_relative 'entity/public_holiday_entity'
+    @public_holiday ||= PublicHolidayEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.public_holiday instead.
   def PublicHoliday(data = nil)
     require_relative 'entity/public_holiday_entity'
     PublicHolidayEntity.new(self, data)

@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -96,7 +95,7 @@ same parameters as `direct()`.
 ## AvailableCountryEntity
 
 ```lua
-local available_country = client:AvailableCountry(nil)
+local available_country = client:available_country(nil)
 ```
 
 ### Fields
@@ -113,7 +112,7 @@ local available_country = client:AvailableCountry(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:AvailableCountry():list()
+local results, err = client:available_country():list()
 ```
 
 ### Common Methods
@@ -149,7 +148,7 @@ Return the entity name.
 ## CountryInfoEntity
 
 ```lua
-local country_info = client:CountryInfo(nil)
+local country_info = client:country_info(nil)
 ```
 
 ### Fields
@@ -169,7 +168,7 @@ local country_info = client:CountryInfo(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:CountryInfo():load({ id = "country_info_id" })
+local result, err = client:country_info():load({ id = "country_info_id" })
 ```
 
 ### Common Methods
@@ -205,7 +204,7 @@ Return the entity name.
 ## LongWeekendEntity
 
 ```lua
-local long_weekend = client:LongWeekend(nil)
+local long_weekend = client:long_weekend(nil)
 ```
 
 ### Fields
@@ -224,7 +223,7 @@ local long_weekend = client:LongWeekend(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:LongWeekend():list()
+local results, err = client:long_weekend():list()
 ```
 
 ### Common Methods
@@ -260,7 +259,7 @@ Return the entity name.
 ## PublicHolidayEntity
 
 ```lua
-local public_holiday = client:PublicHoliday(nil)
+local public_holiday = client:public_holiday(nil)
 ```
 
 ### Fields
@@ -284,7 +283,7 @@ local public_holiday = client:PublicHoliday(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:PublicHoliday():list()
+local results, err = client:public_holiday():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -292,7 +291,7 @@ local results, err = client:PublicHoliday():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:PublicHoliday():load({ id = "public_holiday_id" })
+local result, err = client:public_holiday():load({ id = "public_holiday_id" })
 ```
 
 ### Common Methods
