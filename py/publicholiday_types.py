@@ -4,72 +4,67 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class AvailableCountry:
-    country_code: Optional[str] = None
-    name: Optional[str] = None
+class AvailableCountry(TypedDict, total=False):
+    country_code: str
+    name: str
 
 
-@dataclass
-class AvailableCountryListMatch:
-    country_code: Optional[str] = None
-    name: Optional[str] = None
+class AvailableCountryListMatch(TypedDict, total=False):
+    country_code: str
+    name: str
 
 
-@dataclass
-class CountryInfo:
-    border: Optional[list] = None
-    common_name: Optional[str] = None
-    country_code: Optional[str] = None
-    official_name: Optional[str] = None
-    region: Optional[str] = None
+class CountryInfo(TypedDict, total=False):
+    border: list
+    common_name: str
+    country_code: str
+    official_name: str
+    region: str
 
 
-@dataclass
-class CountryInfoLoadMatch:
+class CountryInfoLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class LongWeekend:
-    day_count: Optional[int] = None
-    end_date: Optional[str] = None
-    need_bridge_day: Optional[bool] = None
-    start_date: Optional[str] = None
+class LongWeekend(TypedDict, total=False):
+    day_count: int
+    end_date: str
+    need_bridge_day: bool
+    start_date: str
 
 
-@dataclass
-class LongWeekendListMatch:
+class LongWeekendListMatch(TypedDict):
     country_code: str
     year: int
 
 
-@dataclass
-class PublicHoliday:
-    country_code: Optional[str] = None
-    county: Optional[list] = None
-    date: Optional[str] = None
-    fixed: Optional[bool] = None
-    launch_year: Optional[int] = None
-    local_name: Optional[str] = None
-    name: Optional[str] = None
-    type: Optional[list] = None
+class PublicHoliday(TypedDict, total=False):
+    country_code: str
+    county: list
+    date: str
+    fixed: bool
+    launch_year: int
+    local_name: str
+    name: str
+    type: list
 
 
-@dataclass
-class PublicHolidayLoadMatch:
+class PublicHolidayLoadMatch(TypedDict):
     country_code: str
 
 
-@dataclass
-class PublicHolidayListMatch:
+class PublicHolidayListMatch(TypedDict):
     country_code: str
     year: int
-

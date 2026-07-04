@@ -208,52 +208,28 @@ class PublicHolidaySDK
   end
 
 
-  # Idiomatic facade: client.available_country.list / client.available_country.load({ "id" => ... })
-  def available_country
-    require_relative 'entity/available_country_entity'
-    @available_country ||= AvailableCountryEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.available_country instead.
+  # Canonical facade: client.AvailableCountry.list / client.AvailableCountry.load({ "id" => ... })
   def AvailableCountry(data = nil)
     require_relative 'entity/available_country_entity'
     AvailableCountryEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.country_info.list / client.country_info.load({ "id" => ... })
-  def country_info
-    require_relative 'entity/country_info_entity'
-    @country_info ||= CountryInfoEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.country_info instead.
+  # Canonical facade: client.CountryInfo.list / client.CountryInfo.load({ "id" => ... })
   def CountryInfo(data = nil)
     require_relative 'entity/country_info_entity'
     CountryInfoEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.long_weekend.list / client.long_weekend.load({ "id" => ... })
-  def long_weekend
-    require_relative 'entity/long_weekend_entity'
-    @long_weekend ||= LongWeekendEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.long_weekend instead.
+  # Canonical facade: client.LongWeekend.list / client.LongWeekend.load({ "id" => ... })
   def LongWeekend(data = nil)
     require_relative 'entity/long_weekend_entity'
     LongWeekendEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.public_holiday.list / client.public_holiday.load({ "id" => ... })
-  def public_holiday
-    require_relative 'entity/public_holiday_entity'
-    @public_holiday ||= PublicHolidayEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.public_holiday instead.
+  # Canonical facade: client.PublicHoliday.list / client.PublicHoliday.load({ "id" => ... })
   def PublicHoliday(data = nil)
     require_relative 'entity/public_holiday_entity'
     PublicHolidayEntity.new(self, data)

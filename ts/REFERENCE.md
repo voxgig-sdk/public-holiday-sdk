@@ -145,7 +145,7 @@ Alias for `PublicHolidaySDK.test()`.
 ## AvailableCountryEntity
 
 ```ts
-const available_country = client.available_country
+const available_country = client.AvailableCountry()
 ```
 
 ### Fields
@@ -162,7 +162,7 @@ const available_country = client.available_country
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.available_country.list()
+const results = await client.AvailableCountry().list()
 ```
 
 ### Common Methods
@@ -196,7 +196,7 @@ Return a copy of the entity options.
 ## CountryInfoEntity
 
 ```ts
-const country_info = client.country_info
+const country_info = client.CountryInfo()
 ```
 
 ### Fields
@@ -216,7 +216,7 @@ const country_info = client.country_info
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.country_info.load({ id: 'country_info_id' })
+const result = await client.CountryInfo().load({ id: 'country_info_id' })
 ```
 
 ### Common Methods
@@ -250,7 +250,7 @@ Return a copy of the entity options.
 ## LongWeekendEntity
 
 ```ts
-const long_weekend = client.long_weekend
+const long_weekend = client.LongWeekend()
 ```
 
 ### Fields
@@ -269,7 +269,7 @@ const long_weekend = client.long_weekend
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.long_weekend.list()
+const results = await client.LongWeekend().list()
 ```
 
 ### Common Methods
@@ -303,7 +303,7 @@ Return a copy of the entity options.
 ## PublicHolidayEntity
 
 ```ts
-const public_holiday = client.public_holiday
+const public_holiday = client.PublicHoliday()
 ```
 
 ### Fields
@@ -327,7 +327,7 @@ const public_holiday = client.public_holiday
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.public_holiday.list()
+const results = await client.PublicHoliday().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -335,7 +335,7 @@ const results = await client.public_holiday.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.public_holiday.load({ id: 'public_holiday_id' })
+const result = await client.PublicHoliday().load({ id: 'public_holiday_id' })
 ```
 
 ### Common Methods

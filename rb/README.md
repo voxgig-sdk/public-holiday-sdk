@@ -28,16 +28,14 @@ require_relative "PublicHoliday_sdk"
 client = PublicHolidaySDK.new
 ```
 
-### 2. List availablecountrys
+### 2. List availablecountry records
 
 ```ruby
 begin
-  result = client.availablecountry.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of AvailableCountry records — iterate directly.
+  availablecountrys = client.AvailableCountry.list
+  availablecountrys.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -85,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = PublicHolidaySDK.test
+client = PublicHolidaySDK.test({
+  "entity" => { "availablecountry" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.availablecountry.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+availablecountry = client.AvailableCountry.load({ "id" => "test01" })
+puts availablecountry
 ```
 
 ### Use a custom fetch function
@@ -167,7 +169,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `AvailableCountry` | `(data) -> AvailableCountryEntity` | Create a AvailableCountry entity instance. |
+| `AvailableCountry` | `(data) -> AvailableCountryEntity` | Create an AvailableCountry entity instance. |
 | `CountryInfo` | `(data) -> CountryInfoEntity` | Create a CountryInfo entity instance. |
 | `LongWeekend` | `(data) -> LongWeekendEntity` | Create a LongWeekend entity instance. |
 | `PublicHoliday` | `(data) -> PublicHolidayEntity` | Create a PublicHoliday entity instance. |
@@ -272,7 +274,7 @@ API path: `/PublicHolidays/{Year}/{CountryCode}`
 
 ### AvailableCountry
 
-Create an instance: `const available_country = client.available_country`
+Create an instance: `available_country = client.AvailableCountry`
 
 #### Operations
 
@@ -289,14 +291,15 @@ Create an instance: `const available_country = client.available_country`
 
 #### Example: List
 
-```ts
-const available_countrys = await client.available_country.list()
+```ruby
+# list returns an Array of AvailableCountry records (raises on error).
+available_countrys = client.AvailableCountry.list
 ```
 
 
 ### CountryInfo
 
-Create an instance: `const country_info = client.country_info`
+Create an instance: `country_info = client.CountryInfo`
 
 #### Operations
 
@@ -316,14 +319,15 @@ Create an instance: `const country_info = client.country_info`
 
 #### Example: Load
 
-```ts
-const country_info = await client.country_info.load({ id: 'country_info_id' })
+```ruby
+# load returns the bare CountryInfo record (raises on error).
+country_info = client.CountryInfo.load({ "id" => "country_info_id" })
 ```
 
 
 ### LongWeekend
 
-Create an instance: `const long_weekend = client.long_weekend`
+Create an instance: `long_weekend = client.LongWeekend`
 
 #### Operations
 
@@ -342,14 +346,15 @@ Create an instance: `const long_weekend = client.long_weekend`
 
 #### Example: List
 
-```ts
-const long_weekends = await client.long_weekend.list()
+```ruby
+# list returns an Array of LongWeekend records (raises on error).
+long_weekends = client.LongWeekend.list
 ```
 
 
 ### PublicHoliday
 
-Create an instance: `const public_holiday = client.public_holiday`
+Create an instance: `public_holiday = client.PublicHoliday`
 
 #### Operations
 
@@ -374,14 +379,16 @@ Create an instance: `const public_holiday = client.public_holiday`
 
 #### Example: Load
 
-```ts
-const public_holiday = await client.public_holiday.load({ id: 'public_holiday_id' })
+```ruby
+# load returns the bare PublicHoliday record (raises on error).
+public_holiday = client.PublicHoliday.load({ "id" => "public_holiday_id" })
 ```
 
 #### Example: List
 
-```ts
-const public_holidays = await client.public_holiday.list()
+```ruby
+# list returns an Array of PublicHoliday records (raises on error).
+public_holidays = client.PublicHoliday.list
 ```
 
 
@@ -456,7 +463,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-availablecountry = client.availablecountry
+availablecountry = client.AvailableCountry
 availablecountry.load({ "id" => "example_id" })
 
 # availablecountry.data_get now returns the loaded availablecountry data

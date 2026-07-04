@@ -95,7 +95,7 @@ same parameters as `direct()`.
 ## AvailableCountryEntity
 
 ```lua
-local available_country = client:available_country(nil)
+local available_country = client:AvailableCountry(nil)
 ```
 
 ### Fields
@@ -112,7 +112,7 @@ local available_country = client:available_country(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:available_country():list()
+local results, err = client:AvailableCountry():list()
 ```
 
 ### Common Methods
@@ -148,7 +148,7 @@ Return the entity name.
 ## CountryInfoEntity
 
 ```lua
-local country_info = client:country_info(nil)
+local country_info = client:CountryInfo(nil)
 ```
 
 ### Fields
@@ -168,7 +168,7 @@ local country_info = client:country_info(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:country_info():load({ id = "country_info_id" })
+local result, err = client:CountryInfo():load({ id = "country_info_id" })
 ```
 
 ### Common Methods
@@ -204,7 +204,7 @@ Return the entity name.
 ## LongWeekendEntity
 
 ```lua
-local long_weekend = client:long_weekend(nil)
+local long_weekend = client:LongWeekend(nil)
 ```
 
 ### Fields
@@ -223,7 +223,7 @@ local long_weekend = client:long_weekend(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:long_weekend():list()
+local results, err = client:LongWeekend():list()
 ```
 
 ### Common Methods
@@ -259,7 +259,7 @@ Return the entity name.
 ## PublicHolidayEntity
 
 ```lua
-local public_holiday = client:public_holiday(nil)
+local public_holiday = client:PublicHoliday(nil)
 ```
 
 ### Fields
@@ -283,7 +283,7 @@ local public_holiday = client:public_holiday(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:public_holiday():list()
+local results, err = client:PublicHoliday():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -291,7 +291,7 @@ local results, err = client:public_holiday():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:public_holiday():load({ id = "public_holiday_id" })
+local result, err = client:PublicHoliday():load({ id = "public_holiday_id" })
 ```
 
 ### Common Methods

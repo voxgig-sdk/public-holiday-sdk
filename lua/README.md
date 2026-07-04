@@ -31,17 +31,17 @@ local sdk = require("public-holiday_sdk")
 local client = sdk.new()
 ```
 
-### 2. List availablecountrys
+### 2. List availablecountry records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:availablecountry():list()
+local availablecountrys, err = client:AvailableCountry():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(availablecountrys) do
+  print(item["id"], item["name"])
 end
 ```
 
@@ -88,8 +88,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:availablecountry():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:AvailableCountry():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -167,7 +167,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `AvailableCountry` | `(data) -> AvailableCountryEntity` | Create a AvailableCountry entity instance. |
+| `AvailableCountry` | `(data) -> AvailableCountryEntity` | Create an AvailableCountry entity instance. |
 | `CountryInfo` | `(data) -> CountryInfoEntity` | Create a CountryInfo entity instance. |
 | `LongWeekend` | `(data) -> LongWeekendEntity` | Create a LongWeekend entity instance. |
 | `PublicHoliday` | `(data) -> PublicHolidayEntity` | Create a PublicHoliday entity instance. |
@@ -192,17 +192,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local available_country, err = client:AvailableCountry():load({ id = "example_id" })
+    if err then error(err) end
+    -- available_country is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -269,7 +274,7 @@ API path: `/PublicHolidays/{Year}/{CountryCode}`
 
 ### AvailableCountry
 
-Create an instance: `const available_country = client.available_country`
+Create an instance: `local available_country = client:AvailableCountry(nil)`
 
 #### Operations
 
@@ -286,14 +291,14 @@ Create an instance: `const available_country = client.available_country`
 
 #### Example: List
 
-```ts
-const available_countrys = await client.available_country.list()
+```lua
+local available_countrys, err = client:AvailableCountry():list()
 ```
 
 
 ### CountryInfo
 
-Create an instance: `const country_info = client.country_info`
+Create an instance: `local country_info = client:CountryInfo(nil)`
 
 #### Operations
 
@@ -313,14 +318,14 @@ Create an instance: `const country_info = client.country_info`
 
 #### Example: Load
 
-```ts
-const country_info = await client.country_info.load({ id: 'country_info_id' })
+```lua
+local country_info, err = client:CountryInfo():load({ id = "country_info_id" })
 ```
 
 
 ### LongWeekend
 
-Create an instance: `const long_weekend = client.long_weekend`
+Create an instance: `local long_weekend = client:LongWeekend(nil)`
 
 #### Operations
 
@@ -339,14 +344,14 @@ Create an instance: `const long_weekend = client.long_weekend`
 
 #### Example: List
 
-```ts
-const long_weekends = await client.long_weekend.list()
+```lua
+local long_weekends, err = client:LongWeekend():list()
 ```
 
 
 ### PublicHoliday
 
-Create an instance: `const public_holiday = client.public_holiday`
+Create an instance: `local public_holiday = client:PublicHoliday(nil)`
 
 #### Operations
 
@@ -371,14 +376,14 @@ Create an instance: `const public_holiday = client.public_holiday`
 
 #### Example: Load
 
-```ts
-const public_holiday = await client.public_holiday.load({ id: 'public_holiday_id' })
+```lua
+local public_holiday, err = client:PublicHoliday():load({ id = "public_holiday_id" })
 ```
 
 #### Example: List
 
-```ts
-const public_holidays = await client.public_holiday.list()
+```lua
+local public_holidays, err = client:PublicHoliday():list()
 ```
 
 
@@ -453,7 +458,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local availablecountry = client:availablecountry()
+local availablecountry = client:AvailableCountry()
 availablecountry:load({ id = "example_id" })
 
 -- availablecountry:data_get() now returns the loaded availablecountry data

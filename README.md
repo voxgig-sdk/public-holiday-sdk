@@ -26,9 +26,11 @@ import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday'
 
 const client = new PublicHolidaySDK()
 
-// List all availablecountrys
-const availablecountrys = await client.availablecountry.list()
-console.log(availablecountrys.data)
+// List all availablecountrys (returns AvailableCountry[])
+const availablecountrys = await client.AvailableCountry().list()
+for (const availablecountry of availablecountrys) {
+  console.log(availablecountry)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -86,9 +88,10 @@ from publicholiday_sdk import PublicHolidaySDK
 
 client = PublicHolidaySDK()
 
-# List all availablecountrys
-availablecountrys = client.availablecountry.list()
-print(availablecountrys)
+# List all availablecountrys (returns a list, raises on error)
+availablecountrys = client.AvailableCountry().list({})
+for availablecountry in availablecountrys:
+    print(availablecountry)
 ```
 
 ### PHP
@@ -99,8 +102,8 @@ require_once 'publicholiday_sdk.php';
 
 $client = new PublicHolidaySDK();
 
-// List all availablecountrys (throws on error)
-$availablecountrys = $client->availablecountry()->list();
+// List all availablecountrys (returns an array; throws on error)
+$availablecountrys = $client->AvailableCountry()->list();
 print_r($availablecountrys);
 ```
 
@@ -123,8 +126,8 @@ require_relative "PublicHoliday_sdk"
 
 client = PublicHolidaySDK.new
 
-# List all availablecountrys
-availablecountrys = client.availablecountry.list
+# List all availablecountrys (returns an Array; raises on error)
+availablecountrys = client.AvailableCountry.list
 puts availablecountrys
 ```
 
@@ -136,7 +139,7 @@ local sdk = require("public-holiday_sdk")
 local client = sdk.new()
 
 -- List all availablecountrys
-local availablecountrys, err = client:availablecountry():list()
+local availablecountrys, err = client:AvailableCountry():list()
 print(availablecountrys)
 ```
 
@@ -149,22 +152,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = PublicHolidaySDK.test()
-const result = await client.availablecountry.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const availablecountry = await client.AvailableCountry().load({ id: 'test01' })
+// availablecountry is a bare AvailableCountry populated with mock data
+console.log(availablecountry)
 ```
 
 ### Python
 
 ```python
 client = PublicHolidaySDK.test()
-result = client.availablecountry.load({"id": "test01"})
+availablecountry = client.AvailableCountry().load({"id": "test01"})
+print(availablecountry)
 ```
 
 ### PHP
 
 ```php
-$client = PublicHolidaySDK::test();
-$result = $client->availablecountry()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = PublicHolidaySDK::test([
+    "entity" => ["availablecountry" => ["test01" => ["id" => "test01"]]],
+]);
+$availablecountry = $client->AvailableCountry()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -179,15 +187,18 @@ result, err := client.AvailableCountry(nil).Load(
 ### Ruby
 
 ```ruby
-client = PublicHolidaySDK.test
-result = client.availablecountry.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = PublicHolidaySDK.test({
+  "entity" => { "availablecountry" => { "test01" => { "id" => "test01" } } },
+})
+availablecountry = client.AvailableCountry.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:availablecountry():load({ id = "test01" })
+local result, err = client:AvailableCountry():load({ id = "test01" })
 ```
 
 ## How it works
@@ -235,6 +246,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

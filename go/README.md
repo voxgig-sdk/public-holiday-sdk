@@ -30,37 +30,33 @@ go mod edit -replace github.com/voxgig-sdk/public-holiday-sdk/go=../public-holid
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/public-holiday-sdk/go"
-    "github.com/voxgig-sdk/public-holiday-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 2. List availablecountrys
-
-```go
-    result, err := client.AvailableCountry(nil).List(nil, nil)
+    // List availablecountry records — the value is the array of records itself.
+    availablecountrys, err := client.AvailableCountry(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range availablecountrys.([]any) {
+        fmt.Println(item)
     }
+}
 ```
 
 
@@ -110,10 +106,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.AvailableCountry(nil).Load(
+availablecountry, err := client.AvailableCountry(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(availablecountry) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -190,7 +189,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `AvailableCountry` | `(data map[string]any) PublicHolidayEntity` | Create a AvailableCountry entity instance. |
+| `AvailableCountry` | `(data map[string]any) PublicHolidayEntity` | Create an AvailableCountry entity instance. |
 | `CountryInfo` | `(data map[string]any) PublicHolidayEntity` | Create a CountryInfo entity instance. |
 | `LongWeekend` | `(data map[string]any) PublicHolidayEntity` | Create a LongWeekend entity instance. |
 | `PublicHoliday` | `(data map[string]any) PublicHolidayEntity` | Create a PublicHoliday entity instance. |
@@ -213,17 +212,24 @@ All entities implement the `PublicHolidayEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    availablecountry, err := client.AvailableCountry(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // availablecountry is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -308,7 +314,11 @@ Create an instance: `available_country := client.AvailableCountry(nil)`
 #### Example: List
 
 ```go
-results, err := client.AvailableCountry(nil).List(nil, nil)
+available_countrys, err := client.AvailableCountry(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(available_countrys) // the array of records
 ```
 
 
@@ -335,7 +345,11 @@ Create an instance: `country_info := client.CountryInfo(nil)`
 #### Example: Load
 
 ```go
-result, err := client.CountryInfo(nil).Load(map[string]any{"id": "country_info_id"}, nil)
+country_info, err := client.CountryInfo(nil).Load(map[string]any{"id": "country_info_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(country_info) // the loaded record
 ```
 
 
@@ -361,7 +375,11 @@ Create an instance: `long_weekend := client.LongWeekend(nil)`
 #### Example: List
 
 ```go
-results, err := client.LongWeekend(nil).List(nil, nil)
+long_weekends, err := client.LongWeekend(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(long_weekends) // the array of records
 ```
 
 
@@ -393,13 +411,21 @@ Create an instance: `public_holiday := client.PublicHoliday(nil)`
 #### Example: Load
 
 ```go
-result, err := client.PublicHoliday(nil).Load(map[string]any{"id": "public_holiday_id"}, nil)
+public_holiday, err := client.PublicHoliday(nil).Load(map[string]any{"id": "public_holiday_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(public_holiday) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.PublicHoliday(nil).List(nil, nil)
+public_holidays, err := client.PublicHoliday(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(public_holidays) // the array of records
 ```
 
 

@@ -29,18 +29,16 @@ require_once 'publicholiday_sdk.php';
 $client = new PublicHolidaySDK();
 ```
 
-### 2. List availablecountrys
+### 2. List availablecountry records
 
 ```php
 try {
-    $result = $client->availablecountry()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of AvailableCountry records — iterate directly.
+    $availablecountrys = $client->AvailableCountry()->list();
+    foreach ($availablecountrys as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -86,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = PublicHolidaySDK::test();
+$client = PublicHolidaySDK::test([
+    "entity" => ["availablecountry" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->availablecountry()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$availablecountry = $client->AvailableCountry()->load(["id" => "test01"]);
+print_r($availablecountry);
 ```
 
 ### Use a custom fetch function
@@ -171,7 +173,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `AvailableCountry` | `($data): AvailableCountryEntity` | Create a AvailableCountry entity instance. |
+| `AvailableCountry` | `($data): AvailableCountryEntity` | Create an AvailableCountry entity instance. |
 | `CountryInfo` | `($data): CountryInfoEntity` | Create a CountryInfo entity instance. |
 | `LongWeekend` | `($data): LongWeekendEntity` | Create a LongWeekend entity instance. |
 | `PublicHoliday` | `($data): PublicHolidayEntity` | Create a PublicHoliday entity instance. |
@@ -277,7 +279,7 @@ API path: `/PublicHolidays/{Year}/{CountryCode}`
 
 ### AvailableCountry
 
-Create an instance: `const available_country = client.available_country`
+Create an instance: `$available_country = $client->AvailableCountry();`
 
 #### Operations
 
@@ -294,14 +296,15 @@ Create an instance: `const available_country = client.available_country`
 
 #### Example: List
 
-```ts
-const available_countrys = await client.available_country.list()
+```php
+// list() returns an array of AvailableCountry records (throws on error).
+$available_countrys = $client->AvailableCountry()->list();
 ```
 
 
 ### CountryInfo
 
-Create an instance: `const country_info = client.country_info`
+Create an instance: `$country_info = $client->CountryInfo();`
 
 #### Operations
 
@@ -321,14 +324,15 @@ Create an instance: `const country_info = client.country_info`
 
 #### Example: Load
 
-```ts
-const country_info = await client.country_info.load({ id: 'country_info_id' })
+```php
+// load() returns the bare CountryInfo record (throws on error).
+$country_info = $client->CountryInfo()->load(["id" => "country_info_id"]);
 ```
 
 
 ### LongWeekend
 
-Create an instance: `const long_weekend = client.long_weekend`
+Create an instance: `$long_weekend = $client->LongWeekend();`
 
 #### Operations
 
@@ -347,14 +351,15 @@ Create an instance: `const long_weekend = client.long_weekend`
 
 #### Example: List
 
-```ts
-const long_weekends = await client.long_weekend.list()
+```php
+// list() returns an array of LongWeekend records (throws on error).
+$long_weekends = $client->LongWeekend()->list();
 ```
 
 
 ### PublicHoliday
 
-Create an instance: `const public_holiday = client.public_holiday`
+Create an instance: `$public_holiday = $client->PublicHoliday();`
 
 #### Operations
 
@@ -379,14 +384,16 @@ Create an instance: `const public_holiday = client.public_holiday`
 
 #### Example: Load
 
-```ts
-const public_holiday = await client.public_holiday.load({ id: 'public_holiday_id' })
+```php
+// load() returns the bare PublicHoliday record (throws on error).
+$public_holiday = $client->PublicHoliday()->load(["id" => "public_holiday_id"]);
 ```
 
 #### Example: List
 
-```ts
-const public_holidays = await client.public_holiday.list()
+```php
+// list() returns an array of PublicHoliday records (throws on error).
+$public_holidays = $client->PublicHoliday()->list();
 ```
 
 
@@ -461,7 +468,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$availablecountry = $client->availablecountry();
+$availablecountry = $client->AvailableCountry();
 $availablecountry->load(["id" => "example_id"]);
 
 // $availablecountry->dataGet() now returns the loaded availablecountry data

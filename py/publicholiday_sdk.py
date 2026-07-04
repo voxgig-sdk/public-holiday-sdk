@@ -220,73 +220,33 @@ class PublicHolidaySDK:
         }
 
 
-    @property
-    def available_country(self):
-        """Idiomatic facade: client.available_country.list() / client.available_country.load({"id": ...})."""
-        from entity.available_country_entity import AvailableCountryEntity
-        cached = getattr(self, "_available_country", None)
-        if cached is None:
-            cached = AvailableCountryEntity(self, None)
-            self._available_country = cached
-        return cached
-
-    def AvailableCountry(self, data=None):
-        # Deprecated: use client.available_country instead.
+    def AvailableCountry(self, data=None) -> "AvailableCountryEntity":
+        """Entity factory: client.AvailableCountry().list({}) / client.AvailableCountry().load({"id": ...})."""
         from entity.available_country_entity import AvailableCountryEntity
         return AvailableCountryEntity(self, data)
 
 
-    @property
-    def country_info(self):
-        """Idiomatic facade: client.country_info.list() / client.country_info.load({"id": ...})."""
-        from entity.country_info_entity import CountryInfoEntity
-        cached = getattr(self, "_country_info", None)
-        if cached is None:
-            cached = CountryInfoEntity(self, None)
-            self._country_info = cached
-        return cached
-
-    def CountryInfo(self, data=None):
-        # Deprecated: use client.country_info instead.
+    def CountryInfo(self, data=None) -> "CountryInfoEntity":
+        """Entity factory: client.CountryInfo().list({}) / client.CountryInfo().load({"id": ...})."""
         from entity.country_info_entity import CountryInfoEntity
         return CountryInfoEntity(self, data)
 
 
-    @property
-    def long_weekend(self):
-        """Idiomatic facade: client.long_weekend.list() / client.long_weekend.load({"id": ...})."""
-        from entity.long_weekend_entity import LongWeekendEntity
-        cached = getattr(self, "_long_weekend", None)
-        if cached is None:
-            cached = LongWeekendEntity(self, None)
-            self._long_weekend = cached
-        return cached
-
-    def LongWeekend(self, data=None):
-        # Deprecated: use client.long_weekend instead.
+    def LongWeekend(self, data=None) -> "LongWeekendEntity":
+        """Entity factory: client.LongWeekend().list({}) / client.LongWeekend().load({"id": ...})."""
         from entity.long_weekend_entity import LongWeekendEntity
         return LongWeekendEntity(self, data)
 
 
-    @property
-    def public_holiday(self):
-        """Idiomatic facade: client.public_holiday.list() / client.public_holiday.load({"id": ...})."""
-        from entity.public_holiday_entity import PublicHolidayEntity
-        cached = getattr(self, "_public_holiday", None)
-        if cached is None:
-            cached = PublicHolidayEntity(self, None)
-            self._public_holiday = cached
-        return cached
-
-    def PublicHoliday(self, data=None):
-        # Deprecated: use client.public_holiday instead.
+    def PublicHoliday(self, data=None) -> "PublicHolidayEntity":
+        """Entity factory: client.PublicHoliday().list({}) / client.PublicHoliday().load({"id": ...})."""
         from entity.public_holiday_entity import PublicHolidayEntity
         return PublicHolidayEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "PublicHolidaySDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -306,3 +266,12 @@ class PublicHolidaySDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.available_country_entity import AvailableCountryEntity
+    from entity.country_info_entity import CountryInfoEntity
+    from entity.long_weekend_entity import LongWeekendEntity
+    from entity.public_holiday_entity import PublicHolidayEntity

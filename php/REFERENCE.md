@@ -97,7 +97,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## AvailableCountryEntity
 
 ```php
-$available_country = $client->available_country();
+$available_country = $client->AvailableCountry();
 ```
 
 ### Fields
@@ -114,7 +114,7 @@ $available_country = $client->available_country();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->available_country()->list([]);
+$results = $client->AvailableCountry()->list([]);
 ```
 
 ### Common Methods
@@ -150,7 +150,7 @@ Return the entity name.
 ## CountryInfoEntity
 
 ```php
-$country_info = $client->country_info();
+$country_info = $client->CountryInfo();
 ```
 
 ### Fields
@@ -170,7 +170,7 @@ $country_info = $client->country_info();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->country_info()->load(["id" => "country_info_id"]);
+$result = $client->CountryInfo()->load(["id" => "country_info_id"]);
 ```
 
 ### Common Methods
@@ -206,7 +206,7 @@ Return the entity name.
 ## LongWeekendEntity
 
 ```php
-$long_weekend = $client->long_weekend();
+$long_weekend = $client->LongWeekend();
 ```
 
 ### Fields
@@ -225,7 +225,7 @@ $long_weekend = $client->long_weekend();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->long_weekend()->list([]);
+$results = $client->LongWeekend()->list([]);
 ```
 
 ### Common Methods
@@ -261,7 +261,7 @@ Return the entity name.
 ## PublicHolidayEntity
 
 ```php
-$public_holiday = $client->public_holiday();
+$public_holiday = $client->PublicHoliday();
 ```
 
 ### Fields
@@ -285,7 +285,7 @@ $public_holiday = $client->public_holiday();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->public_holiday()->list([]);
+$results = $client->PublicHoliday()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -293,7 +293,7 @@ $results = $client->public_holiday()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->public_holiday()->load(["id" => "public_holiday_id"]);
+$result = $client->PublicHoliday()->load(["id" => "public_holiday_id"]);
 ```
 
 ### Common Methods

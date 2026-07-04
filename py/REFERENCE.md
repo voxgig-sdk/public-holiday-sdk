@@ -92,7 +92,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AvailableCountryEntity
 
 ```python
-available_country = client.available_country
+available_country = client.AvailableCountry()
 ```
 
 ### Fields
@@ -109,7 +109,9 @@ available_country = client.available_country
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.available_country.list({})
+results = client.AvailableCountry().list({})
+for available_country in results:
+    print(available_country)
 ```
 
 ### Common Methods
@@ -144,7 +146,7 @@ Return the entity name.
 ## CountryInfoEntity
 
 ```python
-country_info = client.country_info
+country_info = client.CountryInfo()
 ```
 
 ### Fields
@@ -164,7 +166,7 @@ country_info = client.country_info
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.country_info.load({"id": "country_info_id"})
+result = client.CountryInfo().load({"id": "country_info_id"})
 ```
 
 ### Common Methods
@@ -199,7 +201,7 @@ Return the entity name.
 ## LongWeekendEntity
 
 ```python
-long_weekend = client.long_weekend
+long_weekend = client.LongWeekend()
 ```
 
 ### Fields
@@ -218,7 +220,9 @@ long_weekend = client.long_weekend
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.long_weekend.list({})
+results = client.LongWeekend().list({})
+for long_weekend in results:
+    print(long_weekend)
 ```
 
 ### Common Methods
@@ -253,7 +257,7 @@ Return the entity name.
 ## PublicHolidayEntity
 
 ```python
-public_holiday = client.public_holiday
+public_holiday = client.PublicHoliday()
 ```
 
 ### Fields
@@ -277,7 +281,9 @@ public_holiday = client.public_holiday
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.public_holiday.list({})
+results = client.PublicHoliday().list({})
+for public_holiday in results:
+    print(public_holiday)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -285,7 +291,7 @@ results = client.public_holiday.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.public_holiday.load({"id": "public_holiday_id"})
+result = client.PublicHoliday().load({"id": "public_holiday_id"})
 ```
 
 ### Common Methods

@@ -98,7 +98,7 @@ same parameters as `direct()`. Raises on error.
 ## AvailableCountryEntity
 
 ```ruby
-available_country = client.available_country
+available_country = client.AvailableCountry
 ```
 
 ### Fields
@@ -115,7 +115,7 @@ available_country = client.available_country
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.available_country.list(nil)
+results = client.AvailableCountry.list(nil)
 ```
 
 ### Common Methods
@@ -151,7 +151,7 @@ Return the entity name.
 ## CountryInfoEntity
 
 ```ruby
-country_info = client.country_info
+country_info = client.CountryInfo
 ```
 
 ### Fields
@@ -171,7 +171,7 @@ country_info = client.country_info
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.country_info.load({ "id" => "country_info_id" })
+result = client.CountryInfo.load({ "id" => "country_info_id" })
 ```
 
 ### Common Methods
@@ -207,7 +207,7 @@ Return the entity name.
 ## LongWeekendEntity
 
 ```ruby
-long_weekend = client.long_weekend
+long_weekend = client.LongWeekend
 ```
 
 ### Fields
@@ -226,7 +226,7 @@ long_weekend = client.long_weekend
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.long_weekend.list(nil)
+results = client.LongWeekend.list(nil)
 ```
 
 ### Common Methods
@@ -262,7 +262,7 @@ Return the entity name.
 ## PublicHolidayEntity
 
 ```ruby
-public_holiday = client.public_holiday
+public_holiday = client.PublicHoliday
 ```
 
 ### Fields
@@ -286,7 +286,7 @@ public_holiday = client.public_holiday
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.public_holiday.list(nil)
+results = client.PublicHoliday.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -294,7 +294,7 @@ results = client.public_holiday.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.public_holiday.load({ "id" => "public_holiday_id" })
+result = client.PublicHoliday.load({ "id" => "public_holiday_id" })
 ```
 
 ### Common Methods

@@ -233,10 +233,10 @@ class PublicHolidaySDK
 
     private $_available_country = null;
 
-    // Idiomatic facade: $client->available_country()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias AvailableCountry() (PHP method
-    // names are case-insensitive).
-    public function available_country($data = null)
+    // Canonical facade: $client->AvailableCountry()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->available_country()
+    // resolves here too.
+    public function AvailableCountry($data = null)
     {
         require_once __DIR__ . '/entity/available_country_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class PublicHolidaySDK
 
     private $_country_info = null;
 
-    // Idiomatic facade: $client->country_info()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias CountryInfo() (PHP method
-    // names are case-insensitive).
-    public function country_info($data = null)
+    // Canonical facade: $client->CountryInfo()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->country_info()
+    // resolves here too.
+    public function CountryInfo($data = null)
     {
         require_once __DIR__ . '/entity/country_info_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class PublicHolidaySDK
 
     private $_long_weekend = null;
 
-    // Idiomatic facade: $client->long_weekend()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias LongWeekend() (PHP method
-    // names are case-insensitive).
-    public function long_weekend($data = null)
+    // Canonical facade: $client->LongWeekend()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->long_weekend()
+    // resolves here too.
+    public function LongWeekend($data = null)
     {
         require_once __DIR__ . '/entity/long_weekend_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class PublicHolidaySDK
 
     private $_public_holiday = null;
 
-    // Idiomatic facade: $client->public_holiday()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias PublicHoliday() (PHP method
-    // names are case-insensitive).
-    public function public_holiday($data = null)
+    // Canonical facade: $client->PublicHoliday()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->public_holiday()
+    // resolves here too.
+    public function PublicHoliday($data = null)
     {
         require_once __DIR__ . '/entity/public_holiday_entity.php';
         if ($data === null) {

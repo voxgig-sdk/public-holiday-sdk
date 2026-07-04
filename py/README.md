@@ -31,14 +31,16 @@ from publicholiday_sdk import PublicHolidaySDK
 client = PublicHolidaySDK()
 ```
 
-### 2. List availablecountrys
+### 2. List availablecountry records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.availablecountry.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    availablecountrys = client.AvailableCountry().list({})
+    for availablecountry in availablecountrys:
+        print(availablecountry)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -86,8 +88,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = PublicHolidaySDK.test()
 
-result = client.availablecountry.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+availablecountry = client.AvailableCountry().load({"id": "test01"})
+# availablecountry contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -163,7 +166,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `AvailableCountry` | `(data) -> AvailableCountryEntity` | Create a AvailableCountry entity instance. |
+| `AvailableCountry` | `(data) -> AvailableCountryEntity` | Create an AvailableCountry entity instance. |
 | `CountryInfo` | `(data) -> CountryInfoEntity` | Create a CountryInfo entity instance. |
 | `LongWeekend` | `(data) -> LongWeekendEntity` | Create a LongWeekend entity instance. |
 | `PublicHoliday` | `(data) -> PublicHolidayEntity` | Create a PublicHoliday entity instance. |
@@ -269,7 +272,7 @@ API path: `/PublicHolidays/{Year}/{CountryCode}`
 
 ### AvailableCountry
 
-Create an instance: `const available_country = client.available_country`
+Create an instance: `available_country = client.AvailableCountry()`
 
 #### Operations
 
@@ -286,14 +289,14 @@ Create an instance: `const available_country = client.available_country`
 
 #### Example: List
 
-```ts
-const available_countrys = await client.available_country.list()
+```python
+available_countrys = client.AvailableCountry().list({})
 ```
 
 
 ### CountryInfo
 
-Create an instance: `const country_info = client.country_info`
+Create an instance: `country_info = client.CountryInfo()`
 
 #### Operations
 
@@ -313,14 +316,14 @@ Create an instance: `const country_info = client.country_info`
 
 #### Example: Load
 
-```ts
-const country_info = await client.country_info.load({ id: 'country_info_id' })
+```python
+country_info = client.CountryInfo().load({"id": "country_info_id"})
 ```
 
 
 ### LongWeekend
 
-Create an instance: `const long_weekend = client.long_weekend`
+Create an instance: `long_weekend = client.LongWeekend()`
 
 #### Operations
 
@@ -339,14 +342,14 @@ Create an instance: `const long_weekend = client.long_weekend`
 
 #### Example: List
 
-```ts
-const long_weekends = await client.long_weekend.list()
+```python
+long_weekends = client.LongWeekend().list({})
 ```
 
 
 ### PublicHoliday
 
-Create an instance: `const public_holiday = client.public_holiday`
+Create an instance: `public_holiday = client.PublicHoliday()`
 
 #### Operations
 
@@ -371,14 +374,14 @@ Create an instance: `const public_holiday = client.public_holiday`
 
 #### Example: Load
 
-```ts
-const public_holiday = await client.public_holiday.load({ id: 'public_holiday_id' })
+```python
+public_holiday = client.PublicHoliday().load({"id": "public_holiday_id"})
 ```
 
 #### Example: List
 
-```ts
-const public_holidays = await client.public_holiday.list()
+```python
+public_holidays = client.PublicHoliday().list({})
 ```
 
 
@@ -452,7 +455,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-availablecountry = client.availablecountry
+availablecountry = client.AvailableCountry()
 availablecountry.load({"id": "example_id"})
 
 # availablecountry.data_get() now returns the loaded availablecountry data
