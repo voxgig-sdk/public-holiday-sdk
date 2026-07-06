@@ -152,8 +152,8 @@ const available_country = client.AvailableCountry()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `country_code` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -203,11 +203,11 @@ const country_info = client.CountryInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | ``$ARRAY`` | No |  |
-| `common_name` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `official_name` | ``$STRING`` | No |  |
-| `region` | ``$STRING`` | No |  |
+| `border` | `any[]` | No |  |
+| `common_name` | `string` | No |  |
+| `country_code` | `string` | No |  |
+| `official_name` | `string` | No |  |
+| `region` | `string` | No |  |
 
 ### Operations
 
@@ -257,10 +257,10 @@ const long_weekend = client.LongWeekend()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | ``$INTEGER`` | No |  |
-| `end_date` | ``$STRING`` | No |  |
-| `need_bridge_day` | ``$BOOLEAN`` | No |  |
-| `start_date` | ``$STRING`` | No |  |
+| `day_count` | `number` | No |  |
+| `end_date` | `string` | No |  |
+| `need_bridge_day` | `boolean` | No |  |
+| `start_date` | `string` | No |  |
 
 ### Operations
 
@@ -310,15 +310,15 @@ const public_holiday = client.PublicHoliday()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `county` | ``$ARRAY`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `fixed` | ``$BOOLEAN`` | No |  |
-| `global` | ``$BOOLEAN`` | No |  |
-| `launch_year` | ``$INTEGER`` | No |  |
-| `local_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `country_code` | `string` | No |  |
+| `county` | `any[]` | No |  |
+| `date` | `string` | No |  |
+| `fixed` | `boolean` | No |  |
+| `global` | `boolean` | No |  |
+| `launch_year` | `number` | No |  |
+| `local_name` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `any[]` | No |  |
 
 ### Operations
 
@@ -335,7 +335,7 @@ const results = await client.PublicHoliday().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.PublicHoliday().load({ id: 'public_holiday_id' })
+const result = await client.PublicHoliday().load()
 ```
 
 ### Common Methods

@@ -4,6 +4,11 @@
 
 The Python SDK for the PublicHoliday API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.AvailableCountry()` — each
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,11 +43,39 @@ error — iterate it directly.
 
 ```python
 try:
-    availablecountrys = client.AvailableCountry().list({})
+    availablecountrys = client.AvailableCountry().list()
     for availablecountry in availablecountrys:
         print(availablecountry)
 except Exception as err:
     print(f"list failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    availablecountrys = client.AvailableCountry().list()
+    print(availablecountrys)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -63,7 +96,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -89,7 +125,7 @@ Create a mock client for unit testing — no server required:
 client = PublicHolidaySDK.test()
 
 # Entity ops return the bare record and raise on error.
-availablecountry = client.AvailableCountry().load({"id": "test01"})
+availablecountry = client.AvailableCountry().list()
 # availablecountry contains the mock response record
 ```
 
@@ -179,9 +215,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -278,19 +311,19 @@ Create an instance: `available_country = client.AvailableCountry()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `country_code` | `str` |  |
+| `name` | `str` |  |
 
 #### Example: List
 
 ```python
-available_countrys = client.AvailableCountry().list({})
+available_countrys = client.AvailableCountry().list()
 ```
 
 
@@ -308,11 +341,11 @@ Create an instance: `country_info = client.CountryInfo()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `border` | ``$ARRAY`` |  |
-| `common_name` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `official_name` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
+| `border` | `list` |  |
+| `common_name` | `str` |  |
+| `country_code` | `str` |  |
+| `official_name` | `str` |  |
+| `region` | `str` |  |
 
 #### Example: Load
 
@@ -329,21 +362,21 @@ Create an instance: `long_weekend = client.LongWeekend()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `day_count` | ``$INTEGER`` |  |
-| `end_date` | ``$STRING`` |  |
-| `need_bridge_day` | ``$BOOLEAN`` |  |
-| `start_date` | ``$STRING`` |  |
+| `day_count` | `int` |  |
+| `end_date` | `str` |  |
+| `need_bridge_day` | `bool` |  |
+| `start_date` | `str` |  |
 
 #### Example: List
 
 ```python
-long_weekends = client.LongWeekend().list({})
+long_weekends = client.LongWeekend().list()
 ```
 
 
@@ -355,42 +388,46 @@ Create an instance: `public_holiday = client.PublicHoliday()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | ``$STRING`` |  |
-| `county` | ``$ARRAY`` |  |
-| `date` | ``$STRING`` |  |
-| `fixed` | ``$BOOLEAN`` |  |
-| `global` | ``$BOOLEAN`` |  |
-| `launch_year` | ``$INTEGER`` |  |
-| `local_name` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$ARRAY`` |  |
+| `country_code` | `str` |  |
+| `county` | `list` |  |
+| `date` | `str` |  |
+| `fixed` | `bool` |  |
+| `global` | `bool` |  |
+| `launch_year` | `int` |  |
+| `local_name` | `str` |  |
+| `name` | `str` |  |
+| `type` | `list` |  |
 
 #### Example: Load
 
 ```python
-public_holiday = client.PublicHoliday().load({"id": "public_holiday_id"})
+public_holiday = client.PublicHoliday().load()
 ```
 
 #### Example: List
 
 ```python
-public_holidays = client.PublicHoliday().list({})
+public_holidays = client.PublicHoliday().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -407,8 +444,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -451,14 +489,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 availablecountry = client.AvailableCountry()
-availablecountry.load({"id": "example_id"})
+availablecountry.list()
 
-# availablecountry.data_get() now returns the loaded availablecountry data
+# availablecountry.data_get() now returns the availablecountry data from the last list
 # availablecountry.match_get() returns the last match criteria
 ```
 

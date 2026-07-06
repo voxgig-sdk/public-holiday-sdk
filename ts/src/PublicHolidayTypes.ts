@@ -10,7 +10,10 @@ export interface AvailableCountry {
   name?: string
 }
 
-export type AvailableCountryListMatch = Partial<AvailableCountry>
+export interface AvailableCountryListMatch {
+  country_code?: string
+  name?: string
+}
 
 export interface CountryInfo {
   border?: any[]

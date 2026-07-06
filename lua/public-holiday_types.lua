@@ -11,6 +11,8 @@
 ---@field name? string
 
 ---@class AvailableCountryListMatch
+---@field country_code? string
+---@field name? string
 
 ---@class CountryInfo
 ---@field border? table

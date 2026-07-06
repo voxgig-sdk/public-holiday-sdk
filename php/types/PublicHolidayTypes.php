@@ -19,7 +19,7 @@ class AvailableCountry
     public ?string $name = null;
 }
 
-/** Match filter for AvailableCountry#list (any subset of AvailableCountry fields). */
+/** Request payload for AvailableCountry#list. */
 class AvailableCountryListMatch
 {
     public ?string $country_code = null;

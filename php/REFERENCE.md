@@ -8,7 +8,7 @@ Complete API reference for the PublicHoliday PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/public-holiday_sdk.php';
+require_once __DIR__ . '/publicholiday_sdk.php';
 
 $client = new PublicHolidaySDK($options);
 ```
@@ -57,11 +57,11 @@ Create a new `LongWeekendEntity` instance. Pass `null` for no initial data.
 
 Create a new `PublicHolidayEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): PublicHolidayUtility`
 
 Return a copy of the SDK utility object.
 
@@ -104,34 +104,34 @@ $available_country = $client->AvailableCountry();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `country_code` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->AvailableCountry()->list([]);
+$results = $client->AvailableCountry()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -140,7 +140,7 @@ Set the entity match criteria.
 Create a new `AvailableCountryEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -157,11 +157,11 @@ $country_info = $client->CountryInfo();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | ``$ARRAY`` | No |  |
-| `common_name` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `official_name` | ``$STRING`` | No |  |
-| `region` | ``$STRING`` | No |  |
+| `border` | `array` | No |  |
+| `common_name` | `string` | No |  |
+| `country_code` | `string` | No |  |
+| `official_name` | `string` | No |  |
+| `region` | `string` | No |  |
 
 ### Operations
 
@@ -175,19 +175,19 @@ $result = $client->CountryInfo()->load(["id" => "country_info_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -196,7 +196,7 @@ Set the entity match criteria.
 Create a new `CountryInfoEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -213,36 +213,36 @@ $long_weekend = $client->LongWeekend();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | ``$INTEGER`` | No |  |
-| `end_date` | ``$STRING`` | No |  |
-| `need_bridge_day` | ``$BOOLEAN`` | No |  |
-| `start_date` | ``$STRING`` | No |  |
+| `day_count` | `int` | No |  |
+| `end_date` | `string` | No |  |
+| `need_bridge_day` | `bool` | No |  |
+| `start_date` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->LongWeekend()->list([]);
+$results = $client->LongWeekend()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -251,7 +251,7 @@ Set the entity match criteria.
 Create a new `LongWeekendEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -268,24 +268,24 @@ $public_holiday = $client->PublicHoliday();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `county` | ``$ARRAY`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `fixed` | ``$BOOLEAN`` | No |  |
-| `global` | ``$BOOLEAN`` | No |  |
-| `launch_year` | ``$INTEGER`` | No |  |
-| `local_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `country_code` | `string` | No |  |
+| `county` | `array` | No |  |
+| `date` | `string` | No |  |
+| `fixed` | `bool` | No |  |
+| `global` | `bool` | No |  |
+| `launch_year` | `int` | No |  |
+| `local_name` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->PublicHoliday()->list([]);
+$results = $client->PublicHoliday()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -293,24 +293,24 @@ $results = $client->PublicHoliday()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->PublicHoliday()->load(["id" => "public_holiday_id"]);
+$result = $client->PublicHoliday()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -319,7 +319,7 @@ Set the entity match criteria.
 Create a new `PublicHolidayEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

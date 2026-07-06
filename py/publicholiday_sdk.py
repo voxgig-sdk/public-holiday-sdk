@@ -221,25 +221,25 @@ class PublicHolidaySDK:
 
 
     def AvailableCountry(self, data=None) -> "AvailableCountryEntity":
-        """Entity factory: client.AvailableCountry().list({}) / client.AvailableCountry().load({"id": ...})."""
+        """Entity factory: client.AvailableCountry().list() / client.AvailableCountry().load({"id": ...})."""
         from entity.available_country_entity import AvailableCountryEntity
         return AvailableCountryEntity(self, data)
 
 
     def CountryInfo(self, data=None) -> "CountryInfoEntity":
-        """Entity factory: client.CountryInfo().list({}) / client.CountryInfo().load({"id": ...})."""
+        """Entity factory: client.CountryInfo().list() / client.CountryInfo().load({"id": ...})."""
         from entity.country_info_entity import CountryInfoEntity
         return CountryInfoEntity(self, data)
 
 
     def LongWeekend(self, data=None) -> "LongWeekendEntity":
-        """Entity factory: client.LongWeekend().list({}) / client.LongWeekend().load({"id": ...})."""
+        """Entity factory: client.LongWeekend().list() / client.LongWeekend().load({"id": ...})."""
         from entity.long_weekend_entity import LongWeekendEntity
         return LongWeekendEntity(self, data)
 
 
     def PublicHoliday(self, data=None) -> "PublicHolidayEntity":
-        """Entity factory: client.PublicHoliday().list({}) / client.PublicHoliday().load({"id": ...})."""
+        """Entity factory: client.PublicHoliday().list() / client.PublicHoliday().load({"id": ...})."""
         from entity.public_holiday_entity import PublicHolidayEntity
         return PublicHolidayEntity(self, data)
 

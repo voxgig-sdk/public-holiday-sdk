@@ -21,7 +21,7 @@ AvailableCountry = Struct.new(
   keyword_init: true
 )
 
-# Match filter for AvailableCountry#list (any subset of AvailableCountry fields).
+# Request payload for AvailableCountry#list.
 #
 # @!attribute [rw] country_code
 #   @return [String, nil]

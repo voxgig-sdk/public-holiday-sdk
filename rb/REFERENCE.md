@@ -8,7 +8,7 @@ Complete API reference for the PublicHoliday Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'public-holiday_sdk'
+require_relative 'PublicHoliday_sdk'
 
 client = PublicHolidaySDK.new(options)
 ```
@@ -105,17 +105,17 @@ available_country = client.AvailableCountry
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `country_code` | `String` | No |  |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.AvailableCountry.list(nil)
+results = client.AvailableCountry.list
 ```
 
 ### Common Methods
@@ -158,11 +158,11 @@ country_info = client.CountryInfo
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | ``$ARRAY`` | No |  |
-| `common_name` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `official_name` | ``$STRING`` | No |  |
-| `region` | ``$STRING`` | No |  |
+| `border` | `Array` | No |  |
+| `common_name` | `String` | No |  |
+| `country_code` | `String` | No |  |
+| `official_name` | `String` | No |  |
+| `region` | `String` | No |  |
 
 ### Operations
 
@@ -214,19 +214,19 @@ long_weekend = client.LongWeekend
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | ``$INTEGER`` | No |  |
-| `end_date` | ``$STRING`` | No |  |
-| `need_bridge_day` | ``$BOOLEAN`` | No |  |
-| `start_date` | ``$STRING`` | No |  |
+| `day_count` | `Integer` | No |  |
+| `end_date` | `String` | No |  |
+| `need_bridge_day` | `Boolean` | No |  |
+| `start_date` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.LongWeekend.list(nil)
+results = client.LongWeekend.list
 ```
 
 ### Common Methods
@@ -269,24 +269,24 @@ public_holiday = client.PublicHoliday
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `county` | ``$ARRAY`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `fixed` | ``$BOOLEAN`` | No |  |
-| `global` | ``$BOOLEAN`` | No |  |
-| `launch_year` | ``$INTEGER`` | No |  |
-| `local_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `country_code` | `String` | No |  |
+| `county` | `Array` | No |  |
+| `date` | `String` | No |  |
+| `fixed` | `Boolean` | No |  |
+| `global` | `Boolean` | No |  |
+| `launch_year` | `Integer` | No |  |
+| `local_name` | `String` | No |  |
+| `name` | `String` | No |  |
+| `type` | `Array` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.PublicHoliday.list(nil)
+results = client.PublicHoliday.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -294,7 +294,7 @@ results = client.PublicHoliday.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.PublicHoliday.load({ "id" => "public_holiday_id" })
+result = client.PublicHoliday.load()
 ```
 
 ### Common Methods

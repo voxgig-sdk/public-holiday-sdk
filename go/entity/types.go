@@ -14,8 +14,7 @@ type AvailableCountry struct {
 	Name *string `json:"name,omitempty"`
 }
 
-// AvailableCountryListMatch mirrors the available_country fields as an all-optional match
-// filter (Go analog of Partial<AvailableCountry>).
+// AvailableCountryListMatch is the typed request payload for AvailableCountry.ListTyped.
 type AvailableCountryListMatch struct {
 	CountryCode *string `json:"country_code,omitempty"`
 	Name *string `json:"name,omitempty"`

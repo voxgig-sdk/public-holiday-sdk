@@ -8,7 +8,7 @@ Complete API reference for the PublicHoliday Python SDK.
 ### Constructor
 
 ```python
-from public-holiday_sdk import PublicHolidaySDK
+from publicholiday_sdk import PublicHolidaySDK
 
 client = PublicHolidaySDK(options)
 ```
@@ -99,17 +99,17 @@ available_country = client.AvailableCountry()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `country_code` | `str` | No |  |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.AvailableCountry().list({})
+results = client.AvailableCountry().list()
 for available_country in results:
     print(available_country)
 ```
@@ -153,11 +153,11 @@ country_info = client.CountryInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | ``$ARRAY`` | No |  |
-| `common_name` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `official_name` | ``$STRING`` | No |  |
-| `region` | ``$STRING`` | No |  |
+| `border` | `list` | No |  |
+| `common_name` | `str` | No |  |
+| `country_code` | `str` | No |  |
+| `official_name` | `str` | No |  |
+| `region` | `str` | No |  |
 
 ### Operations
 
@@ -208,19 +208,19 @@ long_weekend = client.LongWeekend()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | ``$INTEGER`` | No |  |
-| `end_date` | ``$STRING`` | No |  |
-| `need_bridge_day` | ``$BOOLEAN`` | No |  |
-| `start_date` | ``$STRING`` | No |  |
+| `day_count` | `int` | No |  |
+| `end_date` | `str` | No |  |
+| `need_bridge_day` | `bool` | No |  |
+| `start_date` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.LongWeekend().list({})
+results = client.LongWeekend().list()
 for long_weekend in results:
     print(long_weekend)
 ```
@@ -264,24 +264,24 @@ public_holiday = client.PublicHoliday()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `county` | ``$ARRAY`` | No |  |
-| `date` | ``$STRING`` | No |  |
-| `fixed` | ``$BOOLEAN`` | No |  |
-| `global` | ``$BOOLEAN`` | No |  |
-| `launch_year` | ``$INTEGER`` | No |  |
-| `local_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `country_code` | `str` | No |  |
+| `county` | `list` | No |  |
+| `date` | `str` | No |  |
+| `fixed` | `bool` | No |  |
+| `global` | `bool` | No |  |
+| `launch_year` | `int` | No |  |
+| `local_name` | `str` | No |  |
+| `name` | `str` | No |  |
+| `type` | `list` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.PublicHoliday().list({})
+results = client.PublicHoliday().list()
 for public_holiday in results:
     print(public_holiday)
 ```
@@ -291,7 +291,7 @@ for public_holiday in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.PublicHoliday().load({"id": "public_holiday_id"})
+result = client.PublicHoliday().load()
 ```
 
 ### Common Methods
