@@ -47,6 +47,16 @@ for _, item in ipairs(availablecountrys) do
 end
 ```
 
+### 3. Load a publicholiday
+
+PublicHoliday is nested under country_code, so provide the `country_code`.
+
+```lua
+local publicholiday, err = client:PublicHoliday():load({ country_code = "example_country_code" })
+if err then error(err) end
+print(publicholiday)
+```
+
 
 ## Error handling
 
@@ -398,7 +408,7 @@ Create an instance: `local public_holiday = client:PublicHoliday(nil)`
 #### Example: Load
 
 ```lua
-local public_holiday, err = client:PublicHoliday():load()
+local public_holiday, err = client:PublicHoliday():load({ country_code = "country_code" })
 ```
 
 #### Example: List

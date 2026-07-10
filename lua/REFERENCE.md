@@ -291,7 +291,7 @@ local results, err = client:PublicHoliday():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:PublicHoliday():load()
+local result, err = client:PublicHoliday():load({ country_code = "country_code" })
 ```
 
 ### Common Methods

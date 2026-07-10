@@ -44,6 +44,20 @@ rescue => err
 end
 ```
 
+### 3. Load a publicholiday
+
+PublicHoliday is nested under country_code, so provide the `country_code`.
+
+```ruby
+begin
+  # load returns the bare PublicHoliday record (raises on error).
+  publicholiday = client.PublicHoliday.load({ "country_code" => "example_country_code" })
+  puts publicholiday
+rescue => err
+  warn "load failed: #{err}"
+end
+```
+
 
 ## Error handling
 
@@ -406,7 +420,7 @@ Create an instance: `public_holiday = client.PublicHoliday`
 
 ```ruby
 # load returns the bare PublicHoliday record (raises on error).
-public_holiday = client.PublicHoliday.load()
+public_holiday = client.PublicHoliday.load({ "country_code" => "country_code" })
 ```
 
 #### Example: List

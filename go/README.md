@@ -50,12 +50,12 @@ import (
 func main() {
     client := sdk.New()
 
-    // List availablecountry records — the value is the array of records itself.
-    availablecountrys, err := client.AvailableCountry(nil).List(nil, nil)
+    // List availableCountry records — the value is the array of records itself.
+    availableCountrys, err := client.AvailableCountry(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-    for _, item := range availablecountrys.([]any) {
+    for _, item := range availableCountrys.([]any) {
         fmt.Println(item)
     }
 }
@@ -137,13 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-availablecountry, err := client.AvailableCountry(nil).List(
+availableCountry, err := client.AvailableCountry(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(availablecountry) // the returned mock data
+fmt.Println(availableCountry) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -252,9 +252,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    availablecountry, err := client.AvailableCountry(nil).List(map[string]any{/* fields */}, nil)
+    availableCountry, err := client.AvailableCountry(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // availablecountry is the returned record
+    // availableCountry is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -324,7 +324,7 @@ API path: `/PublicHolidays/{Year}/{CountryCode}`
 
 ### AvailableCountry
 
-Create an instance: `available_country := client.AvailableCountry(nil)`
+Create an instance: `availableCountry := client.AvailableCountry(nil)`
 
 #### Operations
 
@@ -342,17 +342,17 @@ Create an instance: `available_country := client.AvailableCountry(nil)`
 #### Example: List
 
 ```go
-available_countrys, err := client.AvailableCountry(nil).List(nil, nil)
+availableCountrys, err := client.AvailableCountry(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(available_countrys) // the array of records
+fmt.Println(availableCountrys) // the array of records
 ```
 
 
 ### CountryInfo
 
-Create an instance: `country_info := client.CountryInfo(nil)`
+Create an instance: `countryInfo := client.CountryInfo(nil)`
 
 #### Operations
 
@@ -373,17 +373,17 @@ Create an instance: `country_info := client.CountryInfo(nil)`
 #### Example: Load
 
 ```go
-country_info, err := client.CountryInfo(nil).Load(map[string]any{"id": "country_info_id"}, nil)
+countryInfo, err := client.CountryInfo(nil).Load(map[string]any{"id": "country_info_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(country_info) // the loaded record
+fmt.Println(countryInfo) // the loaded record
 ```
 
 
 ### LongWeekend
 
-Create an instance: `long_weekend := client.LongWeekend(nil)`
+Create an instance: `longWeekend := client.LongWeekend(nil)`
 
 #### Operations
 
@@ -403,17 +403,17 @@ Create an instance: `long_weekend := client.LongWeekend(nil)`
 #### Example: List
 
 ```go
-long_weekends, err := client.LongWeekend(nil).List(nil, nil)
+longWeekends, err := client.LongWeekend(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(long_weekends) // the array of records
+fmt.Println(longWeekends) // the array of records
 ```
 
 
 ### PublicHoliday
 
-Create an instance: `public_holiday := client.PublicHoliday(nil)`
+Create an instance: `publicHoliday := client.PublicHoliday(nil)`
 
 #### Operations
 
@@ -439,21 +439,21 @@ Create an instance: `public_holiday := client.PublicHoliday(nil)`
 #### Example: Load
 
 ```go
-public_holiday, err := client.PublicHoliday(nil).Load(nil, nil)
+publicHoliday, err := client.PublicHoliday(nil).Load(map[string]any{"country_code": "country_code"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(public_holiday) // the loaded record
+fmt.Println(publicHoliday) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-public_holidays, err := client.PublicHoliday(nil).List(nil, nil)
+publicHolidays, err := client.PublicHoliday(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(public_holidays) // the array of records
+fmt.Println(publicHolidays) // the array of records
 ```
 
 

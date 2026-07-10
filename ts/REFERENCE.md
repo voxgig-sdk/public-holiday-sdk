@@ -335,7 +335,7 @@ const results = await client.PublicHoliday().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.PublicHoliday().load()
+const result = await client.PublicHoliday().load({ country_code: 'country_code' })
 ```
 
 ### Common Methods

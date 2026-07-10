@@ -155,10 +155,10 @@ PublicHolidayLoadMatch = Struct.new(
 # Request payload for PublicHoliday#list.
 #
 # @!attribute [rw] country_code
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] year
-#   @return [Integer]
+#   @return [Integer, nil]
 PublicHolidayListMatch = Struct.new(
   :country_code,
   :year,

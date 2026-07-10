@@ -81,7 +81,7 @@ class PublicHolidayLoadMatch
 /** Request payload for PublicHoliday#list. */
 class PublicHolidayListMatch
 {
-    public string $country_code;
-    public int $year;
+    public ?string $country_code = null;
+    public ?int $year = null;
 }
 

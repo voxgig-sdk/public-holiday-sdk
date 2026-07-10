@@ -45,6 +45,20 @@ try {
 }
 ```
 
+### 3. Load a publicholiday
+
+PublicHoliday is nested under country_code, so provide the `country_code`.
+
+```php
+try {
+    // load() returns the bare PublicHoliday record (throws on error).
+    $publicholiday = $client->PublicHoliday()->load(["country_code" => "example_country_code"]);
+    print_r($publicholiday);
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
 
 ## Error handling
 
@@ -416,7 +430,7 @@ Create an instance: `$public_holiday = $client->PublicHoliday();`
 
 ```php
 // load() returns the bare PublicHoliday record (throws on error).
-$public_holiday = $client->PublicHoliday()->load();
+$public_holiday = $client->PublicHoliday()->load(["country_code" => "country_code"]);
 ```
 
 #### Example: List

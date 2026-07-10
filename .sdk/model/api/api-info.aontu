@@ -15,10 +15,10 @@ main: {
           url: "https://date.nager.at/api/v3"
         }
       ]
+      summary: "An API for public holiday data."
       termsOfService: "https://date.nager.at"
       title: "Public Holiday API"
       version: "3.0.0"
+      website: "https://date.nager.at"
     }
   }
-}
-

@@ -68,8 +68,8 @@ type PublicHolidayLoadMatch struct {
 
 // PublicHolidayListMatch is the typed request payload for PublicHoliday.ListTyped.
 type PublicHolidayListMatch struct {
-	CountryCode string `json:"country_code"`
-	Year int `json:"year"`
+	CountryCode *string `json:"country_code,omitempty"`
+	Year *int `json:"year,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

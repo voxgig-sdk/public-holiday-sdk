@@ -293,7 +293,7 @@ $results = $client->PublicHoliday()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->PublicHoliday()->load();
+$result = $client->PublicHoliday()->load(["country_code" => "country_code"]);
 ```
 
 ### Common Methods

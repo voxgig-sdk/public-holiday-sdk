@@ -45,6 +45,22 @@ for (const availablecountry of availablecountrys) {
 }
 ```
 
+### 3. Load a publicholiday
+
+PublicHoliday is nested under country_code, so provide the `country_code`.
+`load()` returns the entity directly and throws on failure:
+
+```ts
+try {
+  const publicholiday = await client.PublicHoliday().load({
+    country_code: 'example_country_code',
+  })
+  console.log(publicholiday)
+} catch (err) {
+  console.error('load failed:', err)
+}
+```
+
 
 ## Error handling
 
@@ -451,7 +467,7 @@ Create an instance: `const public_holiday = client.PublicHoliday()`
 #### Example: Load
 
 ```ts
-const public_holiday = await client.PublicHoliday().load()
+const public_holiday = await client.PublicHoliday().load({ country_code: 'country_code' })
 ```
 
 #### Example: List

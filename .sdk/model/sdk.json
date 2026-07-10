@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -722,15 +719,18 @@
           "url": "https://date.nager.at/Api"
         },
         "description": "An API for public holiday data. Supports over 100 countries. Provides information on holidays and long weekends. The API provides a simple way to query the holidays of over 100 countries, including long weekends. For IoT devices, there's an endpoint to check if today is a holiday.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://date.nager.at/api/v3"
           }
         ],
+        "summary": "An API for public holiday data.",
         "termsOfService": "https://date.nager.at",
         "title": "Public Holiday API",
-        "version": "3.0.0"
+        "version": "3.0.0",
+        "website": "https://date.nager.at"
       },
       "option": {},
       "target": {
@@ -783,6 +783,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -833,6 +836,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

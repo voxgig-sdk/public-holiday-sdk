@@ -49,8 +49,8 @@
 ---@field country_code string
 
 ---@class PublicHolidayListMatch
----@field country_code string
----@field year number
+---@field country_code? string
+---@field year? number
 
 local M = {}
 

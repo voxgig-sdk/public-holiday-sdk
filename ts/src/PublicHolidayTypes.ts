@@ -56,7 +56,7 @@ export interface PublicHolidayLoadMatch {
 }
 
 export interface PublicHolidayListMatch {
-  country_code: string
-  year: number
+  country_code?: string
+  year?: number
 }
 

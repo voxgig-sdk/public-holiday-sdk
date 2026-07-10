@@ -291,7 +291,7 @@ for public_holiday in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.PublicHoliday().load()
+result = client.PublicHoliday().load({"country_code": "country_code"})
 ```
 
 ### Common Methods

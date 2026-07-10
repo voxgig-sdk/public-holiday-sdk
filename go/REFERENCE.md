@@ -102,7 +102,8 @@ same parameters as `Direct()`.
 ## AvailableCountryEntity
 
 ```go
-available_country := client.AvailableCountry(nil)
+availableCountry := client.AvailableCountry(nil)
+fmt.Println(availableCountry.GetName()) // "available_country"
 ```
 
 ### Fields
@@ -120,6 +121,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.AvailableCountry(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -149,7 +154,8 @@ Return the entity name.
 ## CountryInfoEntity
 
 ```go
-country_info := client.CountryInfo(nil)
+countryInfo := client.CountryInfo(nil)
+fmt.Println(countryInfo.GetName()) // "country_info"
 ```
 
 ### Fields
@@ -170,6 +176,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.CountryInfo(nil).Load(map[string]any{"id": "country_info_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -199,7 +209,8 @@ Return the entity name.
 ## LongWeekendEntity
 
 ```go
-long_weekend := client.LongWeekend(nil)
+longWeekend := client.LongWeekend(nil)
+fmt.Println(longWeekend.GetName()) // "long_weekend"
 ```
 
 ### Fields
@@ -219,6 +230,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.LongWeekend(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -248,7 +263,8 @@ Return the entity name.
 ## PublicHolidayEntity
 
 ```go
-public_holiday := client.PublicHoliday(nil)
+publicHoliday := client.PublicHoliday(nil)
+fmt.Println(publicHoliday.GetName()) // "public_holiday"
 ```
 
 ### Fields
@@ -273,6 +289,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.PublicHoliday(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -280,7 +300,11 @@ results, err := client.PublicHoliday(nil).List(nil, nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.PublicHoliday(nil).Load(nil, nil)
+result, err := client.PublicHoliday(nil).Load(map[string]any{"country_code": "country_code"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
