@@ -27,7 +27,20 @@ func main() {
 }
 
 func run(args []string, in io.Reader, out, errOut io.Writer) int {
-	client := sdk.NewPublicHolidaySDK(nil)
+	// Configure from the environment: PUBLIC_HOLIDAY_APIKEY carries the API key and
+	// PUBLIC_HOLIDAY_BASE optionally overrides the API base URL (e.g. production).
+	// Both injectable by a secrets vault. Unset -> nil config defaults.
+	var opts map[string]any
+	if apikey := os.Getenv("PUBLIC_HOLIDAY_APIKEY"); apikey != "" {
+		opts = map[string]any{"apikey": apikey}
+	}
+	if base := os.Getenv("PUBLIC_HOLIDAY_BASE"); base != "" {
+		if opts == nil {
+			opts = map[string]any{}
+		}
+		opts["base"] = base
+	}
+	client := sdk.NewPublicHolidaySDK(opts)
 
 	r, err := eng.NewRegistry()
 	if err != nil {

@@ -37,7 +37,20 @@ func main() {
 	addr := flag.String("addr", ":8080", "listen address for http transport")
 	flag.Parse()
 
-	client := sdk.NewPublicHolidaySDK(nil)
+	// Configure from the environment: PUBLIC_HOLIDAY_APIKEY carries the API key and
+	// PUBLIC_HOLIDAY_BASE optionally overrides the API base URL (e.g. production).
+	// Both injectable by a secrets vault. Unset -> nil config defaults.
+	var opts map[string]any
+	if apikey := os.Getenv("PUBLIC_HOLIDAY_APIKEY"); apikey != "" {
+		opts = map[string]any{"apikey": apikey}
+	}
+	if base := os.Getenv("PUBLIC_HOLIDAY_BASE"); base != "" {
+		if opts == nil {
+			opts = map[string]any{}
+		}
+		opts["base"] = base
+	}
+	client := sdk.NewPublicHolidaySDK(opts)
 	server := mcp.NewServer(
 		&mcp.Implementation{
 			Name:    "public-holiday",
