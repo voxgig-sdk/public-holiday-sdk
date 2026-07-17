@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- PublicHoliday SDK exists test
 
 local sdk = require("public-holiday_sdk")
 
