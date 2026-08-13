@@ -2,41 +2,44 @@
   "existing": {
     "public_holiday": {
       "PUBLIC_HOLIDAY00": {
-        "country_code": "s5a",
-        "county": [],
+        "counties": [],
+        "countryCode": "s5b",
         "date": "s5c",
         "fixed": false,
         "global": true,
-        "launch_year": "s5f",
-        "local_name": "s60",
+        "launchYear": "s5f",
+        "localName": "s60",
         "name": "s61",
-        "type": [],
+        "types": [],
+        "country_code": "COUNTRY_CODE01",
         "year": "YEAR01",
         "id": "PUBLIC_HOLIDAY00"
       },
       "PUBLIC_HOLIDAY01": {
-        "country_code": "sb4",
-        "county": [],
+        "counties": [],
+        "countryCode": "sb5",
         "date": "sb6",
         "fixed": false,
         "global": true,
-        "launch_year": "sb9",
-        "local_name": "sba",
+        "launchYear": "sb9",
+        "localName": "sba",
         "name": "sbb",
-        "type": [],
+        "types": [],
+        "country_code": "COUNTRY_CODE01",
         "year": "YEAR01",
         "id": "PUBLIC_HOLIDAY01"
       },
       "PUBLIC_HOLIDAY02": {
-        "country_code": "s10e",
-        "county": [],
+        "counties": [],
+        "countryCode": "s10f",
         "date": "s110",
         "fixed": false,
         "global": true,
-        "launch_year": "s113",
-        "local_name": "s114",
+        "launchYear": "s113",
+        "localName": "s114",
         "name": "s115",
-        "type": [],
+        "types": [],
+        "country_code": "COUNTRY_CODE01",
         "year": "YEAR01",
         "id": "PUBLIC_HOLIDAY02"
       }
@@ -45,15 +48,15 @@
   "new": {
     "public_holiday": {
       "public_holiday_ref01": {
-        "country_code": "s168",
-        "county": [],
+        "counties": [],
+        "countryCode": "s169",
         "date": "s16a",
         "fixed": false,
         "global": true,
-        "launch_year": "s16d",
-        "local_name": "s16e",
+        "launchYear": "s16d",
+        "localName": "s16e",
         "name": "s16f",
-        "type": []
+        "types": []
       }
     }
   }

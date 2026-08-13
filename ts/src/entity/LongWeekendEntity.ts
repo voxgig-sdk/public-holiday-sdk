@@ -37,7 +37,7 @@ class LongWeekendEntity extends PublicHolidayEntityBase<LongWeekend> {
 
 
 
-  async list(this: any, reqmatch?: LongWeekendListMatch, ctrl?: Control): Promise<LongWeekend[]> {
+  async list(this: any, reqmatch?: LongWeekendListMatch, ctrl?: Control): Promise<LongWeekendEntity[]> {
 
     const utility = this._utility
 

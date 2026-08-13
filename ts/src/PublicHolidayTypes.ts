@@ -6,20 +6,20 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface AvailableCountry {
-  country_code?: string
+  countryCode?: string
   name?: string
 }
 
 export interface AvailableCountryListMatch {
-  country_code?: string
+  countryCode?: string
   name?: string
 }
 
 export interface CountryInfo {
-  border?: any[]
-  common_name?: string
-  country_code?: string
-  official_name?: string
+  borders?: any[]
+  commonName?: string
+  countryCode?: string
+  officialName?: string
   region?: string
 }
 
@@ -28,10 +28,10 @@ export interface CountryInfoLoadMatch {
 }
 
 export interface LongWeekend {
-  day_count?: number
-  end_date?: string
-  need_bridge_day?: boolean
-  start_date?: string
+  dayCount?: number
+  endDate?: string
+  needBridgeDay?: boolean
+  startDate?: string
 }
 
 export interface LongWeekendListMatch {
@@ -40,15 +40,15 @@ export interface LongWeekendListMatch {
 }
 
 export interface PublicHoliday {
-  country_code?: string
-  county?: any[]
+  counties?: any[]
+  countryCode?: string
   date?: string
   fixed?: boolean
   global?: boolean
-  launch_year?: number
-  local_name?: string
+  launchYear?: number
+  localName?: string
   name?: string
-  type?: any[]
+  types?: any[]
 }
 
 export interface PublicHolidayLoadMatch {

@@ -102,7 +102,7 @@ local available_country = client:AvailableCountry(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
+| `countryCode` | `string` | No |  |
 | `name` | `string` | No |  |
 
 ### Operations
@@ -155,10 +155,10 @@ local country_info = client:CountryInfo(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | `table` | No |  |
-| `common_name` | `string` | No |  |
-| `country_code` | `string` | No |  |
-| `official_name` | `string` | No |  |
+| `borders` | `table` | No |  |
+| `commonName` | `string` | No |  |
+| `countryCode` | `string` | No |  |
+| `officialName` | `string` | No |  |
 | `region` | `string` | No |  |
 
 ### Operations
@@ -211,10 +211,10 @@ local long_weekend = client:LongWeekend(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | `number` | No |  |
-| `end_date` | `string` | No |  |
-| `need_bridge_day` | `boolean` | No |  |
-| `start_date` | `string` | No |  |
+| `dayCount` | `number` | No |  |
+| `endDate` | `string` | No |  |
+| `needBridgeDay` | `boolean` | No |  |
+| `startDate` | `string` | No |  |
 
 ### Operations
 
@@ -266,15 +266,15 @@ local public_holiday = client:PublicHoliday(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
-| `county` | `table` | No |  |
+| `counties` | `table` | No |  |
+| `countryCode` | `string` | No |  |
 | `date` | `string` | No |  |
 | `fixed` | `boolean` | No |  |
 | `global` | `boolean` | No |  |
-| `launch_year` | `number` | No |  |
-| `local_name` | `string` | No |  |
+| `launchYear` | `number` | No |  |
+| `localName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `type` | `table` | No |  |
+| `types` | `table` | No |  |
 
 ### Operations
 

@@ -7,43 +7,43 @@
 -- edit by hand.
 
 ---@class AvailableCountry
----@field country_code? string
+---@field countryCode? string
 ---@field name? string
 
 ---@class AvailableCountryListMatch
----@field country_code? string
+---@field countryCode? string
 ---@field name? string
 
 ---@class CountryInfo
----@field border? table
----@field common_name? string
----@field country_code? string
----@field official_name? string
+---@field borders? table
+---@field commonName? string
+---@field countryCode? string
+---@field officialName? string
 ---@field region? string
 
 ---@class CountryInfoLoadMatch
 ---@field id string
 
 ---@class LongWeekend
----@field day_count? number
----@field end_date? string
----@field need_bridge_day? boolean
----@field start_date? string
+---@field dayCount? number
+---@field endDate? string
+---@field needBridgeDay? boolean
+---@field startDate? string
 
 ---@class LongWeekendListMatch
 ---@field country_code string
 ---@field year number
 
 ---@class PublicHoliday
----@field country_code? string
----@field county? table
+---@field counties? table
+---@field countryCode? string
 ---@field date? string
 ---@field fixed? boolean
 ---@field global? boolean
----@field launch_year? number
----@field local_name? string
+---@field launchYear? number
+---@field localName? string
 ---@field name? string
----@field type? table
+---@field types? table
 
 ---@class PublicHolidayLoadMatch
 ---@field country_code string

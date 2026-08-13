@@ -29,7 +29,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "country_code",
+						"name": "countryCode",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
@@ -51,6 +51,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/AvailableCountries",
 								"parts": []any{
@@ -64,7 +65,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -75,28 +75,28 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "border",
+						"name": "borders",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "common_name",
+						"name": "commonName",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
 					},
 					map[string]any{
 						"active": true,
-						"name": "country_code",
+						"name": "countryCode",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
-						"name": "official_name",
+						"name": "officialName",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
@@ -131,6 +131,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/CountryInfo/{CountryCode}",
 								"parts": []any{
@@ -154,7 +155,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -165,28 +165,28 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "day_count",
+						"name": "dayCount",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "end_date",
+						"name": "endDate",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
 					},
 					map[string]any{
 						"active": true,
-						"name": "need_bridge_day",
+						"name": "needBridgeDay",
 						"req": false,
 						"type": "`$BOOLEAN`",
 						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
-						"name": "start_date",
+						"name": "startDate",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
@@ -224,6 +224,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/LongWeekend/{Year}/{CountryCode}",
 								"parts": []any{
@@ -250,7 +251,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -265,16 +265,16 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "country_code",
+						"name": "counties",
 						"req": false,
-						"type": "`$STRING`",
+						"type": "`$ARRAY`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "county",
+						"name": "countryCode",
 						"req": false,
-						"type": "`$ARRAY`",
+						"type": "`$STRING`",
 						"index$": 1,
 					},
 					map[string]any{
@@ -300,14 +300,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "launch_year",
+						"name": "launchYear",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 5,
 					},
 					map[string]any{
 						"active": true,
-						"name": "local_name",
+						"name": "localName",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 6,
@@ -321,7 +321,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "type",
+						"name": "types",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 8,
@@ -359,6 +359,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/PublicHolidays/{Year}/{CountryCode}",
 								"parts": []any{
@@ -387,6 +388,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/NextPublicHolidaysWorldwide",
 								"parts": []any{
@@ -400,7 +402,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -432,6 +433,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/IsTodayPublicHoliday/{CountryCode}",
 								"parts": []any{
@@ -471,6 +473,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/NextPublicHolidays/{CountryCode}",
 								"parts": []any{
@@ -494,7 +497,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

@@ -26,8 +26,8 @@ import {
 describe('LongWeekendEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when PUBLICHOLIDAY_TEST_LIVE=TRUE.
-  afterEach(liveDelay('PUBLICHOLIDAY_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when PUBLIC_HOLIDAY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('PUBLIC_HOLIDAY_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = PublicHolidaySDK.test()
@@ -65,7 +65,7 @@ describe('LongWeekendEntity', async () => {
     long_weekend_ref01_match['country_code'] = setup.idmap['country_code01']
     long_weekend_ref01_match['year'] = setup.idmap['year01']
 
-    const long_weekend_ref01_list = await long_weekend_ref01_ent.list(long_weekend_ref01_match)
+    const long_weekend_ref01_list = (await long_weekend_ref01_ent.list(long_weekend_ref01_match)).map((e: any) => e.data())
 
 
   })

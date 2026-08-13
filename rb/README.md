@@ -37,7 +37,7 @@ begin
   # list returns an Array of AvailableCountry records — iterate directly.
   availablecountrys = client.AvailableCountry.list
   availablecountrys.each do |item|
-    puts "#{item["country_code"]}"
+    puts "#{item["countryCode"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -50,7 +50,7 @@ PublicHoliday is nested under country_code, so provide the `country_code`.
 
 ```ruby
 begin
-  # load returns the bare PublicHoliday record (raises on error).
+  # load returns the ENTITY — call data_get for the PublicHoliday record (raises on error).
   publicholiday = client.PublicHoliday.load({ "country_code" => "example_country_code" })
   puts publicholiday
 rescue => err
@@ -65,9 +65,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  availablecountrys = client.AvailableCountry.list()
+  countryinfo = client.CountryInfo.load({ "id" => "example_id" })
 rescue => err
-  warn "list failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -128,14 +128,18 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = PublicHolidaySDK.test
+client = PublicHolidaySDK.test({
+  "entity" => { "countryinfo" => { "test01" => { "id" => "test01" } } },
+})
 
-# Entity ops return the bare mock record (raises on error).
-availablecountry = client.AvailableCountry.list()
-puts availablecountry
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+countryinfo = client.CountryInfo.load({ "id" => "test01" })
+puts countryinfo
 ```
 
 ### Use a custom fetch function
@@ -254,7 +258,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
+| `countryCode` |  |
 | `name` |  |
 
 Operations: List.
@@ -265,10 +269,10 @@ API path: `/AvailableCountries`
 
 | Field | Description |
 | --- | --- |
-| `border` |  |
-| `common_name` |  |
-| `country_code` |  |
-| `official_name` |  |
+| `borders` |  |
+| `commonName` |  |
+| `countryCode` |  |
+| `officialName` |  |
 | `region` |  |
 
 Operations: Load.
@@ -279,10 +283,10 @@ API path: `/CountryInfo/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `day_count` |  |
-| `end_date` |  |
-| `need_bridge_day` |  |
-| `start_date` |  |
+| `dayCount` |  |
+| `endDate` |  |
+| `needBridgeDay` |  |
+| `startDate` |  |
 
 Operations: List.
 
@@ -292,15 +296,15 @@ API path: `/LongWeekend/{Year}/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
-| `county` |  |
+| `counties` |  |
+| `countryCode` |  |
 | `date` |  |
 | `fixed` |  |
 | `global` |  |
-| `launch_year` |  |
-| `local_name` |  |
+| `launchYear` |  |
+| `localName` |  |
 | `name` |  |
-| `type` |  |
+| `types` |  |
 
 Operations: List, Load.
 
@@ -325,7 +329,7 @@ Create an instance: `available_country = client.AvailableCountry`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `String` |  |
+| `countryCode` | `String` |  |
 | `name` | `String` |  |
 
 #### Example: List
@@ -350,16 +354,16 @@ Create an instance: `country_info = client.CountryInfo`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `border` | `Array` |  |
-| `common_name` | `String` |  |
-| `country_code` | `String` |  |
-| `official_name` | `String` |  |
+| `borders` | `Array` |  |
+| `commonName` | `String` |  |
+| `countryCode` | `String` |  |
+| `officialName` | `String` |  |
 | `region` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare CountryInfo record (raises on error).
+# load returns the ENTITY — call data_get for the CountryInfo record (raises on error).
 country_info = client.CountryInfo.load({ "id" => "country_info_id" })
 ```
 
@@ -378,10 +382,10 @@ Create an instance: `long_weekend = client.LongWeekend`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `day_count` | `Integer` |  |
-| `end_date` | `String` |  |
-| `need_bridge_day` | `Boolean` |  |
-| `start_date` | `String` |  |
+| `dayCount` | `Integer` |  |
+| `endDate` | `String` |  |
+| `needBridgeDay` | `Boolean` |  |
+| `startDate` | `String` |  |
 
 #### Example: List
 
@@ -406,20 +410,20 @@ Create an instance: `public_holiday = client.PublicHoliday`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `String` |  |
-| `county` | `Array` |  |
+| `counties` | `Array` |  |
+| `countryCode` | `String` |  |
 | `date` | `String` |  |
 | `fixed` | `Boolean` |  |
 | `global` | `Boolean` |  |
-| `launch_year` | `Integer` |  |
-| `local_name` | `String` |  |
+| `launchYear` | `Integer` |  |
+| `localName` | `String` |  |
 | `name` | `String` |  |
-| `type` | `Array` |  |
+| `types` | `Array` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare PublicHoliday record (raises on error).
+# load returns the ENTITY — call data_get for the PublicHoliday record (raises on error).
 public_holiday = client.PublicHoliday.load({ "country_code" => "country_code" })
 ```
 
@@ -503,15 +507,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-availablecountry = client.AvailableCountry
-availablecountry.list()
+countryinfo = client.CountryInfo
+countryinfo.load({ "id" => "example_id" })
 
-# availablecountry.data_get now returns the availablecountry data from the last list
-# availablecountry.match_get returns the last match criteria
+# countryinfo.data_get now returns the countryinfo data from the last load
+# countryinfo.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -15,24 +15,24 @@ declare(strict_types=1);
 /** AvailableCountry entity data model. */
 class AvailableCountry
 {
-    public ?string $country_code = null;
+    public ?string $countryCode = null;
     public ?string $name = null;
 }
 
 /** Request payload for AvailableCountry#list. */
 class AvailableCountryListMatch
 {
-    public ?string $country_code = null;
+    public ?string $countryCode = null;
     public ?string $name = null;
 }
 
 /** CountryInfo entity data model. */
 class CountryInfo
 {
-    public ?array $border = null;
-    public ?string $common_name = null;
-    public ?string $country_code = null;
-    public ?string $official_name = null;
+    public ?array $borders = null;
+    public ?string $commonName = null;
+    public ?string $countryCode = null;
+    public ?string $officialName = null;
     public ?string $region = null;
 }
 
@@ -45,10 +45,10 @@ class CountryInfoLoadMatch
 /** LongWeekend entity data model. */
 class LongWeekend
 {
-    public ?int $day_count = null;
-    public ?string $end_date = null;
-    public ?bool $need_bridge_day = null;
-    public ?string $start_date = null;
+    public ?int $dayCount = null;
+    public ?string $endDate = null;
+    public ?bool $needBridgeDay = null;
+    public ?string $startDate = null;
 }
 
 /** Request payload for LongWeekend#list. */
@@ -61,15 +61,15 @@ class LongWeekendListMatch
 /** PublicHoliday entity data model. */
 class PublicHoliday
 {
-    public ?string $country_code = null;
-    public ?array $county = null;
+    public ?array $counties = null;
+    public ?string $countryCode = null;
     public ?string $date = null;
     public ?bool $fixed = null;
     public ?bool $global = null;
-    public ?int $launch_year = null;
-    public ?string $local_name = null;
+    public ?int $launchYear = null;
+    public ?string $localName = null;
     public ?string $name = null;
-    public ?array $type = null;
+    public ?array $types = null;
 }
 
 /** Request payload for PublicHoliday#load. */

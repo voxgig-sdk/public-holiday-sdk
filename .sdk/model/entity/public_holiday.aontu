@@ -6,14 +6,14 @@ main: kit: entity: public_holiday: {
 
   fields: [
     {
-      name: "country_code"
-      req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "county"
+      name: "counties"
       req: false
       type: "`$ARRAY`"
+    }
+    {
+      name: "countryCode"
+      req: false
+      type: "`$STRING`"
     }
     {
       name: "date"
@@ -31,12 +31,12 @@ main: kit: entity: public_holiday: {
       type: "`$BOOLEAN`"
     }
     {
-      name: "launch_year"
+      name: "launchYear"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "local_name"
+      name: "localName"
       req: false
       type: "`$STRING`"
     }
@@ -46,7 +46,7 @@ main: kit: entity: public_holiday: {
       type: "`$STRING`"
     }
     {
-      name: "type"
+      name: "types"
       req: false
       type: "`$ARRAY`"
     }

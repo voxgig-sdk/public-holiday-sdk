@@ -23,8 +23,8 @@ module PublicHolidayTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("PUBLICHOLIDAY_TEST_LIVE")
-    override = getenv("PUBLICHOLIDAY_TEST_OVERRIDE")
+    live = getenv("PUBLIC_HOLIDAY_TEST_LIVE")
+    override = getenv("PUBLIC_HOLIDAY_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module PublicHolidayTestRunner
       end
     end
 
-    explain = getenv("PUBLICHOLIDAY_TEST_EXPLAIN")
-    m["PUBLICHOLIDAY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("PUBLIC_HOLIDAY_TEST_EXPLAIN")
+    m["PUBLIC_HOLIDAY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

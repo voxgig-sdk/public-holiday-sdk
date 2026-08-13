@@ -6,7 +6,7 @@ main: kit: entity: available_country: {
 
   fields: [
     {
-      name: "country_code"
+      name: "countryCode"
       req: false
       type: "`$STRING`"
     }

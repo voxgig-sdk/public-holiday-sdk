@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import PublicHolidayControl
-from core.error import PublicHolidayError
-from core.result import PublicHolidayResult
-from core.spec import PublicHolidaySpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import PublicHolidayControl
+from projectname_sdk.core.error import PublicHolidayError
+from projectname_sdk.core.result import PublicHolidayResult
+from projectname_sdk.core.spec import PublicHolidaySpec
 
 
 # True when this SDK was generated with the named feature.

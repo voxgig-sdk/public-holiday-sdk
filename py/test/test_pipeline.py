@@ -16,11 +16,11 @@
 import pytest
 
 from publicholiday_sdk import PublicHolidaySDK
-from core.error import PublicHolidayError
-from core.result import PublicHolidayResult
-from core.response import PublicHolidayResponse
-from core.spec import PublicHolidaySpec
-from feature.base_feature import PublicHolidayBaseFeature
+from publicholiday_sdk.core.error import PublicHolidayError
+from publicholiday_sdk.core.result import PublicHolidayResult
+from publicholiday_sdk.core.response import PublicHolidayResponse
+from publicholiday_sdk.core.spec import PublicHolidaySpec
+from publicholiday_sdk.feature.base_feature import PublicHolidayBaseFeature
 
 
 def _client():

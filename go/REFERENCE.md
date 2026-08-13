@@ -110,7 +110,7 @@ fmt.Println(availableCountry.GetName()) // "available_country"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
+| `countryCode` | `string` | No |  |
 | `name` | `string` | No |  |
 
 ### Operations
@@ -162,10 +162,10 @@ fmt.Println(countryInfo.GetName()) // "country_info"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | `[]any` | No |  |
-| `common_name` | `string` | No |  |
-| `country_code` | `string` | No |  |
-| `official_name` | `string` | No |  |
+| `borders` | `[]any` | No |  |
+| `commonName` | `string` | No |  |
+| `countryCode` | `string` | No |  |
+| `officialName` | `string` | No |  |
 | `region` | `string` | No |  |
 
 ### Operations
@@ -217,10 +217,10 @@ fmt.Println(longWeekend.GetName()) // "long_weekend"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | `int` | No |  |
-| `end_date` | `string` | No |  |
-| `need_bridge_day` | `bool` | No |  |
-| `start_date` | `string` | No |  |
+| `dayCount` | `int` | No |  |
+| `endDate` | `string` | No |  |
+| `needBridgeDay` | `bool` | No |  |
+| `startDate` | `string` | No |  |
 
 ### Operations
 
@@ -271,15 +271,15 @@ fmt.Println(publicHoliday.GetName()) // "public_holiday"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
-| `county` | `[]any` | No |  |
+| `counties` | `[]any` | No |  |
+| `countryCode` | `string` | No |  |
 | `date` | `string` | No |  |
 | `fixed` | `bool` | No |  |
 | `global` | `bool` | No |  |
-| `launch_year` | `int` | No |  |
-| `local_name` | `string` | No |  |
+| `launchYear` | `int` | No |  |
+| `localName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `type` | `[]any` | No |  |
+| `types` | `[]any` | No |  |
 
 ### Operations
 

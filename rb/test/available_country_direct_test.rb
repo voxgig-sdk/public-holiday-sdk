@@ -60,11 +60,11 @@ def available_country_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "PUBLICHOLIDAY_TEST_AVAILABLE_COUNTRY_ENTID" => {},
-    "PUBLICHOLIDAY_TEST_LIVE" => "FALSE",
+    "PUBLIC_HOLIDAY_TEST_AVAILABLE_COUNTRY_ENTID" => {},
+    "PUBLIC_HOLIDAY_TEST_LIVE" => "FALSE",
   })
 
-  live = env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
+  live = env["PUBLIC_HOLIDAY_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

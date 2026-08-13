@@ -152,7 +152,7 @@ const available_country = client.AvailableCountry()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
+| `countryCode` | `string` | No |  |
 | `name` | `string` | No |  |
 
 ### Operations
@@ -203,10 +203,10 @@ const country_info = client.CountryInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | `any[]` | No |  |
-| `common_name` | `string` | No |  |
-| `country_code` | `string` | No |  |
-| `official_name` | `string` | No |  |
+| `borders` | `any[]` | No |  |
+| `commonName` | `string` | No |  |
+| `countryCode` | `string` | No |  |
+| `officialName` | `string` | No |  |
 | `region` | `string` | No |  |
 
 ### Operations
@@ -257,10 +257,10 @@ const long_weekend = client.LongWeekend()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | `number` | No |  |
-| `end_date` | `string` | No |  |
-| `need_bridge_day` | `boolean` | No |  |
-| `start_date` | `string` | No |  |
+| `dayCount` | `number` | No |  |
+| `endDate` | `string` | No |  |
+| `needBridgeDay` | `boolean` | No |  |
+| `startDate` | `string` | No |  |
 
 ### Operations
 
@@ -269,7 +269,7 @@ const long_weekend = client.LongWeekend()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.LongWeekend().list()
+const results = await client.LongWeekend().list({ country_code: "example", year: 1 })
 ```
 
 ### Common Methods
@@ -310,15 +310,15 @@ const public_holiday = client.PublicHoliday()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
-| `county` | `any[]` | No |  |
+| `counties` | `any[]` | No |  |
+| `countryCode` | `string` | No |  |
 | `date` | `string` | No |  |
 | `fixed` | `boolean` | No |  |
 | `global` | `boolean` | No |  |
-| `launch_year` | `number` | No |  |
-| `local_name` | `string` | No |  |
+| `launchYear` | `number` | No |  |
+| `localName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `type` | `any[]` | No |  |
+| `types` | `any[]` | No |  |
 
 ### Operations
 

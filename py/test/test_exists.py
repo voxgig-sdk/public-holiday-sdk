@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# PublicHoliday SDK exists test
 
 import pytest
 from publicholiday_sdk import PublicHolidaySDK

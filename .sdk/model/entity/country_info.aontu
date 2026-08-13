@@ -6,22 +6,22 @@ main: kit: entity: country_info: {
 
   fields: [
     {
-      name: "border"
+      name: "borders"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "common_name"
+      name: "commonName"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "country_code"
+      name: "countryCode"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "official_name"
+      name: "officialName"
       req: false
       type: "`$STRING`"
     }

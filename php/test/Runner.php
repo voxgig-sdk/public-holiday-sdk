@@ -43,8 +43,8 @@ class PublicHolidayTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('PUBLICHOLIDAY_TEST_LIVE');
-        $override = self::getenv('PUBLICHOLIDAY_TEST_OVERRIDE');
+        $live = self::getenv('PUBLIC_HOLIDAY_TEST_LIVE');
+        $override = self::getenv('PUBLIC_HOLIDAY_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class PublicHolidayTestRunner
             }
         }
 
-        $explain = self::getenv('PUBLICHOLIDAY_TEST_EXPLAIN');
+        $explain = self::getenv('PUBLIC_HOLIDAY_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['PUBLICHOLIDAY_TEST_EXPLAIN'] = $explain;
+            $m['PUBLIC_HOLIDAY_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

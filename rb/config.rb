@@ -30,7 +30,7 @@ module PublicHolidayConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "country_code",
+              "name" => "countryCode",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
@@ -52,6 +52,7 @@ module PublicHolidayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/AvailableCountries",
                   "parts" => [
@@ -76,28 +77,28 @@ module PublicHolidayConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "border",
+              "name" => "borders",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "common_name",
+              "name" => "commonName",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 1,
             },
             {
               "active" => true,
-              "name" => "country_code",
+              "name" => "countryCode",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 2,
             },
             {
               "active" => true,
-              "name" => "official_name",
+              "name" => "officialName",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
@@ -132,6 +133,7 @@ module PublicHolidayConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/CountryInfo/{CountryCode}",
                   "parts" => [
@@ -166,28 +168,28 @@ module PublicHolidayConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "day_count",
+              "name" => "dayCount",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "end_date",
+              "name" => "endDate",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 1,
             },
             {
               "active" => true,
-              "name" => "need_bridge_day",
+              "name" => "needBridgeDay",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 2,
             },
             {
               "active" => true,
-              "name" => "start_date",
+              "name" => "startDate",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
@@ -225,6 +227,7 @@ module PublicHolidayConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/LongWeekend/{Year}/{CountryCode}",
                   "parts" => [
@@ -266,16 +269,16 @@ module PublicHolidayConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "country_code",
+              "name" => "counties",
               "req" => false,
-              "type" => "`$STRING`",
+              "type" => "`$ARRAY`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "county",
+              "name" => "countryCode",
               "req" => false,
-              "type" => "`$ARRAY`",
+              "type" => "`$STRING`",
               "index$" => 1,
             },
             {
@@ -301,14 +304,14 @@ module PublicHolidayConfig
             },
             {
               "active" => true,
-              "name" => "launch_year",
+              "name" => "launchYear",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 5,
             },
             {
               "active" => true,
-              "name" => "local_name",
+              "name" => "localName",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 6,
@@ -322,7 +325,7 @@ module PublicHolidayConfig
             },
             {
               "active" => true,
-              "name" => "type",
+              "name" => "types",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 8,
@@ -360,6 +363,7 @@ module PublicHolidayConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/PublicHolidays/{Year}/{CountryCode}",
                   "parts" => [
@@ -388,6 +392,7 @@ module PublicHolidayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/NextPublicHolidaysWorldwide",
                   "parts" => [
@@ -433,6 +438,7 @@ module PublicHolidayConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/IsTodayPublicHoliday/{CountryCode}",
                   "parts" => [
@@ -472,6 +478,7 @@ module PublicHolidayConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/NextPublicHolidays/{CountryCode}",
                   "parts" => [

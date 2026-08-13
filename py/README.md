@@ -53,7 +53,7 @@ except Exception as err:
 ### 3. Load a publicholiday
 
 PublicHoliday is nested under country_code, so provide the `country_code`.
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -70,10 +70,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    availablecountrys = client.AvailableCountry().list()
-    print(availablecountrys)
+    countryinfo = client.CountryInfo().load({"id": "example_id"})
+    print(countryinfo)
 except Exception as err:
-    print(f"list failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -137,9 +137,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = PublicHolidaySDK.test()
 
-# Entity ops return the bare record and raise on error.
-availablecountry = client.AvailableCountry().list()
-# availablecountry contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+countryinfo = client.CountryInfo().load({"id": "test01"})
+# countryinfo contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -237,7 +238,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -259,7 +260,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
+| `countryCode` |  |
 | `name` |  |
 
 Operations: List.
@@ -270,10 +271,10 @@ API path: `/AvailableCountries`
 
 | Field | Description |
 | --- | --- |
-| `border` |  |
-| `common_name` |  |
-| `country_code` |  |
-| `official_name` |  |
+| `borders` |  |
+| `commonName` |  |
+| `countryCode` |  |
+| `officialName` |  |
 | `region` |  |
 
 Operations: Load.
@@ -284,10 +285,10 @@ API path: `/CountryInfo/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `day_count` |  |
-| `end_date` |  |
-| `need_bridge_day` |  |
-| `start_date` |  |
+| `dayCount` |  |
+| `endDate` |  |
+| `needBridgeDay` |  |
+| `startDate` |  |
 
 Operations: List.
 
@@ -297,15 +298,15 @@ API path: `/LongWeekend/{Year}/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
-| `county` |  |
+| `counties` |  |
+| `countryCode` |  |
 | `date` |  |
 | `fixed` |  |
 | `global` |  |
-| `launch_year` |  |
-| `local_name` |  |
+| `launchYear` |  |
+| `localName` |  |
 | `name` |  |
-| `type` |  |
+| `types` |  |
 
 Operations: List, Load.
 
@@ -330,7 +331,7 @@ Create an instance: `available_country = client.AvailableCountry()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `str` |  |
+| `countryCode` | `str` |  |
 | `name` | `str` |  |
 
 #### Example: List
@@ -354,10 +355,10 @@ Create an instance: `country_info = client.CountryInfo()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `border` | `list` |  |
-| `common_name` | `str` |  |
-| `country_code` | `str` |  |
-| `official_name` | `str` |  |
+| `borders` | `list` |  |
+| `commonName` | `str` |  |
+| `countryCode` | `str` |  |
+| `officialName` | `str` |  |
 | `region` | `str` |  |
 
 #### Example: Load
@@ -381,15 +382,15 @@ Create an instance: `long_weekend = client.LongWeekend()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `day_count` | `int` |  |
-| `end_date` | `str` |  |
-| `need_bridge_day` | `bool` |  |
-| `start_date` | `str` |  |
+| `dayCount` | `int` |  |
+| `endDate` | `str` |  |
+| `needBridgeDay` | `bool` |  |
+| `startDate` | `str` |  |
 
 #### Example: List
 
 ```python
-long_weekends = client.LongWeekend().list()
+long_weekends = client.LongWeekend().list({"country_code": "example", "year": 1})
 ```
 
 
@@ -408,15 +409,15 @@ Create an instance: `public_holiday = client.PublicHoliday()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `str` |  |
-| `county` | `list` |  |
+| `counties` | `list` |  |
+| `countryCode` | `str` |  |
 | `date` | `str` |  |
 | `fixed` | `bool` |  |
 | `global` | `bool` |  |
-| `launch_year` | `int` |  |
-| `local_name` | `str` |  |
+| `launchYear` | `int` |  |
+| `localName` | `str` |  |
 | `name` | `str` |  |
-| `type` | `list` |  |
+| `types` | `list` |  |
 
 #### Example: Load
 
@@ -502,15 +503,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-availablecountry = client.AvailableCountry()
-availablecountry.list()
+countryinfo = client.CountryInfo()
+countryinfo.load({"id": "example_id"})
 
-# availablecountry.data_get() now returns the availablecountry data from the last list
-# availablecountry.match_get() returns the last match criteria
+# countryinfo.data_get() now returns the countryinfo data from the last load
+# countryinfo.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

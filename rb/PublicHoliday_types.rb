@@ -10,51 +10,51 @@
 
 # AvailableCountry entity data model.
 #
-# @!attribute [rw] country_code
+# @!attribute [rw] countryCode
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 AvailableCountry = Struct.new(
-  :country_code,
+  :countryCode,
   :name,
   keyword_init: true
 )
 
 # Request payload for AvailableCountry#list.
 #
-# @!attribute [rw] country_code
+# @!attribute [rw] countryCode
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 AvailableCountryListMatch = Struct.new(
-  :country_code,
+  :countryCode,
   :name,
   keyword_init: true
 )
 
 # CountryInfo entity data model.
 #
-# @!attribute [rw] border
+# @!attribute [rw] borders
 #   @return [Array, nil]
 #
-# @!attribute [rw] common_name
+# @!attribute [rw] commonName
 #   @return [String, nil]
 #
-# @!attribute [rw] country_code
+# @!attribute [rw] countryCode
 #   @return [String, nil]
 #
-# @!attribute [rw] official_name
+# @!attribute [rw] officialName
 #   @return [String, nil]
 #
 # @!attribute [rw] region
 #   @return [String, nil]
 CountryInfo = Struct.new(
-  :border,
-  :common_name,
-  :country_code,
-  :official_name,
+  :borders,
+  :commonName,
+  :countryCode,
+  :officialName,
   :region,
   keyword_init: true
 )
@@ -70,22 +70,22 @@ CountryInfoLoadMatch = Struct.new(
 
 # LongWeekend entity data model.
 #
-# @!attribute [rw] day_count
+# @!attribute [rw] dayCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] end_date
+# @!attribute [rw] endDate
 #   @return [String, nil]
 #
-# @!attribute [rw] need_bridge_day
+# @!attribute [rw] needBridgeDay
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] start_date
+# @!attribute [rw] startDate
 #   @return [String, nil]
 LongWeekend = Struct.new(
-  :day_count,
-  :end_date,
-  :need_bridge_day,
-  :start_date,
+  :dayCount,
+  :endDate,
+  :needBridgeDay,
+  :startDate,
   keyword_init: true
 )
 
@@ -104,11 +104,11 @@ LongWeekendListMatch = Struct.new(
 
 # PublicHoliday entity data model.
 #
-# @!attribute [rw] country_code
-#   @return [String, nil]
-#
-# @!attribute [rw] county
+# @!attribute [rw] counties
 #   @return [Array, nil]
+#
+# @!attribute [rw] countryCode
+#   @return [String, nil]
 #
 # @!attribute [rw] date
 #   @return [String, nil]
@@ -119,27 +119,27 @@ LongWeekendListMatch = Struct.new(
 # @!attribute [rw] global
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] launch_year
+# @!attribute [rw] launchYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] local_name
+# @!attribute [rw] localName
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] type
+# @!attribute [rw] types
 #   @return [Array, nil]
 PublicHoliday = Struct.new(
-  :country_code,
-  :county,
+  :counties,
+  :countryCode,
   :date,
   :fixed,
   :global,
-  :launch_year,
-  :local_name,
+  :launchYear,
+  :localName,
   :name,
-  :type,
+  :types,
   keyword_init: true
 )
 

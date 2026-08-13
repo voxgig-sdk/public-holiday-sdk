@@ -38,7 +38,7 @@ try {
     // list() returns an array of AvailableCountry records — iterate directly.
     $availablecountrys = $client->AvailableCountry()->list();
     foreach ($availablecountrys as $item) {
-        echo $item["country_code"] . "\n";
+        echo $item["countryCode"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -51,7 +51,7 @@ PublicHoliday is nested under country_code, so provide the `country_code`.
 
 ```php
 try {
-    // load() returns the bare PublicHoliday record (throws on error).
+    // load() returns the ENTITY — call data_get() for the PublicHoliday record (throws on error).
     $publicholiday = $client->PublicHoliday()->load(["country_code" => "example_country_code"]);
     print_r($publicholiday);
 } catch (\Throwable $err) {
@@ -67,7 +67,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $availablecountrys = $client->AvailableCountry()->list();
+    $countryinfo = $client->CountryInfo()->load(["id" => "example_id"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -134,14 +134,18 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = PublicHolidaySDK::test();
+$client = PublicHolidaySDK::test([
+    "entity" => ["countryinfo" => ["test01" => ["id" => "test01"]]],
+]);
 
-// Entity ops return the bare mock record (throws on error).
-$availablecountry = $client->AvailableCountry()->list();
-print_r($availablecountry);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$countryinfo = $client->CountryInfo()->load(["id" => "test01"]);
+print_r($countryinfo);
 ```
 
 ### Use a custom fetch function
@@ -242,7 +246,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -264,7 +268,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
+| `countryCode` |  |
 | `name` |  |
 
 Operations: List.
@@ -275,10 +279,10 @@ API path: `/AvailableCountries`
 
 | Field | Description |
 | --- | --- |
-| `border` |  |
-| `common_name` |  |
-| `country_code` |  |
-| `official_name` |  |
+| `borders` |  |
+| `commonName` |  |
+| `countryCode` |  |
+| `officialName` |  |
 | `region` |  |
 
 Operations: Load.
@@ -289,10 +293,10 @@ API path: `/CountryInfo/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `day_count` |  |
-| `end_date` |  |
-| `need_bridge_day` |  |
-| `start_date` |  |
+| `dayCount` |  |
+| `endDate` |  |
+| `needBridgeDay` |  |
+| `startDate` |  |
 
 Operations: List.
 
@@ -302,15 +306,15 @@ API path: `/LongWeekend/{Year}/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
-| `county` |  |
+| `counties` |  |
+| `countryCode` |  |
 | `date` |  |
 | `fixed` |  |
 | `global` |  |
-| `launch_year` |  |
-| `local_name` |  |
+| `launchYear` |  |
+| `localName` |  |
 | `name` |  |
-| `type` |  |
+| `types` |  |
 
 Operations: List, Load.
 
@@ -335,7 +339,7 @@ Create an instance: `$available_country = $client->AvailableCountry();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
+| `countryCode` | `string` |  |
 | `name` | `string` |  |
 
 #### Example: List
@@ -360,16 +364,16 @@ Create an instance: `$country_info = $client->CountryInfo();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `border` | `array` |  |
-| `common_name` | `string` |  |
-| `country_code` | `string` |  |
-| `official_name` | `string` |  |
+| `borders` | `array` |  |
+| `commonName` | `string` |  |
+| `countryCode` | `string` |  |
+| `officialName` | `string` |  |
 | `region` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare CountryInfo record (throws on error).
+// load() returns the ENTITY — call data_get() for the CountryInfo record (throws on error).
 $country_info = $client->CountryInfo()->load(["id" => "country_info_id"]);
 ```
 
@@ -388,10 +392,10 @@ Create an instance: `$long_weekend = $client->LongWeekend();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `day_count` | `int` |  |
-| `end_date` | `string` |  |
-| `need_bridge_day` | `bool` |  |
-| `start_date` | `string` |  |
+| `dayCount` | `int` |  |
+| `endDate` | `string` |  |
+| `needBridgeDay` | `bool` |  |
+| `startDate` | `string` |  |
 
 #### Example: List
 
@@ -416,20 +420,20 @@ Create an instance: `$public_holiday = $client->PublicHoliday();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
-| `county` | `array` |  |
+| `counties` | `array` |  |
+| `countryCode` | `string` |  |
 | `date` | `string` |  |
 | `fixed` | `bool` |  |
 | `global` | `bool` |  |
-| `launch_year` | `int` |  |
-| `local_name` | `string` |  |
+| `launchYear` | `int` |  |
+| `localName` | `string` |  |
 | `name` | `string` |  |
-| `type` | `array` |  |
+| `types` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare PublicHoliday record (throws on error).
+// load() returns the ENTITY — call data_get() for the PublicHoliday record (throws on error).
 $public_holiday = $client->PublicHoliday()->load(["country_code" => "country_code"]);
 ```
 
@@ -513,15 +517,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$availablecountry = $client->AvailableCountry();
-$availablecountry->list();
+$countryinfo = $client->CountryInfo();
+$countryinfo->load(["id" => "example_id"]);
 
-// $availablecountry->data_get() now returns the availablecountry data from the last list
-// $availablecountry->match_get() returns the last match criteria
+// $countryinfo->data_get() now returns the countryinfo data from the last load
+// $countryinfo->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -99,7 +99,7 @@ available_country = client.AvailableCountry()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `str` | No |  |
+| `countryCode` | `str` | No |  |
 | `name` | `str` | No |  |
 
 ### Operations
@@ -153,10 +153,10 @@ country_info = client.CountryInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | `list` | No |  |
-| `common_name` | `str` | No |  |
-| `country_code` | `str` | No |  |
-| `official_name` | `str` | No |  |
+| `borders` | `list` | No |  |
+| `commonName` | `str` | No |  |
+| `countryCode` | `str` | No |  |
+| `officialName` | `str` | No |  |
 | `region` | `str` | No |  |
 
 ### Operations
@@ -208,10 +208,10 @@ long_weekend = client.LongWeekend()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | `int` | No |  |
-| `end_date` | `str` | No |  |
-| `need_bridge_day` | `bool` | No |  |
-| `start_date` | `str` | No |  |
+| `dayCount` | `int` | No |  |
+| `endDate` | `str` | No |  |
+| `needBridgeDay` | `bool` | No |  |
+| `startDate` | `str` | No |  |
 
 ### Operations
 
@@ -220,7 +220,7 @@ long_weekend = client.LongWeekend()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.LongWeekend().list()
+results = client.LongWeekend().list({"country_code": "example", "year": 1})
 for long_weekend in results:
     print(long_weekend)
 ```
@@ -264,15 +264,15 @@ public_holiday = client.PublicHoliday()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `str` | No |  |
-| `county` | `list` | No |  |
+| `counties` | `list` | No |  |
+| `countryCode` | `str` | No |  |
 | `date` | `str` | No |  |
 | `fixed` | `bool` | No |  |
 | `global` | `bool` | No |  |
-| `launch_year` | `int` | No |  |
-| `local_name` | `str` | No |  |
+| `launchYear` | `int` | No |  |
+| `localName` | `str` | No |  |
 | `name` | `str` | No |  |
-| `type` | `list` | No |  |
+| `types` | `list` | No |  |
 
 ### Operations
 

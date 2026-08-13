@@ -37,7 +37,7 @@ class AvailableCountryEntity extends PublicHolidayEntityBase<AvailableCountry> {
 
 
 
-  async list(this: any, reqmatch?: AvailableCountryListMatch, ctrl?: Control): Promise<AvailableCountry[]> {
+  async list(this: any, reqmatch?: AvailableCountryListMatch, ctrl?: Control): Promise<AvailableCountryEntity[]> {
 
     const utility = this._utility
 

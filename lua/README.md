@@ -43,7 +43,7 @@ local availablecountrys, err = client:AvailableCountry():list()
 if err then error(err) end
 
 for _, item in ipairs(availablecountrys) do
-  print(item["country_code"])
+  print(item["countryCode"])
 end
 ```
 
@@ -64,7 +64,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local availablecountrys, err = client:AvailableCountry():list()
+local countryinfo, err = client:CountryInfo():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -122,7 +122,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:AvailableCountry():list()
+local result, err = client:CountryInfo():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -233,9 +233,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local available_country, err = client:AvailableCountry():load()
+    local country_info, err = client:CountryInfo():load({ id = "example_id" })
     if err then error(err) end
-    -- available_country is the loaded record
+    -- country_info is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -246,7 +246,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
+| `countryCode` |  |
 | `name` |  |
 
 Operations: List.
@@ -257,10 +257,10 @@ API path: `/AvailableCountries`
 
 | Field | Description |
 | --- | --- |
-| `border` |  |
-| `common_name` |  |
-| `country_code` |  |
-| `official_name` |  |
+| `borders` |  |
+| `commonName` |  |
+| `countryCode` |  |
+| `officialName` |  |
 | `region` |  |
 
 Operations: Load.
@@ -271,10 +271,10 @@ API path: `/CountryInfo/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `day_count` |  |
-| `end_date` |  |
-| `need_bridge_day` |  |
-| `start_date` |  |
+| `dayCount` |  |
+| `endDate` |  |
+| `needBridgeDay` |  |
+| `startDate` |  |
 
 Operations: List.
 
@@ -284,15 +284,15 @@ API path: `/LongWeekend/{Year}/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
-| `county` |  |
+| `counties` |  |
+| `countryCode` |  |
 | `date` |  |
 | `fixed` |  |
 | `global` |  |
-| `launch_year` |  |
-| `local_name` |  |
+| `launchYear` |  |
+| `localName` |  |
 | `name` |  |
-| `type` |  |
+| `types` |  |
 
 Operations: List, Load.
 
@@ -317,7 +317,7 @@ Create an instance: `local available_country = client:AvailableCountry(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
+| `countryCode` | `string` |  |
 | `name` | `string` |  |
 
 #### Example: List
@@ -341,10 +341,10 @@ Create an instance: `local country_info = client:CountryInfo(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `border` | `table` |  |
-| `common_name` | `string` |  |
-| `country_code` | `string` |  |
-| `official_name` | `string` |  |
+| `borders` | `table` |  |
+| `commonName` | `string` |  |
+| `countryCode` | `string` |  |
+| `officialName` | `string` |  |
 | `region` | `string` |  |
 
 #### Example: Load
@@ -368,10 +368,10 @@ Create an instance: `local long_weekend = client:LongWeekend(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `day_count` | `number` |  |
-| `end_date` | `string` |  |
-| `need_bridge_day` | `boolean` |  |
-| `start_date` | `string` |  |
+| `dayCount` | `number` |  |
+| `endDate` | `string` |  |
+| `needBridgeDay` | `boolean` |  |
+| `startDate` | `string` |  |
 
 #### Example: List
 
@@ -395,15 +395,15 @@ Create an instance: `local public_holiday = client:PublicHoliday(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
-| `county` | `table` |  |
+| `counties` | `table` |  |
+| `countryCode` | `string` |  |
 | `date` | `string` |  |
 | `fixed` | `boolean` |  |
 | `global` | `boolean` |  |
-| `launch_year` | `number` |  |
-| `local_name` | `string` |  |
+| `launchYear` | `number` |  |
+| `localName` | `string` |  |
 | `name` | `string` |  |
-| `type` | `table` |  |
+| `types` | `table` |  |
 
 #### Example: Load
 
@@ -490,15 +490,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local availablecountry = client:AvailableCountry()
-availablecountry:list()
+local countryinfo = client:CountryInfo()
+countryinfo:load({ id = "example_id" })
 
--- availablecountry:data_get() now returns the availablecountry data from the last list
--- availablecountry:match_get() returns the last match criteria
+-- countryinfo:data_get() now returns the countryinfo data from the last load
+-- countryinfo:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

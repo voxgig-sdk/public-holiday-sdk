@@ -104,7 +104,7 @@ $available_country = $client->AvailableCountry();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
+| `countryCode` | `string` | No |  |
 | `name` | `string` | No |  |
 
 ### Operations
@@ -157,10 +157,10 @@ $country_info = $client->CountryInfo();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | `array` | No |  |
-| `common_name` | `string` | No |  |
-| `country_code` | `string` | No |  |
-| `official_name` | `string` | No |  |
+| `borders` | `array` | No |  |
+| `commonName` | `string` | No |  |
+| `countryCode` | `string` | No |  |
+| `officialName` | `string` | No |  |
 | `region` | `string` | No |  |
 
 ### Operations
@@ -213,10 +213,10 @@ $long_weekend = $client->LongWeekend();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | `int` | No |  |
-| `end_date` | `string` | No |  |
-| `need_bridge_day` | `bool` | No |  |
-| `start_date` | `string` | No |  |
+| `dayCount` | `int` | No |  |
+| `endDate` | `string` | No |  |
+| `needBridgeDay` | `bool` | No |  |
+| `startDate` | `string` | No |  |
 
 ### Operations
 
@@ -268,15 +268,15 @@ $public_holiday = $client->PublicHoliday();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
-| `county` | `array` | No |  |
+| `counties` | `array` | No |  |
+| `countryCode` | `string` | No |  |
 | `date` | `string` | No |  |
 | `fixed` | `bool` | No |  |
 | `global` | `bool` | No |  |
-| `launch_year` | `int` | No |  |
-| `local_name` | `string` | No |  |
+| `launchYear` | `int` | No |  |
+| `localName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `type` | `array` | No |  |
+| `types` | `array` | No |  |
 
 ### Operations
 

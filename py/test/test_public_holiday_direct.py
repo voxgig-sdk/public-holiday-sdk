@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from publicholiday_sdk.utility.voxgig_struct import voxgig_struct as vs
 from publicholiday_sdk import PublicHolidaySDK
-from core import helpers
+from publicholiday_sdk.core import helpers
 from test import runner
 
 
@@ -118,11 +118,11 @@ def _public_holiday_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "PUBLICHOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID": {},
-        "PUBLICHOLIDAY_TEST_LIVE": "FALSE",
+        "PUBLIC_HOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID": {},
+        "PUBLIC_HOLIDAY_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("PUBLICHOLIDAY_TEST_LIVE") == "TRUE"
+    live = env.get("PUBLIC_HOLIDAY_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

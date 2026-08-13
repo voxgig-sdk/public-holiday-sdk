@@ -80,11 +80,11 @@ function long_weekend_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["PUBLICHOLIDAY_TEST_LONG_WEEKEND_ENTID"] = {},
-    ["PUBLICHOLIDAY_TEST_LIVE"] = "FALSE",
+    ["PUBLIC_HOLIDAY_TEST_LONG_WEEKEND_ENTID"] = {},
+    ["PUBLIC_HOLIDAY_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["PUBLICHOLIDAY_TEST_LIVE"] == "TRUE"
+  local live = env["PUBLIC_HOLIDAY_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

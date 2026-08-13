@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "available_country": {
           "active": true,
@@ -27,7 +32,7 @@
           "fields": [
             {
               "active": true,
-              "name": "country_code",
+              "name": "countryCode",
               "req": false,
               "type": "`$STRING`"
             },
@@ -47,6 +52,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/AvailableCountries",
                   "parts": [
@@ -73,25 +79,25 @@
           "fields": [
             {
               "active": true,
-              "name": "border",
+              "name": "borders",
               "req": false,
               "type": "`$ARRAY`"
             },
             {
               "active": true,
-              "name": "common_name",
+              "name": "commonName",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "country_code",
+              "name": "countryCode",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "official_name",
+              "name": "officialName",
               "req": false,
               "type": "`$STRING`"
             },
@@ -123,6 +129,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/CountryInfo/{CountryCode}",
                   "parts": [
@@ -159,25 +166,25 @@
           "fields": [
             {
               "active": true,
-              "name": "day_count",
+              "name": "dayCount",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "end_date",
+              "name": "endDate",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "need_bridge_day",
+              "name": "needBridgeDay",
               "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
-              "name": "start_date",
+              "name": "startDate",
               "req": false,
               "type": "`$STRING`"
             }
@@ -212,6 +219,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/LongWeekend/{Year}/{CountryCode}",
                   "parts": [
@@ -255,15 +263,15 @@
           "fields": [
             {
               "active": true,
-              "name": "country_code",
+              "name": "counties",
               "req": false,
-              "type": "`$STRING`"
+              "type": "`$ARRAY`"
             },
             {
               "active": true,
-              "name": "county",
+              "name": "countryCode",
               "req": false,
-              "type": "`$ARRAY`"
+              "type": "`$STRING`"
             },
             {
               "active": true,
@@ -285,13 +293,13 @@
             },
             {
               "active": true,
-              "name": "launch_year",
+              "name": "launchYear",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "local_name",
+              "name": "localName",
               "req": false,
               "type": "`$STRING`"
             },
@@ -303,7 +311,7 @@
             },
             {
               "active": true,
-              "name": "type",
+              "name": "types",
               "req": false,
               "type": "`$ARRAY`"
             }
@@ -338,6 +346,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/PublicHolidays/{Year}/{CountryCode}",
                   "parts": [
@@ -365,6 +374,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/NextPublicHolidaysWorldwide",
                   "parts": [
@@ -407,6 +417,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/IsTodayPublicHoliday/{CountryCode}",
                   "parts": [
@@ -444,6 +455,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/NextPublicHolidays/{CountryCode}",
                   "parts": [
@@ -733,18 +745,41 @@
         "website": "https://date.nager.at"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -766,22 +801,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -820,21 +873,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -873,12 +944,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -890,10 +966,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -915,22 +1004,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -952,13 +1059,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -970,10 +1082,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -995,13 +1120,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1018,10 +1148,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1043,13 +1186,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -1072,10 +1220,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "public-holiday"
+            "goversion": "",
+            "name": "public-holiday",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1097,9 +1258,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

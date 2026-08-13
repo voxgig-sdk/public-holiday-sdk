@@ -6,22 +6,22 @@ main: kit: entity: long_weekend: {
 
   fields: [
     {
-      name: "day_count"
+      name: "dayCount"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "end_date"
+      name: "endDate"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "need_bridge_day"
+      name: "needBridgeDay"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "start_date"
+      name: "startDate"
       req: false
       type: "`$STRING`"
     }

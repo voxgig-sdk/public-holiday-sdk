@@ -105,7 +105,7 @@ available_country = client.AvailableCountry
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `String` | No |  |
+| `countryCode` | `String` | No |  |
 | `name` | `String` | No |  |
 
 ### Operations
@@ -158,10 +158,10 @@ country_info = client.CountryInfo
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `border` | `Array` | No |  |
-| `common_name` | `String` | No |  |
-| `country_code` | `String` | No |  |
-| `official_name` | `String` | No |  |
+| `borders` | `Array` | No |  |
+| `commonName` | `String` | No |  |
+| `countryCode` | `String` | No |  |
+| `officialName` | `String` | No |  |
 | `region` | `String` | No |  |
 
 ### Operations
@@ -214,10 +214,10 @@ long_weekend = client.LongWeekend
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `day_count` | `Integer` | No |  |
-| `end_date` | `String` | No |  |
-| `need_bridge_day` | `Boolean` | No |  |
-| `start_date` | `String` | No |  |
+| `dayCount` | `Integer` | No |  |
+| `endDate` | `String` | No |  |
+| `needBridgeDay` | `Boolean` | No |  |
+| `startDate` | `String` | No |  |
 
 ### Operations
 
@@ -269,15 +269,15 @@ public_holiday = client.PublicHoliday
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `String` | No |  |
-| `county` | `Array` | No |  |
+| `counties` | `Array` | No |  |
+| `countryCode` | `String` | No |  |
 | `date` | `String` | No |  |
 | `fixed` | `Boolean` | No |  |
 | `global` | `Boolean` | No |  |
-| `launch_year` | `Integer` | No |  |
-| `local_name` | `String` | No |  |
+| `launchYear` | `Integer` | No |  |
+| `localName` | `String` | No |  |
 | `name` | `String` | No |  |
-| `type` | `Array` | No |  |
+| `types` | `Array` | No |  |
 
 ### Operations
 

@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'PublicHoliday',
   }
 
 
@@ -65,7 +65,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "country_code",
+          "name": "countryCode",
           "req": false,
           "type": "`$STRING`",
           "index$": 0
@@ -87,6 +87,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/AvailableCountries",
               "parts": [
@@ -111,28 +112,28 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "border",
+          "name": "borders",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "common_name",
+          "name": "commonName",
           "req": false,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "country_code",
+          "name": "countryCode",
           "req": false,
           "type": "`$STRING`",
           "index$": 2
         },
         {
           "active": true,
-          "name": "official_name",
+          "name": "officialName",
           "req": false,
           "type": "`$STRING`",
           "index$": 3
@@ -167,6 +168,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/CountryInfo/{CountryCode}",
               "parts": [
@@ -201,28 +203,28 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "day_count",
+          "name": "dayCount",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "end_date",
+          "name": "endDate",
           "req": false,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "need_bridge_day",
+          "name": "needBridgeDay",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 2
         },
         {
           "active": true,
-          "name": "start_date",
+          "name": "startDate",
           "req": false,
           "type": "`$STRING`",
           "index$": 3
@@ -260,6 +262,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/LongWeekend/{Year}/{CountryCode}",
               "parts": [
@@ -301,16 +304,16 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "country_code",
+          "name": "counties",
           "req": false,
-          "type": "`$STRING`",
+          "type": "`$ARRAY`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "county",
+          "name": "countryCode",
           "req": false,
-          "type": "`$ARRAY`",
+          "type": "`$STRING`",
           "index$": 1
         },
         {
@@ -336,14 +339,14 @@ class Config {
         },
         {
           "active": true,
-          "name": "launch_year",
+          "name": "launchYear",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 5
         },
         {
           "active": true,
-          "name": "local_name",
+          "name": "localName",
           "req": false,
           "type": "`$STRING`",
           "index$": 6
@@ -357,7 +360,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "type",
+          "name": "types",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 8
@@ -395,6 +398,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/PublicHolidays/{Year}/{CountryCode}",
               "parts": [
@@ -423,6 +427,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/NextPublicHolidaysWorldwide",
               "parts": [
@@ -468,6 +473,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/IsTodayPublicHoliday/{CountryCode}",
               "parts": [
@@ -507,6 +513,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/NextPublicHolidays/{CountryCode}",
               "parts": [

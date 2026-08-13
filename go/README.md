@@ -68,12 +68,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-availablecountrys, err := client.AvailableCountry(nil).List(nil, nil)
+countryinfo, err := client.CountryInfo(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = availablecountrys
+_ = countryinfo
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -137,13 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-availableCountry, err := client.AvailableCountry(nil).List(
-    nil, nil,
+countryInfo, err := client.CountryInfo(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(availableCountry) // the returned mock data
+fmt.Println(countryInfo) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -265,7 +265,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"country_code"` |  |
+| `"countryCode"` |  |
 | `"name"` |  |
 
 Operations: List.
@@ -276,10 +276,10 @@ API path: `/AvailableCountries`
 
 | Field | Description |
 | --- | --- |
-| `"border"` |  |
-| `"common_name"` |  |
-| `"country_code"` |  |
-| `"official_name"` |  |
+| `"borders"` |  |
+| `"commonName"` |  |
+| `"countryCode"` |  |
+| `"officialName"` |  |
 | `"region"` |  |
 
 Operations: Load.
@@ -290,10 +290,10 @@ API path: `/CountryInfo/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `"day_count"` |  |
-| `"end_date"` |  |
-| `"need_bridge_day"` |  |
-| `"start_date"` |  |
+| `"dayCount"` |  |
+| `"endDate"` |  |
+| `"needBridgeDay"` |  |
+| `"startDate"` |  |
 
 Operations: List.
 
@@ -303,15 +303,15 @@ API path: `/LongWeekend/{Year}/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `"country_code"` |  |
-| `"county"` |  |
+| `"counties"` |  |
+| `"countryCode"` |  |
 | `"date"` |  |
 | `"fixed"` |  |
 | `"global"` |  |
-| `"launch_year"` |  |
-| `"local_name"` |  |
+| `"launchYear"` |  |
+| `"localName"` |  |
 | `"name"` |  |
-| `"type"` |  |
+| `"types"` |  |
 
 Operations: List, Load.
 
@@ -336,7 +336,7 @@ Create an instance: `availableCountry := client.AvailableCountry(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
+| `countryCode` | `string` |  |
 | `name` | `string` |  |
 
 #### Example: List
@@ -364,10 +364,10 @@ Create an instance: `countryInfo := client.CountryInfo(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `border` | `[]any` |  |
-| `common_name` | `string` |  |
-| `country_code` | `string` |  |
-| `official_name` | `string` |  |
+| `borders` | `[]any` |  |
+| `commonName` | `string` |  |
+| `countryCode` | `string` |  |
+| `officialName` | `string` |  |
 | `region` | `string` |  |
 
 #### Example: Load
@@ -395,10 +395,10 @@ Create an instance: `longWeekend := client.LongWeekend(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `day_count` | `int` |  |
-| `end_date` | `string` |  |
-| `need_bridge_day` | `bool` |  |
-| `start_date` | `string` |  |
+| `dayCount` | `int` |  |
+| `endDate` | `string` |  |
+| `needBridgeDay` | `bool` |  |
+| `startDate` | `string` |  |
 
 #### Example: List
 
@@ -426,15 +426,15 @@ Create an instance: `publicHoliday := client.PublicHoliday(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
-| `county` | `[]any` |  |
+| `counties` | `[]any` |  |
+| `countryCode` | `string` |  |
 | `date` | `string` |  |
 | `fixed` | `bool` |  |
 | `global` | `bool` |  |
-| `launch_year` | `int` |  |
-| `local_name` | `string` |  |
+| `launchYear` | `int` |  |
+| `localName` | `string` |  |
 | `name` | `string` |  |
-| `type` | `[]any` |  |
+| `types` | `[]any` |  |
 
 #### Example: Load
 
@@ -526,15 +526,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `List`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-availablecountry := client.AvailableCountry(nil)
-availablecountry.List(nil, nil)
+countryinfo := client.CountryInfo(nil)
+countryinfo.Load(map[string]any{"id": "example_id"}, nil)
 
-// availablecountry.Data() now returns the availablecountry data from the last list
-// availablecountry.Match() returns the last match criteria
+// countryinfo.Data() now returns the countryinfo data from the last load
+// countryinfo.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

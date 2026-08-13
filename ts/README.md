@@ -35,7 +35,9 @@ const client = new PublicHolidaySDK()
 
 ### 2. List availablecountry records
 
-`list()` resolves to an array of AvailableCountry objects — iterate it directly:
+`list()` resolves to an array of AvailableCountry ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const availablecountrys = await client.AvailableCountry().list()
@@ -68,10 +70,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const availablecountrys = await client.AvailableCountry().list()
-  console.log(availablecountrys)
+  const countryinfo = await client.CountryInfo().load({ id: "example_id" })
+  console.log(countryinfo)
 } catch (err) {
-  console.error('list failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -135,9 +137,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = PublicHolidaySDK.test()
 
-const availablecountry = await client.AvailableCountry().list()
-// availablecountry is a bare entity populated with mock response data
-console.log(availablecountry)
+const countryinfo = await client.CountryInfo().load({ id: 'test01' })
+// countryinfo is the entity, populated with mock response data
+// — call countryinfo.data() for the record itself
+console.log(countryinfo)
 ```
 
 You can also use the instance method:
@@ -152,10 +155,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.AvailableCountry()
+const entity = client.CountryInfo()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -305,7 +308,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
+| `countryCode` |  |
 | `name` |  |
 
 Operations: list.
@@ -316,10 +319,10 @@ API path: `/AvailableCountries`
 
 | Field | Description |
 | --- | --- |
-| `border` |  |
-| `common_name` |  |
-| `country_code` |  |
-| `official_name` |  |
+| `borders` |  |
+| `commonName` |  |
+| `countryCode` |  |
+| `officialName` |  |
 | `region` |  |
 
 Operations: load.
@@ -330,10 +333,10 @@ API path: `/CountryInfo/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `day_count` |  |
-| `end_date` |  |
-| `need_bridge_day` |  |
-| `start_date` |  |
+| `dayCount` |  |
+| `endDate` |  |
+| `needBridgeDay` |  |
+| `startDate` |  |
 
 Operations: list.
 
@@ -343,15 +346,15 @@ API path: `/LongWeekend/{Year}/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `country_code` |  |
-| `county` |  |
+| `counties` |  |
+| `countryCode` |  |
 | `date` |  |
 | `fixed` |  |
 | `global` |  |
-| `launch_year` |  |
-| `local_name` |  |
+| `launchYear` |  |
+| `localName` |  |
 | `name` |  |
-| `type` |  |
+| `types` |  |
 
 Operations: list, load.
 
@@ -376,7 +379,7 @@ Create an instance: `const available_country = client.AvailableCountry()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
+| `countryCode` | `string` |  |
 | `name` | `string` |  |
 
 #### Example: List
@@ -400,10 +403,10 @@ Create an instance: `const country_info = client.CountryInfo()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `border` | `any[]` |  |
-| `common_name` | `string` |  |
-| `country_code` | `string` |  |
-| `official_name` | `string` |  |
+| `borders` | `any[]` |  |
+| `commonName` | `string` |  |
+| `countryCode` | `string` |  |
+| `officialName` | `string` |  |
 | `region` | `string` |  |
 
 #### Example: Load
@@ -427,15 +430,15 @@ Create an instance: `const long_weekend = client.LongWeekend()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `day_count` | `number` |  |
-| `end_date` | `string` |  |
-| `need_bridge_day` | `boolean` |  |
-| `start_date` | `string` |  |
+| `dayCount` | `number` |  |
+| `endDate` | `string` |  |
+| `needBridgeDay` | `boolean` |  |
+| `startDate` | `string` |  |
 
 #### Example: List
 
 ```ts
-const long_weekends = await client.LongWeekend().list()
+const long_weekends = await client.LongWeekend().list({ country_code: "example", year: 1 })
 ```
 
 
@@ -454,15 +457,15 @@ Create an instance: `const public_holiday = client.PublicHoliday()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
-| `county` | `any[]` |  |
+| `counties` | `any[]` |  |
+| `countryCode` | `string` |  |
 | `date` | `string` |  |
 | `fixed` | `boolean` |  |
 | `global` | `boolean` |  |
-| `launch_year` | `number` |  |
-| `local_name` | `string` |  |
+| `launchYear` | `number` |  |
+| `localName` | `string` |  |
 | `name` | `string` |  |
-| `type` | `any[]` |  |
+| `types` | `any[]` |  |
 
 #### Example: Load
 
@@ -541,16 +544,16 @@ import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const availablecountry = client.AvailableCountry()
-await availablecountry.list()
+const countryinfo = client.CountryInfo()
+await countryinfo.load({ id: "example_id" })
 
-// availablecountry.data() now returns the availablecountry data from the last `list`
-// availablecountry.match() returns the last match criteria
+// countryinfo.data() now returns the countryinfo data from the last `load`
+// countryinfo.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

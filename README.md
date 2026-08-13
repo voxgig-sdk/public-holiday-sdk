@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = PublicHolidaySDK.test()
-const availablecountrys = await client.AvailableCountry().list()
-// availablecountrys is an array of bare AvailableCountry records populated with mock data
-console.log(availablecountrys)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = PublicHolidaySDK.test({
+  entity: {
+    country_info: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const countryinfo = await client.CountryInfo().load({ id: 'test01' })
+// countryinfo is the CountryInfo entity, populated with mock data
+// — call countryinfo.data() for the record itself
+console.log(countryinfo)
 ```
 
 ### Python
 
 ```python
 client = PublicHolidaySDK.test()
-availablecountrys = client.AvailableCountry().list()
-print(availablecountrys)
+countryinfo = client.CountryInfo().load({"id": "test01"})
+print(countryinfo)
 ```
 
 ### PHP
@@ -57,17 +66,17 @@ print(availablecountrys)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = PublicHolidaySDK::test([
-    "entity" => ["availablecountry" => ["test01" => []]],
+    "entity" => ["countryinfo" => ["test01" => ["id" => "test01"]]],
 ]);
-$availablecountrys = $client->AvailableCountry()->list();
+$countryinfo = $client->CountryInfo()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.AvailableCountry(nil).List(
-    nil, nil,
+result, err := client.CountryInfo(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 ```
 
@@ -76,16 +85,16 @@ result, err := client.AvailableCountry(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = PublicHolidaySDK.test({
-  "entity" => { "availablecountry" => { "test01" => {} } },
+  "entity" => { "countryinfo" => { "test01" => { "id" => "test01" } } },
 })
-availablecountrys = client.AvailableCountry.list()
+countryinfo = client.CountryInfo.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:AvailableCountry():list()
+local result, err = client:CountryInfo():load({ id = "test01" })
 ```
 
 ## Packages
@@ -110,7 +119,7 @@ import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday'
 
 const client = new PublicHolidaySDK()
 
-// List all availablecountrys (returns AvailableCountry[])
+// List all availablecountrys (returns AvailableCountryEntity[] — .data() for the record)
 const availablecountrys = await client.AvailableCountry().list()
 for (const availablecountry of availablecountrys) {
   console.log(availablecountry)
@@ -361,6 +370,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://date.nager.at/Api](https://date.nager.at/Api)
 

@@ -26,8 +26,8 @@ import {
 describe('CountryInfoEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when PUBLICHOLIDAY_TEST_LIVE=TRUE.
-  afterEach(liveDelay('PUBLICHOLIDAY_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when PUBLIC_HOLIDAY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('PUBLIC_HOLIDAY_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = PublicHolidaySDK.test()

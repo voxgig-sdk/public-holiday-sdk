@@ -2,15 +2,15 @@
   "existing": {
     "available_country": {
       "AVAILABLE_COUNTRY00": {
-        "country_code": "s14",
+        "countryCode": "s14",
         "name": "s15"
       },
       "AVAILABLE_COUNTRY01": {
-        "country_code": "s28",
+        "countryCode": "s28",
         "name": "s29"
       },
       "AVAILABLE_COUNTRY02": {
-        "country_code": "s3c",
+        "countryCode": "s3c",
         "name": "s3d"
       }
     }
@@ -18,7 +18,7 @@
   "new": {
     "available_country": {
       "available_country_ref01": {
-        "country_code": "s50",
+        "countryCode": "s50",
         "name": "s51"
       }
     }
