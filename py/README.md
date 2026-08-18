@@ -428,7 +428,7 @@ public_holiday = client.PublicHoliday().load({"country_code": "country_code"})
 #### Example: List
 
 ```python
-public_holidays = client.PublicHoliday().list()
+public_holidays = client.PublicHoliday().list({"country_code": "example", "year": 1})
 ```
 
 

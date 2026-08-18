@@ -281,7 +281,7 @@ public_holiday = client.PublicHoliday()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.PublicHoliday().list()
+results = client.PublicHoliday().list({"country_code": "example", "year": 1})
 for public_holiday in results:
     print(public_holiday)
 ```

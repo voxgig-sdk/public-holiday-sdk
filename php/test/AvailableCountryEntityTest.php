@@ -40,7 +40,7 @@ class AvailableCountryEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = PublicHolidayConfig::make_config();
+        $cfg = PublicHolidayConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = PublicHolidaySDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];

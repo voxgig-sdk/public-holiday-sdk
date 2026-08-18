@@ -65,6 +65,6 @@ class PublicHolidayLoadMatch(TypedDict):
     country_code: str
 
 
-class PublicHolidayListMatch(TypedDict, total=False):
+class PublicHolidayListMatch(TypedDict):
     country_code: str
     year: int

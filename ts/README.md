@@ -476,7 +476,7 @@ const public_holiday = await client.PublicHoliday().load({ country_code: 'countr
 #### Example: List
 
 ```ts
-const public_holidays = await client.PublicHoliday().list()
+const public_holidays = await client.PublicHoliday().list({ country_code: "example", year: 1 })
 ```
 
 

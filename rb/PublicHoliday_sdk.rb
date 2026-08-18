@@ -28,7 +28,7 @@ class PublicHolidaySDK
     utility = PublicHolidayUtility.new
     @_utility = utility
 
-    config = PublicHolidayConfig.make_config
+    config = PublicHolidayConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

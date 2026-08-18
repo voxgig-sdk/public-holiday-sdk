@@ -40,7 +40,7 @@ class PublicHolidaySDK
         $utility = new PublicHolidayUtility();
         $this->_utility = $utility;
 
-        $config = PublicHolidayConfig::make_config();
+        $config = PublicHolidayConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

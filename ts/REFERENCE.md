@@ -327,7 +327,7 @@ const public_holiday = client.PublicHoliday()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.PublicHoliday().list()
+const results = await client.PublicHoliday().list({ country_code: "example", year: 1 })
 ```
 
 #### `load(match: object, ctrl?: object)`

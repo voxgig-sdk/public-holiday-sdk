@@ -15,7 +15,7 @@ require_relative "../PublicHoliday_sdk"
 module PublicHolidayFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = PublicHolidayConfig.make_config["feature"]
+    f = PublicHolidayConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 
