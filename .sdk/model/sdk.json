@@ -36,12 +36,14 @@
               "active": true,
               "name": "countryCode",
               "req": false,
+              "short": "ISO 3166-1 alpha-2 country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Country name",
               "type": "`$STRING`"
             }
           ],
@@ -83,30 +85,35 @@
               "active": true,
               "name": "borders",
               "req": false,
+              "short": "Bordering countries",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "commonName",
               "req": false,
+              "short": "Common name of the country",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "countryCode",
               "req": false,
+              "short": "ISO 3166-1 alpha-2 country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "officialName",
               "req": false,
+              "short": "Official name of the country",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "region",
               "req": false,
+              "short": "Region of the country",
               "type": "`$STRING`"
             }
           ],
@@ -170,24 +177,28 @@
               "active": true,
               "name": "dayCount",
               "req": false,
+              "short": "Number of days in the long weekend",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "endDate",
               "req": false,
+              "short": "End date of the long weekend",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "needBridgeDay",
               "req": false,
+              "short": "Whether a bridge day is needed",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "startDate",
               "req": false,
+              "short": "Start date of the long weekend",
               "type": "`$STRING`"
             }
           ],
@@ -267,54 +278,63 @@
               "active": true,
               "name": "counties",
               "req": false,
+              "short": "If it is not global you found here the Federal states (ISO-3166-2)",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "countryCode",
               "req": false,
+              "short": "ISO 3166-1 alpha-2 country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "date",
               "req": false,
+              "short": "The date of the holiday",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "fixed",
               "req": false,
+              "short": "Is this public holiday every year on the same date",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "global",
               "req": false,
+              "short": "Is this public holiday in every county (federal state)",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "launchYear",
               "req": false,
+              "short": "The launch year of the public holiday",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "localName",
               "req": false,
+              "short": "Local name of the holiday",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "English name of the holiday",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "types",
               "req": false,
+              "short": "The types of the public holiday.",
               "type": "`$ARRAY`"
             }
           ],

@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "PublicHoliday",
+      slug = "public-holiday",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -32,10 +35,12 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "countryCode",
+            ["short"] = "ISO 3166-1 alpha-2 country code",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "name",
+            ["short"] = "Country name",
             ["type"] = "`$STRING`",
           },
         },
@@ -70,22 +75,27 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "borders",
+            ["short"] = "Bordering countries",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "commonName",
+            ["short"] = "Common name of the country",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "countryCode",
+            ["short"] = "ISO 3166-1 alpha-2 country code",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "officialName",
+            ["short"] = "Official name of the country",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "region",
+            ["short"] = "Region of the country",
             ["type"] = "`$STRING`",
           },
         },
@@ -141,18 +151,22 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "dayCount",
+            ["short"] = "Number of days in the long weekend",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "endDate",
+            ["short"] = "End date of the long weekend",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "needBridgeDay",
+            ["short"] = "Whether a bridge day is needed",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "startDate",
+            ["short"] = "Start date of the long weekend",
             ["type"] = "`$STRING`",
           },
         },
@@ -223,38 +237,47 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "counties",
+            ["short"] = "If it is not global you found here the Federal states (ISO-3166-2)",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "countryCode",
+            ["short"] = "ISO 3166-1 alpha-2 country code",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "date",
+            ["short"] = "The date of the holiday",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "fixed",
+            ["short"] = "Is this public holiday every year on the same date",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "global",
+            ["short"] = "Is this public holiday in every county (federal state)",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "launchYear",
+            ["short"] = "The launch year of the public holiday",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "localName",
+            ["short"] = "Local name of the holiday",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "name",
+            ["short"] = "English name of the holiday",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "types",
+            ["short"] = "The types of the public holiday.",
             ["type"] = "`$ARRAY`",
           },
         },

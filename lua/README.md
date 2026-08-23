@@ -246,8 +246,8 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `countryCode` |  |
-| `name` |  |
+| `countryCode` | ISO 3166-1 alpha-2 country code |
+| `name` | Country name |
 
 Operations: List.
 
@@ -257,11 +257,11 @@ API path: `/AvailableCountries`
 
 | Field | Description |
 | --- | --- |
-| `borders` |  |
-| `commonName` |  |
-| `countryCode` |  |
-| `officialName` |  |
-| `region` |  |
+| `borders` | Bordering countries |
+| `commonName` | Common name of the country |
+| `countryCode` | ISO 3166-1 alpha-2 country code |
+| `officialName` | Official name of the country |
+| `region` | Region of the country |
 
 Operations: Load.
 
@@ -271,10 +271,10 @@ API path: `/CountryInfo/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `dayCount` |  |
-| `endDate` |  |
-| `needBridgeDay` |  |
-| `startDate` |  |
+| `dayCount` | Number of days in the long weekend |
+| `endDate` | End date of the long weekend |
+| `needBridgeDay` | Whether a bridge day is needed |
+| `startDate` | Start date of the long weekend |
 
 Operations: List.
 
@@ -284,15 +284,15 @@ API path: `/LongWeekend/{Year}/{CountryCode}`
 
 | Field | Description |
 | --- | --- |
-| `counties` |  |
-| `countryCode` |  |
-| `date` |  |
-| `fixed` |  |
-| `global` |  |
-| `launchYear` |  |
-| `localName` |  |
-| `name` |  |
-| `types` |  |
+| `counties` | If it is not global you found here the Federal states (ISO-3166-2) |
+| `countryCode` | ISO 3166-1 alpha-2 country code |
+| `date` | The date of the holiday |
+| `fixed` | Is this public holiday every year on the same date |
+| `global` | Is this public holiday in every county (federal state) |
+| `launchYear` | The launch year of the public holiday |
+| `localName` | Local name of the holiday |
+| `name` | English name of the holiday |
+| `types` | The types of the public holiday. |
 
 Operations: List, Load.
 
@@ -317,8 +317,8 @@ Create an instance: `local available_country = client:AvailableCountry(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `countryCode` | `string` |  |
-| `name` | `string` |  |
+| `countryCode` | `string` | ISO 3166-1 alpha-2 country code |
+| `name` | `string` | Country name |
 
 #### Example: List
 
@@ -341,11 +341,11 @@ Create an instance: `local country_info = client:CountryInfo(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `borders` | `table` |  |
-| `commonName` | `string` |  |
-| `countryCode` | `string` |  |
-| `officialName` | `string` |  |
-| `region` | `string` |  |
+| `borders` | `table` | Bordering countries |
+| `commonName` | `string` | Common name of the country |
+| `countryCode` | `string` | ISO 3166-1 alpha-2 country code |
+| `officialName` | `string` | Official name of the country |
+| `region` | `string` | Region of the country |
 
 #### Example: Load
 
@@ -368,10 +368,10 @@ Create an instance: `local long_weekend = client:LongWeekend(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `dayCount` | `number` |  |
-| `endDate` | `string` |  |
-| `needBridgeDay` | `boolean` |  |
-| `startDate` | `string` |  |
+| `dayCount` | `number` | Number of days in the long weekend |
+| `endDate` | `string` | End date of the long weekend |
+| `needBridgeDay` | `boolean` | Whether a bridge day is needed |
+| `startDate` | `string` | Start date of the long weekend |
 
 #### Example: List
 
@@ -395,15 +395,15 @@ Create an instance: `local public_holiday = client:PublicHoliday(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `counties` | `table` |  |
-| `countryCode` | `string` |  |
-| `date` | `string` |  |
-| `fixed` | `boolean` |  |
-| `global` | `boolean` |  |
-| `launchYear` | `number` |  |
-| `localName` | `string` |  |
-| `name` | `string` |  |
-| `types` | `table` |  |
+| `counties` | `table` | If it is not global you found here the Federal states (ISO-3166-2) |
+| `countryCode` | `string` | ISO 3166-1 alpha-2 country code |
+| `date` | `string` | The date of the holiday |
+| `fixed` | `boolean` | Is this public holiday every year on the same date |
+| `global` | `boolean` | Is this public holiday in every county (federal state) |
+| `launchYear` | `number` | The launch year of the public holiday |
+| `localName` | `string` | Local name of the holiday |
+| `name` | `string` | English name of the holiday |
+| `types` | `table` | The types of the public holiday. |
 
 #### Example: Load
 

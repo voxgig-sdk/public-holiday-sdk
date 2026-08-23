@@ -1,0 +1,44 @@
+# Entity: available_country
+
+main: kit: entity: available_country: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "countryCode"
+      req: false
+      short: "ISO 3166-1 alpha-2 country code"
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Country name"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "available_country"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/AvailableCountries"
+          parts: [
+            "AvailableCountries"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -105,8 +105,8 @@ available_country = client.AvailableCountry
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `countryCode` | `String` | No |  |
-| `name` | `String` | No |  |
+| `countryCode` | `String` | No | ISO 3166-1 alpha-2 country code |
+| `name` | `String` | No | Country name |
 
 ### Operations
 
@@ -158,11 +158,11 @@ country_info = client.CountryInfo
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `borders` | `Array` | No |  |
-| `commonName` | `String` | No |  |
-| `countryCode` | `String` | No |  |
-| `officialName` | `String` | No |  |
-| `region` | `String` | No |  |
+| `borders` | `Array` | No | Bordering countries |
+| `commonName` | `String` | No | Common name of the country |
+| `countryCode` | `String` | No | ISO 3166-1 alpha-2 country code |
+| `officialName` | `String` | No | Official name of the country |
+| `region` | `String` | No | Region of the country |
 
 ### Operations
 
@@ -214,10 +214,10 @@ long_weekend = client.LongWeekend
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dayCount` | `Integer` | No |  |
-| `endDate` | `String` | No |  |
-| `needBridgeDay` | `Boolean` | No |  |
-| `startDate` | `String` | No |  |
+| `dayCount` | `Integer` | No | Number of days in the long weekend |
+| `endDate` | `String` | No | End date of the long weekend |
+| `needBridgeDay` | `Boolean` | No | Whether a bridge day is needed |
+| `startDate` | `String` | No | Start date of the long weekend |
 
 ### Operations
 
@@ -269,15 +269,15 @@ public_holiday = client.PublicHoliday
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `counties` | `Array` | No |  |
-| `countryCode` | `String` | No |  |
-| `date` | `String` | No |  |
-| `fixed` | `Boolean` | No |  |
-| `global` | `Boolean` | No |  |
-| `launchYear` | `Integer` | No |  |
-| `localName` | `String` | No |  |
-| `name` | `String` | No |  |
-| `types` | `Array` | No |  |
+| `counties` | `Array` | No | If it is not global you found here the Federal states (ISO-3166-2) |
+| `countryCode` | `String` | No | ISO 3166-1 alpha-2 country code |
+| `date` | `String` | No | The date of the holiday |
+| `fixed` | `Boolean` | No | Is this public holiday every year on the same date |
+| `global` | `Boolean` | No | Is this public holiday in every county (federal state) |
+| `launchYear` | `Integer` | No | The launch year of the public holiday |
+| `localName` | `String` | No | Local name of the holiday |
+| `name` | `String` | No | English name of the holiday |
+| `types` | `Array` | No | The types of the public holiday. |
 
 ### Operations
 

@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "PublicHoliday",
+			"slug": "public-holiday",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -36,10 +39,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "countryCode",
+						"short": "ISO 3166-1 alpha-2 country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Country name",
 						"type": "`$STRING`",
 					},
 				},
@@ -74,22 +79,27 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "borders",
+						"short": "Bordering countries",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "commonName",
+						"short": "Common name of the country",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "countryCode",
+						"short": "ISO 3166-1 alpha-2 country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "officialName",
+						"short": "Official name of the country",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "region",
+						"short": "Region of the country",
 						"type": "`$STRING`",
 					},
 				},
@@ -145,18 +155,22 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "dayCount",
+						"short": "Number of days in the long weekend",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "endDate",
+						"short": "End date of the long weekend",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "needBridgeDay",
+						"short": "Whether a bridge day is needed",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "startDate",
+						"short": "Start date of the long weekend",
 						"type": "`$STRING`",
 					},
 				},
@@ -227,38 +241,47 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "counties",
+						"short": "If it is not global you found here the Federal states (ISO-3166-2)",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "countryCode",
+						"short": "ISO 3166-1 alpha-2 country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date",
+						"short": "The date of the holiday",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "fixed",
+						"short": "Is this public holiday every year on the same date",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "global",
+						"short": "Is this public holiday in every county (federal state)",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "launchYear",
+						"short": "The launch year of the public holiday",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "localName",
+						"short": "Local name of the holiday",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "English name of the holiday",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "types",
+						"short": "The types of the public holiday.",
 						"type": "`$ARRAY`",
 					},
 				},

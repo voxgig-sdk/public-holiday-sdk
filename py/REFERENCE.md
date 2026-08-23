@@ -99,8 +99,8 @@ available_country = client.AvailableCountry()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `countryCode` | `str` | No |  |
-| `name` | `str` | No |  |
+| `countryCode` | `str` | No | ISO 3166-1 alpha-2 country code |
+| `name` | `str` | No | Country name |
 
 ### Operations
 
@@ -153,11 +153,11 @@ country_info = client.CountryInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `borders` | `list` | No |  |
-| `commonName` | `str` | No |  |
-| `countryCode` | `str` | No |  |
-| `officialName` | `str` | No |  |
-| `region` | `str` | No |  |
+| `borders` | `list` | No | Bordering countries |
+| `commonName` | `str` | No | Common name of the country |
+| `countryCode` | `str` | No | ISO 3166-1 alpha-2 country code |
+| `officialName` | `str` | No | Official name of the country |
+| `region` | `str` | No | Region of the country |
 
 ### Operations
 
@@ -208,10 +208,10 @@ long_weekend = client.LongWeekend()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dayCount` | `int` | No |  |
-| `endDate` | `str` | No |  |
-| `needBridgeDay` | `bool` | No |  |
-| `startDate` | `str` | No |  |
+| `dayCount` | `int` | No | Number of days in the long weekend |
+| `endDate` | `str` | No | End date of the long weekend |
+| `needBridgeDay` | `bool` | No | Whether a bridge day is needed |
+| `startDate` | `str` | No | Start date of the long weekend |
 
 ### Operations
 
@@ -264,15 +264,15 @@ public_holiday = client.PublicHoliday()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `counties` | `list` | No |  |
-| `countryCode` | `str` | No |  |
-| `date` | `str` | No |  |
-| `fixed` | `bool` | No |  |
-| `global` | `bool` | No |  |
-| `launchYear` | `int` | No |  |
-| `localName` | `str` | No |  |
-| `name` | `str` | No |  |
-| `types` | `list` | No |  |
+| `counties` | `list` | No | If it is not global you found here the Federal states (ISO-3166-2) |
+| `countryCode` | `str` | No | ISO 3166-1 alpha-2 country code |
+| `date` | `str` | No | The date of the holiday |
+| `fixed` | `bool` | No | Is this public holiday every year on the same date |
+| `global` | `bool` | No | Is this public holiday in every county (federal state) |
+| `launchYear` | `int` | No | The launch year of the public holiday |
+| `localName` | `str` | No | Local name of the holiday |
+| `name` | `str` | No | English name of the holiday |
+| `types` | `list` | No | The types of the public holiday. |
 
 ### Operations
 
