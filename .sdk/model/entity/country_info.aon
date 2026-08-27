@@ -24,6 +24,11 @@ main: kit: entity: country_info: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "officialName"
       req: false
       short: "Official name of the country"
@@ -36,6 +41,11 @@ main: kit: entity: country_info: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "country_info"
   op: {

@@ -40,7 +40,8 @@ class Config {
      test:     {
       "options": {
         "active": false
-      }
+      },
+      "transport": "base"
     },
 
   }
@@ -127,6 +128,10 @@ class Config {
         {
           "name": "countryCode",
           "short": "ISO 3166-1 alpha-2 country code",
+          "type": "`$STRING`"
+        },
+        {
+          "name": "id",
           "type": "`$STRING`"
         },
         {

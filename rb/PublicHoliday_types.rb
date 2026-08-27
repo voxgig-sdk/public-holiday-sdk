@@ -45,6 +45,9 @@ AvailableCountryListMatch = Struct.new(
 # @!attribute [rw] countryCode
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] officialName
 #   @return [String, nil]
 #
@@ -54,6 +57,7 @@ CountryInfo = Struct.new(
   :borders,
   :commonName,
   :countryCode,
+  :id,
   :officialName,
   :region,
   keyword_init: true

@@ -161,6 +161,7 @@ country_info = client.CountryInfo
 | `borders` | `Array` | No | Bordering countries |
 | `commonName` | `String` | No | Common name of the country |
 | `countryCode` | `String` | No | ISO 3166-1 alpha-2 country code |
+| `id` | `String` | No |  |
 | `officialName` | `String` | No | Official name of the country |
 | `region` | `String` | No | Region of the country |
 

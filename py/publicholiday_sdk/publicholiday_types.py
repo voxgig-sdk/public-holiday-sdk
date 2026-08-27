@@ -30,6 +30,7 @@ class CountryInfo(TypedDict, total=False):
     borders: list
     commonName: str
     countryCode: str
+    id: str
     officialName: str
     region: str
 

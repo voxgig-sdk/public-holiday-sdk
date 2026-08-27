@@ -272,6 +272,7 @@ API path: `/AvailableCountries`
 | `borders` | Bordering countries |
 | `commonName` | Common name of the country |
 | `countryCode` | ISO 3166-1 alpha-2 country code |
+| `id` |  |
 | `officialName` | Official name of the country |
 | `region` | Region of the country |
 
@@ -357,6 +358,7 @@ Create an instance: `country_info = client.CountryInfo`
 | `borders` | `Array` | Bordering countries |
 | `commonName` | `String` | Common name of the country |
 | `countryCode` | `String` | ISO 3166-1 alpha-2 country code |
+| `id` | `String` |  |
 | `officialName` | `String` | Official name of the country |
 | `region` | `String` | Region of the country |
 

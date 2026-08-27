@@ -59,9 +59,12 @@ describe('CountryInfoEntity', async () => {
 
     let country_info_ref01_data = Object.values(setup.data.existing.country_info)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const country_info_ref01_ent = client.CountryInfo()
+    const country_info_ref01_match_dt0: any = {}
+    country_info_ref01_match_dt0.id = country_info_ref01_data.id
+    const country_info_ref01_data_dt0 = (await country_info_ref01_ent.load(country_info_ref01_match_dt0)).data()
+    assert(country_info_ref01_data_dt0.id === country_info_ref01_data.id)
 
 
   })

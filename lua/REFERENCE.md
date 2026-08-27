@@ -158,6 +158,7 @@ local country_info = client:CountryInfo(nil)
 | `borders` | `table` | No | Bordering countries |
 | `commonName` | `string` | No | Common name of the country |
 | `countryCode` | `string` | No | ISO 3166-1 alpha-2 country code |
+| `id` | `string` | No |  |
 | `officialName` | `string` | No | Official name of the country |
 | `region` | `string` | No | Region of the country |
 

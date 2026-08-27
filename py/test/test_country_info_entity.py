@@ -48,9 +48,13 @@ class TestCountryInfoEntity:
 
         # LOAD
         country_info_ref01_ent = client.CountryInfo(None)
-        country_info_ref01_match_dt0 = {}
+        country_info_ref01_match_dt0 = {
+            "id": country_info_ref01_data["id"],
+        }
         country_info_ref01_data_dt0_loaded = country_info_ref01_ent.load(country_info_ref01_match_dt0, None)
-        assert country_info_ref01_data_dt0_loaded is not None
+        country_info_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(country_info_ref01_data_dt0_loaded))
+        assert country_info_ref01_data_dt0_load_result is not None
+        assert country_info_ref01_data_dt0_load_result["id"] == country_info_ref01_data["id"]
 
 
 

@@ -44,10 +44,14 @@ describe("CountryInfoEntity", function()
 
     -- LOAD
     local country_info_ref01_ent = client:CountryInfo(nil)
-    local country_info_ref01_match_dt0 = {}
+    local country_info_ref01_match_dt0 = {
+      id = country_info_ref01_data["id"],
+    }
     local country_info_ref01_data_dt0_loaded, err = country_info_ref01_ent:load(country_info_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(country_info_ref01_data_dt0_loaded)
+    local country_info_ref01_data_dt0_load_result = helpers.to_map(type(country_info_ref01_data_dt0_loaded) == 'table' and country_info_ref01_data_dt0_loaded.data_get and country_info_ref01_data_dt0_loaded:data_get() or country_info_ref01_data_dt0_loaded)
+    assert.is_not_nil(country_info_ref01_data_dt0_load_result)
+    assert.are.equal(country_info_ref01_data_dt0_load_result["id"], country_info_ref01_data["id"])
 
   end)
 end)

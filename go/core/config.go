@@ -20,6 +20,7 @@ func MakeConfig() map[string]any {
 				"options": map[string]any{
 					"active": false,
 				},
+				"transport": "base",
 			},
 		},
 		"options": map[string]any{
@@ -90,6 +91,10 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "countryCode",
 						"short": "ISO 3166-1 alpha-2 country code",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "id",
 						"type": "`$STRING`",
 					},
 					map[string]any{

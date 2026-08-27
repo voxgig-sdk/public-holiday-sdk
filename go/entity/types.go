@@ -29,6 +29,7 @@ type CountryInfo struct {
 	Borders *[]any `json:"borders,omitempty"`
 	CommonName *string `json:"commonName,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty"`
+	Id *string `json:"id,omitempty"`
 	OfficialName *string `json:"officialName,omitempty"`
 	Region *string `json:"region,omitempty"`
 }

@@ -3,27 +3,27 @@
     "country_info": {
       "COUNTRY_INFO00": {
         "borders": [],
-        "commonName": "s33",
-        "countryCode": "s34",
-        "officialName": "s35",
-        "region": "s36",
-        "id": "COUNTRY_INFO00"
+        "commonName": "s3d",
+        "countryCode": "s3e",
+        "id": "COUNTRY_INFO00",
+        "officialName": "s40",
+        "region": "s41"
       },
       "COUNTRY_INFO01": {
         "borders": [],
-        "commonName": "s65",
-        "countryCode": "s66",
-        "officialName": "s67",
-        "region": "s68",
-        "id": "COUNTRY_INFO01"
+        "commonName": "s79",
+        "countryCode": "s7a",
+        "id": "COUNTRY_INFO01",
+        "officialName": "s7c",
+        "region": "s7d"
       },
       "COUNTRY_INFO02": {
         "borders": [],
-        "commonName": "s97",
-        "countryCode": "s98",
-        "officialName": "s99",
-        "region": "s9a",
-        "id": "COUNTRY_INFO02"
+        "commonName": "sb5",
+        "countryCode": "sb6",
+        "id": "COUNTRY_INFO02",
+        "officialName": "sb8",
+        "region": "sb9"
       }
     }
   },
@@ -31,10 +31,10 @@
     "country_info": {
       "country_info_ref01": {
         "borders": [],
-        "commonName": "sc9",
-        "countryCode": "sca",
-        "officialName": "scb",
-        "region": "scc"
+        "commonName": "sf1",
+        "countryCode": "sf2",
+        "officialName": "sf4",
+        "region": "sf5"
       }
     }
   }

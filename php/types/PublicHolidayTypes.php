@@ -32,6 +32,7 @@ class CountryInfo
     public ?array $borders = null;
     public ?string $commonName = null;
     public ?string $countryCode = null;
+    public ?string $id = null;
     public ?string $officialName = null;
     public ?string $region = null;
 }

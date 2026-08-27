@@ -19,6 +19,7 @@ export interface CountryInfo {
   borders?: any[]
   commonName?: string
   countryCode?: string
+  id?: string
   officialName?: string
   region?: string
 }

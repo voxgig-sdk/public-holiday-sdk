@@ -48,9 +48,13 @@ class CountryInfoEntityTest extends TestCase
 
         // LOAD
         $country_info_ref01_ent = $client->CountryInfo(null);
-        $country_info_ref01_match_dt0 = [];
+        $country_info_ref01_match_dt0 = [
+            "id" => $country_info_ref01_data["id"],
+        ];
         $country_info_ref01_data_dt0_loaded = $country_info_ref01_ent->load($country_info_ref01_match_dt0, null);
-        $this->assertNotNull($country_info_ref01_data_dt0_loaded);
+        $country_info_ref01_data_dt0_load_result = Helpers::to_map(is_object($country_info_ref01_data_dt0_loaded) && method_exists($country_info_ref01_data_dt0_loaded, 'data_get') ? $country_info_ref01_data_dt0_loaded->data_get() : $country_info_ref01_data_dt0_loaded);
+        $this->assertNotNull($country_info_ref01_data_dt0_load_result);
+        $this->assertEquals($country_info_ref01_data_dt0_load_result["id"], $country_info_ref01_data["id"]);
 
     }
 }

@@ -156,6 +156,7 @@ country_info = client.CountryInfo()
 | `borders` | `list` | No | Bordering countries |
 | `commonName` | `str` | No | Common name of the country |
 | `countryCode` | `str` | No | ISO 3166-1 alpha-2 country code |
+| `id` | `str` | No |  |
 | `officialName` | `str` | No | Official name of the country |
 | `region` | `str` | No | Region of the country |
 

@@ -260,6 +260,7 @@ API path: `/AvailableCountries`
 | `borders` | Bordering countries |
 | `commonName` | Common name of the country |
 | `countryCode` | ISO 3166-1 alpha-2 country code |
+| `id` |  |
 | `officialName` | Official name of the country |
 | `region` | Region of the country |
 
@@ -344,6 +345,7 @@ Create an instance: `local country_info = client:CountryInfo(nil)`
 | `borders` | `table` | Bordering countries |
 | `commonName` | `string` | Common name of the country |
 | `countryCode` | `string` | ISO 3166-1 alpha-2 country code |
+| `id` | `string` |  |
 | `officialName` | `string` | Official name of the country |
 | `region` | `string` | Region of the country |
 

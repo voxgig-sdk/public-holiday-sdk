@@ -41,9 +41,13 @@ class CountryInfoEntityTest < Minitest::Test
 
     # LOAD
     country_info_ref01_ent = client.CountryInfo(nil)
-    country_info_ref01_match_dt0 = {}
+    country_info_ref01_match_dt0 = {
+      "id" => country_info_ref01_data["id"],
+    }
     country_info_ref01_data_dt0_loaded = country_info_ref01_ent.load(country_info_ref01_match_dt0, nil)
-    assert !country_info_ref01_data_dt0_loaded.nil?
+    country_info_ref01_data_dt0_load_result = Helpers.to_map(country_info_ref01_data_dt0_loaded.respond_to?(:data_get) ? country_info_ref01_data_dt0_loaded.data_get : country_info_ref01_data_dt0_loaded)
+    assert !country_info_ref01_data_dt0_load_result.nil?
+    assert_equal country_info_ref01_data_dt0_load_result["id"], country_info_ref01_data["id"]
 
   end
 end

@@ -42,6 +42,7 @@ class PublicHolidayConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -112,6 +113,10 @@ class PublicHolidayConfig
             [
               'name' => 'countryCode',
               'short' => 'ISO 3166-1 alpha-2 country code',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [

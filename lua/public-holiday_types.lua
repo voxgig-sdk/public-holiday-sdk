@@ -18,6 +18,7 @@
 ---@field borders? table
 ---@field commonName? string
 ---@field countryCode? string
+---@field id? string
 ---@field officialName? string
 ---@field region? string
 
