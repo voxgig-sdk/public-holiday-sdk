@@ -69,6 +69,7 @@ type PublicHoliday struct {
 // PublicHolidayLoadMatch is the typed request payload for PublicHoliday.LoadTyped.
 type PublicHolidayLoadMatch struct {
 	CountryCode string `json:"country_code"`
+	Offset *int `json:"offset,omitempty"`
 }
 
 // PublicHolidayListMatch is the typed request payload for PublicHoliday.ListTyped.

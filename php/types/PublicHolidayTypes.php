@@ -77,6 +77,7 @@ class PublicHoliday
 class PublicHolidayLoadMatch
 {
     public string $country_code;
+    public ?int $offset = null;
 }
 
 /** Request payload for PublicHoliday#list. */

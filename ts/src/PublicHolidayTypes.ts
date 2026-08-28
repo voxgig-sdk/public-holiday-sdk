@@ -54,6 +54,7 @@ export interface PublicHoliday {
 
 export interface PublicHolidayLoadMatch {
   country_code: string
+  offset?: number
 }
 
 export interface PublicHolidayListMatch {

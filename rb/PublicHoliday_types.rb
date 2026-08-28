@@ -151,8 +151,12 @@ PublicHoliday = Struct.new(
 #
 # @!attribute [rw] country_code
 #   @return [String]
+#
+# @!attribute [rw] offset
+#   @return [Integer, nil]
 PublicHolidayLoadMatch = Struct.new(
   :country_code,
+  :offset,
   keyword_init: true
 )
 

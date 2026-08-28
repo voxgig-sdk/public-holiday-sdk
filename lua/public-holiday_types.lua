@@ -48,6 +48,7 @@
 
 ---@class PublicHolidayLoadMatch
 ---@field country_code string
+---@field offset? number
 
 ---@class PublicHolidayListMatch
 ---@field country_code string

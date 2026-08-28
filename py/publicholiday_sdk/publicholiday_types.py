@@ -62,8 +62,12 @@ class PublicHoliday(TypedDict, total=False):
     types: list
 
 
-class PublicHolidayLoadMatch(TypedDict):
+class PublicHolidayLoadMatchRequired(TypedDict):
     country_code: str
+
+
+class PublicHolidayLoadMatch(PublicHolidayLoadMatchRequired, total=False):
+    offset: int
 
 
 class PublicHolidayListMatch(TypedDict):
