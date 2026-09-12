@@ -12,6 +12,7 @@ main: kit: entity: long_weekend: {
       type: "`$INTEGER`"
     }
     {
+      format: "date"
       name: "endDate"
       req: false
       short: "End date of the long weekend"
@@ -24,6 +25,7 @@ main: kit: entity: long_weekend: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "date"
       name: "startDate"
       req: false
       short: "Start date of the long weekend"
@@ -59,17 +61,23 @@ main: kit: entity: long_weekend: {
           }
           method: "GET"
           orig: "/LongWeekend/{Year}/{CountryCode}"
-          parts: [
-            "LongWeekend"
-            "{year}"
-            "{country_code}"
-          ]
           rename: {
             param: {
               CountryCode: "country_code"
               Year: "year"
             }
           }
+          segments: [
+            {
+              lit: "LongWeekend"
+            }
+            {
+              var: "year"
+            }
+            {
+              var: "country_code"
+            }
+          ]
           select: {
             exist: [
               "country_code"

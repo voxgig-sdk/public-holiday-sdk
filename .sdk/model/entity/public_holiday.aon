@@ -18,6 +18,7 @@ main: kit: entity: public_holiday: {
       type: "`$STRING`"
     }
     {
+      format: "date"
       name: "date"
       req: false
       short: "The date of the holiday"
@@ -89,17 +90,23 @@ main: kit: entity: public_holiday: {
           }
           method: "GET"
           orig: "/PublicHolidays/{Year}/{CountryCode}"
-          parts: [
-            "PublicHolidays"
-            "{year}"
-            "{country_code}"
-          ]
           rename: {
             param: {
               CountryCode: "country_code"
               Year: "year"
             }
           }
+          segments: [
+            {
+              lit: "PublicHolidays"
+            }
+            {
+              var: "year"
+            }
+            {
+              var: "country_code"
+            }
+          ]
           select: {
             exist: [
               "country_code"
@@ -114,8 +121,10 @@ main: kit: entity: public_holiday: {
         {
           method: "GET"
           orig: "/NextPublicHolidaysWorldwide"
-          parts: [
-            "NextPublicHolidaysWorldwide"
+          segments: [
+            {
+              lit: "NextPublicHolidaysWorldwide"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -151,15 +160,19 @@ main: kit: entity: public_holiday: {
           }
           method: "GET"
           orig: "/IsTodayPublicHoliday/{CountryCode}"
-          parts: [
-            "IsTodayPublicHoliday"
-            "{country_code}"
-          ]
           rename: {
             param: {
               CountryCode: "country_code"
             }
           }
+          segments: [
+            {
+              lit: "IsTodayPublicHoliday"
+            }
+            {
+              var: "country_code"
+            }
+          ]
           select: {
             exist: [
               "country_code"
@@ -186,15 +199,19 @@ main: kit: entity: public_holiday: {
           }
           method: "GET"
           orig: "/NextPublicHolidays/{CountryCode}"
-          parts: [
-            "NextPublicHolidays"
-            "{country_code}"
-          ]
           rename: {
             param: {
               CountryCode: "country_code"
             }
           }
+          segments: [
+            {
+              lit: "NextPublicHolidays"
+            }
+            {
+              var: "country_code"
+            }
+          ]
           select: {
             exist: [
               "country_code"

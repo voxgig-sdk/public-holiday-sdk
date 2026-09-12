@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -97,14 +108,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/AvailableCountries",
-              "parts": [
-                "AvailableCountries"
+              "segments": [
+                {
+                  "lit": "AvailableCountries"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "AvailableCountries"
+              ]
             }
           ]
         }
@@ -145,6 +161,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "country_info",
       "op": {
         "load": {
@@ -167,15 +187,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/CountryInfo/{CountryCode}",
-              "parts": [
-                "CountryInfo",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "CountryCode": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "CountryInfo"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -184,7 +208,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "CountryInfo",
+                "{id}"
+              ]
             }
           ]
         }
@@ -201,6 +229,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date",
           "name": "endDate",
           "short": "End date of the long weekend",
           "type": "`$STRING`"
@@ -211,6 +240,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date",
           "name": "startDate",
           "short": "Start date of the long weekend",
           "type": "`$STRING`"
@@ -246,17 +276,23 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/LongWeekend/{Year}/{CountryCode}",
-              "parts": [
-                "LongWeekend",
-                "{year}",
-                "{country_code}"
-              ],
               "rename": {
                 "param": {
                   "CountryCode": "country_code",
                   "Year": "year"
                 }
               },
+              "segments": [
+                {
+                  "lit": "LongWeekend"
+                },
+                {
+                  "var": "year"
+                },
+                {
+                  "var": "country_code"
+                }
+              ],
               "select": {
                 "exist": [
                   "country_code",
@@ -266,7 +302,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "LongWeekend",
+                "{year}",
+                "{country_code}"
+              ]
             }
           ]
         }
@@ -292,6 +333,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date",
           "name": "date",
           "short": "The date of the holiday",
           "type": "`$STRING`"
@@ -357,17 +399,23 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/PublicHolidays/{Year}/{CountryCode}",
-              "parts": [
-                "PublicHolidays",
-                "{year}",
-                "{country_code}"
-              ],
               "rename": {
                 "param": {
                   "CountryCode": "country_code",
                   "Year": "year"
                 }
               },
+              "segments": [
+                {
+                  "lit": "PublicHolidays"
+                },
+                {
+                  "var": "year"
+                },
+                {
+                  "var": "country_code"
+                }
+              ],
               "select": {
                 "exist": [
                   "country_code",
@@ -377,21 +425,31 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "PublicHolidays",
+                "{year}",
+                "{country_code}"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/NextPublicHolidaysWorldwide",
-              "parts": [
-                "NextPublicHolidaysWorldwide"
+              "segments": [
+                {
+                  "lit": "NextPublicHolidaysWorldwide"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "NextPublicHolidaysWorldwide"
+              ]
             }
           ]
         },
@@ -423,15 +481,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/IsTodayPublicHoliday/{CountryCode}",
-              "parts": [
-                "IsTodayPublicHoliday",
-                "{country_code}"
-              ],
               "rename": {
                 "param": {
                   "CountryCode": "country_code"
                 }
               },
+              "segments": [
+                {
+                  "lit": "IsTodayPublicHoliday"
+                },
+                {
+                  "var": "country_code"
+                }
+              ],
               "select": {
                 "exist": [
                   "country_code",
@@ -441,7 +503,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "IsTodayPublicHoliday",
+                "{country_code}"
+              ]
             },
             {
               "args": {
@@ -459,15 +525,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/NextPublicHolidays/{CountryCode}",
-              "parts": [
-                "NextPublicHolidays",
-                "{country_code}"
-              ],
               "rename": {
                 "param": {
                   "CountryCode": "country_code"
                 }
               },
+              "segments": [
+                {
+                  "lit": "NextPublicHolidays"
+                },
+                {
+                  "var": "country_code"
+                }
+              ],
               "select": {
                 "exist": [
                   "country_code"
@@ -476,7 +546,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "NextPublicHolidays",
+                "{country_code}"
+              ]
             }
           ]
         }
@@ -502,6 +576,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

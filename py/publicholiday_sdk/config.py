@@ -1,6 +1,14 @@
 # PublicHoliday SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -77,14 +85,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/AvailableCountries",
-                "parts": [
-                  "AvailableCountries",
+                "segments": [
+                  {
+                    "lit": "AvailableCountries",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "AvailableCountries",
+                ],
               },
             ],
           },
@@ -125,6 +138,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "country_info",
         "op": {
           "load": {
@@ -147,15 +164,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/CountryInfo/{CountryCode}",
-                "parts": [
-                  "CountryInfo",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "CountryCode": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "CountryInfo",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -165,6 +186,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "CountryInfo",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -181,6 +206,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date",
             "name": "endDate",
             "short": "End date of the long weekend",
             "type": "`$STRING`",
@@ -191,6 +217,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date",
             "name": "startDate",
             "short": "Start date of the long weekend",
             "type": "`$STRING`",
@@ -226,17 +253,23 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/LongWeekend/{Year}/{CountryCode}",
-                "parts": [
-                  "LongWeekend",
-                  "{year}",
-                  "{country_code}",
-                ],
                 "rename": {
                   "param": {
                     "CountryCode": "country_code",
                     "Year": "year",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "LongWeekend",
+                  },
+                  {
+                    "var": "year",
+                  },
+                  {
+                    "var": "country_code",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "country_code",
@@ -247,6 +280,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "LongWeekend",
+                  "{year}",
+                  "{country_code}",
+                ],
               },
             ],
           },
@@ -272,6 +310,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date",
             "name": "date",
             "short": "The date of the holiday",
             "type": "`$STRING`",
@@ -337,17 +376,23 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/PublicHolidays/{Year}/{CountryCode}",
-                "parts": [
-                  "PublicHolidays",
-                  "{year}",
-                  "{country_code}",
-                ],
                 "rename": {
                   "param": {
                     "CountryCode": "country_code",
                     "Year": "year",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "PublicHolidays",
+                  },
+                  {
+                    "var": "year",
+                  },
+                  {
+                    "var": "country_code",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "country_code",
@@ -358,20 +403,30 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "PublicHolidays",
+                  "{year}",
+                  "{country_code}",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/NextPublicHolidaysWorldwide",
-                "parts": [
-                  "NextPublicHolidaysWorldwide",
+                "segments": [
+                  {
+                    "lit": "NextPublicHolidaysWorldwide",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "NextPublicHolidaysWorldwide",
+                ],
               },
             ],
           },
@@ -403,15 +458,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/IsTodayPublicHoliday/{CountryCode}",
-                "parts": [
-                  "IsTodayPublicHoliday",
-                  "{country_code}",
-                ],
                 "rename": {
                   "param": {
                     "CountryCode": "country_code",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "IsTodayPublicHoliday",
+                  },
+                  {
+                    "var": "country_code",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "country_code",
@@ -422,6 +481,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "IsTodayPublicHoliday",
+                  "{country_code}",
+                ],
               },
               {
                 "args": {
@@ -439,15 +502,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/NextPublicHolidays/{CountryCode}",
-                "parts": [
-                  "NextPublicHolidays",
-                  "{country_code}",
-                ],
                 "rename": {
                   "param": {
                     "CountryCode": "country_code",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "NextPublicHolidays",
+                  },
+                  {
+                    "var": "country_code",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "country_code",
@@ -457,6 +524,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "NextPublicHolidays",
+                  "{country_code}",
+                ],
               },
             ],
           },

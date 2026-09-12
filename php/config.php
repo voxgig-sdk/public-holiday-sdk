@@ -82,13 +82,18 @@ class PublicHolidayConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/AvailableCountries',
-                  'parts' => [
-                    'AvailableCountries',
+                  'segments' => [
+                    [
+                      'lit' => 'AvailableCountries',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'AvailableCountries',
                   ],
                 ],
               ],
@@ -130,6 +135,10 @@ class PublicHolidayConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'country_info',
           'op' => [
             'load' => [
@@ -152,13 +161,17 @@ class PublicHolidayConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/CountryInfo/{CountryCode}',
-                  'parts' => [
-                    'CountryInfo',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'CountryCode' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'CountryInfo',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -169,6 +182,10 @@ class PublicHolidayConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'CountryInfo',
+                    '{id}',
                   ],
                 ],
               ],
@@ -186,6 +203,7 @@ class PublicHolidayConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'date',
               'name' => 'endDate',
               'short' => 'End date of the long weekend',
               'type' => '`$STRING`',
@@ -196,6 +214,7 @@ class PublicHolidayConfig
               'type' => '`$BOOLEAN`',
             ],
             [
+              'format' => 'date',
               'name' => 'startDate',
               'short' => 'Start date of the long weekend',
               'type' => '`$STRING`',
@@ -231,15 +250,21 @@ class PublicHolidayConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/LongWeekend/{Year}/{CountryCode}',
-                  'parts' => [
-                    'LongWeekend',
-                    '{year}',
-                    '{country_code}',
-                  ],
                   'rename' => [
                     'param' => [
                       'CountryCode' => 'country_code',
                       'Year' => 'year',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'LongWeekend',
+                    ],
+                    [
+                      'var' => 'year',
+                    ],
+                    [
+                      'var' => 'country_code',
                     ],
                   ],
                   'select' => [
@@ -251,6 +276,11 @@ class PublicHolidayConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'LongWeekend',
+                    '{year}',
+                    '{country_code}',
                   ],
                 ],
               ],
@@ -277,6 +307,7 @@ class PublicHolidayConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date',
               'name' => 'date',
               'short' => 'The date of the holiday',
               'type' => '`$STRING`',
@@ -342,15 +373,21 @@ class PublicHolidayConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/PublicHolidays/{Year}/{CountryCode}',
-                  'parts' => [
-                    'PublicHolidays',
-                    '{year}',
-                    '{country_code}',
-                  ],
                   'rename' => [
                     'param' => [
                       'CountryCode' => 'country_code',
                       'Year' => 'year',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'PublicHolidays',
+                    ],
+                    [
+                      'var' => 'year',
+                    ],
+                    [
+                      'var' => 'country_code',
                     ],
                   ],
                   'select' => [
@@ -363,19 +400,29 @@ class PublicHolidayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [
+                    'PublicHolidays',
+                    '{year}',
+                    '{country_code}',
+                  ],
                 ],
                 [
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/NextPublicHolidaysWorldwide',
-                  'parts' => [
-                    'NextPublicHolidaysWorldwide',
+                  'segments' => [
+                    [
+                      'lit' => 'NextPublicHolidaysWorldwide',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'NextPublicHolidaysWorldwide',
                   ],
                 ],
               ],
@@ -408,13 +455,17 @@ class PublicHolidayConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/IsTodayPublicHoliday/{CountryCode}',
-                  'parts' => [
-                    'IsTodayPublicHoliday',
-                    '{country_code}',
-                  ],
                   'rename' => [
                     'param' => [
                       'CountryCode' => 'country_code',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'IsTodayPublicHoliday',
+                    ],
+                    [
+                      'var' => 'country_code',
                     ],
                   ],
                   'select' => [
@@ -426,6 +477,10 @@ class PublicHolidayConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'IsTodayPublicHoliday',
+                    '{country_code}',
                   ],
                 ],
                 [
@@ -444,13 +499,17 @@ class PublicHolidayConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/NextPublicHolidays/{CountryCode}',
-                  'parts' => [
-                    'NextPublicHolidays',
-                    '{country_code}',
-                  ],
                   'rename' => [
                     'param' => [
                       'CountryCode' => 'country_code',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'NextPublicHolidays',
+                    ],
+                    [
+                      'var' => 'country_code',
                     ],
                   ],
                   'select' => [
@@ -461,6 +520,10 @@ class PublicHolidayConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'NextPublicHolidays',
+                    '{country_code}',
                   ],
                 ],
               ],

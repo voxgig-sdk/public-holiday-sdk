@@ -67,15 +67,19 @@ main: kit: entity: country_info: {
           }
           method: "GET"
           orig: "/CountryInfo/{CountryCode}"
-          parts: [
-            "CountryInfo"
-            "{id}"
-          ]
           rename: {
             param: {
               CountryCode: "id"
             }
           }
+          segments: [
+            {
+              lit: "CountryInfo"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

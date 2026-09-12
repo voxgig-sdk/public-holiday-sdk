@@ -59,8 +59,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/AvailableCountries",
-                  "parts": [
-                    "AvailableCountries"
+                  "segments": [
+                    {
+                      "lit": "AvailableCountries"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -151,15 +153,19 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/CountryInfo/{CountryCode}",
-                  "parts": [
-                    "CountryInfo",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "CountryCode": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "CountryInfo"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -192,6 +198,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "endDate",
               "req": false,
               "short": "End date of the long weekend",
@@ -206,6 +213,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "startDate",
               "req": false,
               "short": "Start date of the long weekend",
@@ -245,17 +253,23 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/LongWeekend/{Year}/{CountryCode}",
-                  "parts": [
-                    "LongWeekend",
-                    "{year}",
-                    "{country_code}"
-                  ],
                   "rename": {
                     "param": {
                       "CountryCode": "country_code",
                       "Year": "year"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "LongWeekend"
+                    },
+                    {
+                      "var": "year"
+                    },
+                    {
+                      "var": "country_code"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "country_code",
@@ -300,6 +314,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "date",
               "req": false,
               "short": "The date of the holiday",
@@ -381,17 +396,23 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/PublicHolidays/{Year}/{CountryCode}",
-                  "parts": [
-                    "PublicHolidays",
-                    "{year}",
-                    "{country_code}"
-                  ],
                   "rename": {
                     "param": {
                       "CountryCode": "country_code",
                       "Year": "year"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "PublicHolidays"
+                    },
+                    {
+                      "var": "year"
+                    },
+                    {
+                      "var": "country_code"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "country_code",
@@ -409,8 +430,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/NextPublicHolidaysWorldwide",
-                  "parts": [
-                    "NextPublicHolidaysWorldwide"
+                  "segments": [
+                    {
+                      "lit": "NextPublicHolidaysWorldwide"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -452,15 +475,19 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/IsTodayPublicHoliday/{CountryCode}",
-                  "parts": [
-                    "IsTodayPublicHoliday",
-                    "{country_code}"
-                  ],
                   "rename": {
                     "param": {
                       "CountryCode": "country_code"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "IsTodayPublicHoliday"
+                    },
+                    {
+                      "var": "country_code"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "country_code",
@@ -490,15 +517,19 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/NextPublicHolidays/{CountryCode}",
-                  "parts": [
-                    "NextPublicHolidays",
-                    "{country_code}"
-                  ],
                   "rename": {
                     "param": {
                       "CountryCode": "country_code"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "NextPublicHolidays"
+                    },
+                    {
+                      "var": "country_code"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "country_code"
@@ -591,8 +622,11 @@
             }
           },
           "name": "test",
+          "needs": {},
           "origname": "",
           "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
           "target": {
             "go": {
               "deps": {}
@@ -820,6 +854,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -845,6 +882,10 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/runner_test.go",
+            "test/struct_runner_test.go"
+          ],
           "title": "Golang"
         },
         "go-cli": {
@@ -896,6 +937,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -920,6 +962,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go CLI"
         },
         "go-mcp": {
@@ -971,6 +1014,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -995,6 +1039,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go MCP server"
         },
         "lua": {
@@ -1035,6 +1080,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1060,6 +1108,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.lua"
+          ],
           "title": "Lua"
         },
         "php": {
@@ -1094,6 +1145,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1119,6 +1173,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/StructRunner.php"
+          ],
           "title": "PHP"
         },
         "py": {
@@ -1159,6 +1216,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1184,6 +1244,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.py"
+          ],
           "title": "Python"
         },
         "rb": {
@@ -1229,6 +1292,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1254,6 +1320,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.rb"
+          ],
           "title": "Ruby"
         },
         "ts": {
@@ -1271,11 +1340,6 @@
               "active": true,
               "kind": "dev",
               "version": "^25.6.0"
-            },
-            "dotenv": {
-              "active": true,
-              "kind": "dev",
-              "version": "^17.4.2"
             },
             "typescript": {
               "active": true,
@@ -1304,6 +1368,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1328,6 +1395,14 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
           "title": "TypeScript"
         }
       },
