@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday'
+import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday-sdk'
 
 const client = new PublicHolidaySDK()
 ```
@@ -564,7 +564,7 @@ public-holiday/
 Import the SDK from the package root:
 
 ```ts
-import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday'
+import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday-sdk'
 ```
 
 ### Entity state

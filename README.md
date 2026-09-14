@@ -105,7 +105,7 @@ local result, err = client:CountryInfo():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/public-holiday` | publish pending — [install from git tag](https://github.com/voxgig-sdk/public-holiday-sdk/releases) |
+| TypeScript | `@voxgig-sdk/public-holiday-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/public-holiday-sdk/releases) |
 | Python | `voxgig-sdk-public-holiday` | publish pending — [install from git tag](https://github.com/voxgig-sdk/public-holiday-sdk/releases) |
 | PHP | `voxgig-sdk/public-holiday` | publish pending — [install from git tag](https://github.com/voxgig-sdk/public-holiday-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/public-holiday-sdk/go` | `go get github.com/voxgig-sdk/public-holiday-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:CountryInfo():load({ id = "test01" })
 ### TypeScript
 
 ```ts
-import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday'
+import { PublicHolidaySDK } from '@voxgig-sdk/public-holiday-sdk'
 
 const client = new PublicHolidaySDK()
 
