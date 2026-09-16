@@ -1,12 +1,18 @@
 # PublicHoliday SDK feature factory
 
 from publicholiday_sdk.feature.base_feature import PublicHolidayBaseFeature
+from publicholiday_sdk.feature.ratelimit_feature import PublicHolidayRatelimitFeature
+from publicholiday_sdk.feature.retry_feature import PublicHolidayRetryFeature
 from publicholiday_sdk.feature.test_feature import PublicHolidayTestFeature
+from publicholiday_sdk.feature.timeout_feature import PublicHolidayTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: PublicHolidayBaseFeature(),
+    "ratelimit": lambda: PublicHolidayRatelimitFeature(),
+    "retry": lambda: PublicHolidayRetryFeature(),
     "test": lambda: PublicHolidayTestFeature(),
+    "timeout": lambda: PublicHolidayTimeoutFeature(),
 }
 
 

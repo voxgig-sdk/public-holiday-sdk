@@ -4,7 +4,10 @@ declare(strict_types=1);
 // PublicHoliday SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class PublicHolidayFeatures
@@ -14,8 +17,14 @@ class PublicHolidayFeatures
         switch ($name) {
             case "base":
                 return new PublicHolidayBaseFeature();
+            case "ratelimit":
+                return new PublicHolidayRatelimitFeature();
+            case "retry":
+                return new PublicHolidayRetryFeature();
             case "test":
                 return new PublicHolidayTestFeature();
+            case "timeout":
+                return new PublicHolidayTimeoutFeature();
             default:
                 return new PublicHolidayBaseFeature();
         }
@@ -31,7 +40,10 @@ class PublicHolidayFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

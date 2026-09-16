@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { PublicHolidaySDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('LongWeekendEntity', async () => {
 
     const live = 'TRUE' === process.env.PUBLIC_HOLIDAY_TEST_LIVE
     for (const op of ['list']) {
-      if (maybeSkipControl(t, 'entityOp', 'long_weekend.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'long_weekend.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set PUBLIC_HOLIDAY_TEST_LONG_WEEKEND_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"dayCount","req":false,"short":"Number of days in the long weekend","type":"`$INTEGER`","index$":0},{"active":true,"format":"date","name":"endDate","req":false,"short":"End date of the long weekend","type":"`$STRING`","index$":1},{"active":true,"name":"needBridgeDay","req":false,"short":"Whether a bridge day is needed","type":"`$BOOLEAN`","index$":2},{"active":true,"format":"date","name":"startDate","req":false,"short":"Start date of the long weekend","type":"`$STRING`","index$":3}],"name":"long_weekend","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{"params":[{"active":true,"example":"AT","kind":"param","name":"country_code","orig":"country_code","reqd":true,"type":"`$STRING`","index$":0},{"active":true,"example":2026,"kind":"param","name":"year","orig":"year","reqd":true,"type":"`$INTEGER`","index$":1}]},"contract":{"id":"GET /LongWeekend/{Year}/{CountryCode}","json":"{\"operationId\":\"getLongWeekends\",\"parameters\":[{\"description\":\"The year to retrieve long weekends for\",\"in\":\"path\",\"name\":\"Year\",\"required\":true,\"schema\":{\"example\":2026,\"type\":\"integer\"}},{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"dayCount\":{\"description\":\"Number of days in the long weekend\",\"type\":\"integer\"},\"endDate\":{\"description\":\"End date of the long weekend\",\"format\":\"date\",\"type\":\"string\"},\"needBridgeDay\":{\"description\":\"Whether a bridge day is needed\",\"type\":\"boolean\"},\"startDate\":{\"description\":\"Start date of the long weekend\",\"format\":\"date\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of long weekends\"},\"404\":{\"description\":\"Country not found or no long weekends available\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/LongWeekend/{Year}/{CountryCode}","rename":{"param":{"CountryCode":"country_code","Year":"year"}},"segments":[{"lit":"LongWeekend"},{"var":"year"},{"var":"country_code"}],"select":{"exist":["country_code","year"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[["long_weekend"]]},"key$":"long_weekend","name__orig":"long_weekend","Name":"LongWeekend","name_":"long_weekend","name-":"long-weekend","NAME":"LONG_WEEKEND","index$":2}, {"active":true,"entity":"long_weekend","key$":"BasicLongWeekendFlow","kind":"basic","name":"BasicLongWeekendFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{"country_code":"country_code01","year":"year01"},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"long_weekend_ref01"}}],"index$":0}]}, 'LongWeekend')
     }
     const client = setup.client
     const struct = setup.struct
@@ -111,13 +110,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['PUBLIC_HOLIDAY_TEST_LONG_WEEKEND_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'PUBLIC_HOLIDAY_TEST_LONG_WEEKEND_ENTID': idmap,
     'PUBLIC_HOLIDAY_TEST_LIVE': 'FALSE',
@@ -128,7 +120,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.PUBLIC_HOLIDAY_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['PUBLIC_HOLIDAY_TEST_LONG_WEEKEND_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new PublicHolidaySDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.PUBLIC_HOLIDAY_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

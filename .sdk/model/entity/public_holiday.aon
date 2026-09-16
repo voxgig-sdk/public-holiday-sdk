@@ -88,6 +88,12 @@ main: kit: entity: public_holiday: {
               }
             ]
           }
+          contract: {
+            id: "GET /PublicHolidays/{Year}/{CountryCode}"
+            json: "{\"operationId\":\"getPublicHolidays\",\"parameters\":[{\"description\":\"The year to retrieve holidays for\",\"in\":\"path\",\"name\":\"Year\",\"required\":true,\"schema\":{\"example\":2026,\"type\":\"integer\"}},{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":[{\"counties\":null,\"countryCode\":\"AT\",\"date\":\"2017-01-01\",\"fixed\":true,\"global\":true,\"launchYear\":1967,\"localName\":\"Neujahr\",\"name\":\"New Year's Day\",\"types\":[\"Public\"]},{\"counties\":null,\"countryCode\":\"AT\",\"date\":\"2017-01-06\",\"fixed\":true,\"global\":true,\"launchYear\":null,\"localName\":\"Heilige Drei Könige\",\"name\":\"Epiphany\",\"types\":[\"Public\"]}],\"schema\":{\"items\":{\"properties\":{\"counties\":{\"description\":\"If it is not global you found here the Federal states (ISO-3166-2)\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"date\":{\"description\":\"The date of the holiday\",\"example\":\"2017-01-01\",\"format\":\"date\",\"type\":\"string\"},\"fixed\":{\"description\":\"Is this public holiday every year on the same date\",\"example\":true,\"type\":\"boolean\"},\"global\":{\"description\":\"Is this public holiday in every county (federal state)\",\"example\":true,\"type\":\"boolean\"},\"launchYear\":{\"description\":\"The launch year of the public holiday\",\"example\":1967,\"nullable\":true,\"type\":\"integer\"},\"localName\":{\"description\":\"Local name of the holiday\",\"example\":\"Neujahr\",\"type\":\"string\"},\"name\":{\"description\":\"English name of the holiday\",\"example\":\"New Year's Day\",\"type\":\"string\"},\"types\":{\"description\":\"The types of the public holiday. Public (Bank holiday, banks and offices are closed), Bank (Bank holiday, banks and offices are closed), School (School holiday, schools are closed), Authorities (Authorities are closed), Optional (Majority of people take a day off), Observance (Optional festivity, no paid day off)\",\"items\":{\"enum\":[\"Public\",\"Bank\",\"School\",\"Authorities\",\"Optional\",\"Observance\"],\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of public holidays\"},\"400\":{\"description\":\"Invalid year or country code format\"},\"404\":{\"description\":\"Country not found or no holidays available for the specified year\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/PublicHolidays/{Year}/{CountryCode}"
           rename: {
@@ -119,6 +125,12 @@ main: kit: entity: public_holiday: {
           }
         }
         {
+          contract: {
+            id: "GET /NextPublicHolidaysWorldwide"
+            json: "{\"operationId\":\"getNextPublicHolidaysWorldwide\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"counties\":{\"description\":\"If it is not global you found here the Federal states (ISO-3166-2)\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"date\":{\"description\":\"The date of the holiday\",\"example\":\"2017-01-01\",\"format\":\"date\",\"type\":\"string\"},\"fixed\":{\"description\":\"Is this public holiday every year on the same date\",\"example\":true,\"type\":\"boolean\"},\"global\":{\"description\":\"Is this public holiday in every county (federal state)\",\"example\":true,\"type\":\"boolean\"},\"launchYear\":{\"description\":\"The launch year of the public holiday\",\"example\":1967,\"nullable\":true,\"type\":\"integer\"},\"localName\":{\"description\":\"Local name of the holiday\",\"example\":\"Neujahr\",\"type\":\"string\"},\"name\":{\"description\":\"English name of the holiday\",\"example\":\"New Year's Day\",\"type\":\"string\"},\"types\":{\"description\":\"The types of the public holiday. Public (Bank holiday, banks and offices are closed), Bank (Bank holiday, banks and offices are closed), School (School holiday, schools are closed), Authorities (Authorities are closed), Optional (Majority of people take a day off), Observance (Optional festivity, no paid day off)\",\"items\":{\"enum\":[\"Public\",\"Bank\",\"School\",\"Authorities\",\"Optional\",\"Observance\"],\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with next public holidays worldwide\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/NextPublicHolidaysWorldwide"
           segments: [
@@ -158,6 +170,12 @@ main: kit: entity: public_holiday: {
               }
             ]
           }
+          contract: {
+            id: "GET /IsTodayPublicHoliday/{CountryCode}"
+            json: "{\"operationId\":\"isTodayPublicHoliday\",\"parameters\":[{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}},{\"description\":\"Timezone offset in hours\",\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"description\":\"Today is a public holiday\"},\"204\":{\"description\":\"Today is not a public holiday\"},\"404\":{\"description\":\"Country not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/IsTodayPublicHoliday/{CountryCode}"
           rename: {
@@ -196,6 +214,12 @@ main: kit: entity: public_holiday: {
                 type: "`$STRING`"
               }
             ]
+          }
+          contract: {
+            id: "GET /NextPublicHolidays/{CountryCode}"
+            json: "{\"operationId\":\"getNextPublicHolidays\",\"parameters\":[{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"counties\":{\"description\":\"If it is not global you found here the Federal states (ISO-3166-2)\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"date\":{\"description\":\"The date of the holiday\",\"example\":\"2017-01-01\",\"format\":\"date\",\"type\":\"string\"},\"fixed\":{\"description\":\"Is this public holiday every year on the same date\",\"example\":true,\"type\":\"boolean\"},\"global\":{\"description\":\"Is this public holiday in every county (federal state)\",\"example\":true,\"type\":\"boolean\"},\"launchYear\":{\"description\":\"The launch year of the public holiday\",\"example\":1967,\"nullable\":true,\"type\":\"integer\"},\"localName\":{\"description\":\"Local name of the holiday\",\"example\":\"Neujahr\",\"type\":\"string\"},\"name\":{\"description\":\"English name of the holiday\",\"example\":\"New Year's Day\",\"type\":\"string\"},\"types\":{\"description\":\"The types of the public holiday. Public (Bank holiday, banks and offices are closed), Bank (Bank holiday, banks and offices are closed), School (School holiday, schools are closed), Authorities (Authorities are closed), Optional (Majority of people take a day off), Observance (Optional festivity, no paid day off)\",\"items\":{\"enum\":[\"Public\",\"Bank\",\"School\",\"Authorities\",\"Optional\",\"Observance\"],\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with next public holidays\"},\"404\":{\"description\":\"Country not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/NextPublicHolidays/{CountryCode}"

@@ -37,5 +37,85 @@
         "region": "sf5"
       }
     }
+  },
+  "requests": {
+    "GET /CountryInfo/{CountryCode}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCountryInfo",
+        "parameters": [
+          {
+            "description": "ISO 3166-1 alpha-2 country code",
+            "in": "path",
+            "name": "CountryCode",
+            "required": true,
+            "schema": {
+              "example": "AT",
+              "maxLength": 2,
+              "minLength": 2,
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "borders": {
+                      "description": "Bordering countries",
+                      "items": {
+                        "properties": {
+                          "countryCode": {
+                            "description": "ISO 3166-1 alpha-2 country code",
+                            "example": "AT",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Country name",
+                            "example": "Austria",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "commonName": {
+                      "description": "Common name of the country",
+                      "example": "Austria",
+                      "type": "string"
+                    },
+                    "countryCode": {
+                      "description": "ISO 3166-1 alpha-2 country code",
+                      "example": "AT",
+                      "type": "string"
+                    },
+                    "officialName": {
+                      "description": "Official name of the country",
+                      "example": "Republic of Austria",
+                      "type": "string"
+                    },
+                    "region": {
+                      "description": "Region of the country",
+                      "example": "Europe",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with country information"
+          },
+          "404": {
+            "description": "Country not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

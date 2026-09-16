@@ -22,5 +22,43 @@
         "name": "s51"
       }
     }
+  },
+  "requests": {
+    "GET /AvailableCountries": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getAvailableCountries",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "countryCode": {
+                        "description": "ISO 3166-1 alpha-2 country code",
+                        "example": "AT",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Country name",
+                        "example": "Austria",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response with list of available countries"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }
