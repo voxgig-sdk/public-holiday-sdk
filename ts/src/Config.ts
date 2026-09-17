@@ -127,18 +127,18 @@ class Config {
 
     entity: {
       
-      available_country: {
-      },
-
-      country_info: {
-      },
-
-      long_weekend: {
-      },
-
-      public_holiday: {
-      },
-
+        available_country: {
+        },
+  
+        country_info: {
+        },
+  
+        long_weekend: {
+        },
+  
+        public_holiday: {
+        },
+  
     }
   }
 
