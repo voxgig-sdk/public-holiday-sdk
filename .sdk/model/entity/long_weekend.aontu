@@ -1,0 +1,107 @@
+# Entity: long_weekend
+
+main: kit: entity: long_weekend: {
+
+  alias: field: {}
+
+  fields: {
+    dayCount: {
+      h: "Day Count"
+      n: "dayCount"
+      r: false
+      sh: "Number of days in the long weekend"
+      t: "`$INTEGER`"
+    }
+    endDate: {
+      fo: "date"
+      h: "End Date"
+      n: "endDate"
+      r: false
+      sh: "End date of the long weekend"
+      t: "`$STRING`"
+    }
+    needBridgeDay: {
+      h: "Need Bridge Day"
+      n: "needBridgeDay"
+      r: false
+      sh: "Whether a bridge day is needed"
+      t: "`$BOOLEAN`"
+    }
+    startDate: {
+      fo: "date"
+      h: "Start Date"
+      n: "startDate"
+      r: false
+      sh: "Start date of the long weekend"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "long_weekend"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /LongWeekend/{Year}/{CountryCode}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "AT"
+                k: "param"
+                n: "country_code"
+                or: "country_code"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: 2026
+                k: "param"
+                n: "year"
+                or: "year"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/LongWeekend/{Year}/{CountryCode}"
+          q: {
+            exist: [
+              "country_code"
+              "year"
+            ]
+          }
+          r: {
+            param: {
+              CountryCode: "country_code"
+              Year: "year"
+            }
+          }
+          s: [
+            {
+              lit: "LongWeekend"
+            }
+            {
+              var: "year"
+            }
+            {
+              var: "country_code"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

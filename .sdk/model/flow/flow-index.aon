@@ -1,6 +1,0 @@
-# Flows
-
-@"./BasicAvailableCountryFlow.aon"
-@"./BasicCountryInfoFlow.aon"
-@"./BasicLongWeekendFlow.aon"
-@"./BasicPublicHolidayFlow.aon"

@@ -46,20 +46,6 @@ try {
 }
 ```
 
-### 3. Load a publicholiday
-
-PublicHoliday is nested under country_code, so provide the `country_code`.
-
-```php
-try {
-    // load() returns the ENTITY — call data_get() for the PublicHoliday record (throws on error).
-    $publicholiday = $client->PublicHoliday()->load(["country_code" => "example_country_code"]);
-    print_r($publicholiday->data_get());
-} catch (\Throwable $err) {
-    echo "Error: " . $err->getMessage();
-}
-```
-
 
 ## Error handling
 

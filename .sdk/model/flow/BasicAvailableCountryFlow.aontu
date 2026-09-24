@@ -1,0 +1,22 @@
+# BasicAvailableCountryFlow
+
+main: kit: flow: BasicAvailableCountryFlow:
+{
+  entity: "available_country",
+  kind: "basic",
+  name: "BasicAvailableCountryFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "available_country_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAvailableCountryFlow"
+}

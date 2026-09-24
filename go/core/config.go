@@ -94,13 +94,15 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "countryCode",
-						"short": "ISO 3166-1 alpha-2 country code",
+						"title": "Country Code",
 						"type": "`$STRING`",
+						"short": "ISO 3166-1 alpha-2 country code",
 					},
 					map[string]any{
 						"name": "name",
-						"short": "Country name",
+						"title": "Name",
 						"type": "`$STRING`",
+						"short": "Country name",
 					},
 				},
 				"name": "available_country",
@@ -110,7 +112,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/AvailableCountries",
@@ -119,14 +120,16 @@ func MakeConfig() map[string]any {
 										"lit": "AvailableCountries",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"AvailableCountries",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"AvailableCountries",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -139,32 +142,38 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "borders",
-						"short": "Bordering countries",
+						"title": "Borders",
 						"type": "`$ARRAY`",
+						"short": "Bordering countries",
 					},
 					map[string]any{
 						"name": "commonName",
-						"short": "Common name of the country",
+						"title": "Common Name",
 						"type": "`$STRING`",
+						"short": "Common name of the country",
 					},
 					map[string]any{
 						"name": "countryCode",
-						"short": "ISO 3166-1 alpha-2 country code",
+						"title": "Country Code",
 						"type": "`$STRING`",
+						"short": "ISO 3166-1 alpha-2 country code",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "officialName",
-						"short": "Official name of the country",
+						"title": "Official Name",
 						"type": "`$STRING`",
+						"short": "Official name of the country",
 					},
 					map[string]any{
 						"name": "region",
-						"short": "Region of the country",
+						"title": "Region",
 						"type": "`$STRING`",
+						"short": "Region of the country",
 					},
 				},
 				"id": map[string]any{
@@ -178,26 +187,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "AT",
-											"kind": "param",
-											"name": "id",
-											"orig": "country_code",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/CountryInfo/{CountryCode}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"CountryCode": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "CountryInfo",
@@ -206,18 +198,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"CountryInfo",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"CountryCode": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"CountryInfo",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "country_code",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "AT",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -231,25 +240,29 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "dayCount",
-						"short": "Number of days in the long weekend",
+						"title": "Day Count",
 						"type": "`$INTEGER`",
+						"short": "Number of days in the long weekend",
 					},
 					map[string]any{
-						"format": "date",
 						"name": "endDate",
-						"short": "End date of the long weekend",
+						"title": "End Date",
 						"type": "`$STRING`",
+						"short": "End date of the long weekend",
+						"format": "date",
 					},
 					map[string]any{
 						"name": "needBridgeDay",
-						"short": "Whether a bridge day is needed",
+						"title": "Need Bridge Day",
 						"type": "`$BOOLEAN`",
+						"short": "Whether a bridge day is needed",
 					},
 					map[string]any{
-						"format": "date",
 						"name": "startDate",
-						"short": "Start date of the long weekend",
+						"title": "Start Date",
 						"type": "`$STRING`",
+						"short": "Start date of the long weekend",
+						"format": "date",
 					},
 				},
 				"name": "long_weekend",
@@ -259,35 +272,9 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "AT",
-											"kind": "param",
-											"name": "country_code",
-											"orig": "country_code",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 2026,
-											"kind": "param",
-											"name": "year",
-											"orig": "year",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/LongWeekend/{Year}/{CountryCode}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"CountryCode": "country_code",
-										"Year": "year",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "LongWeekend",
@@ -299,80 +286,111 @@ func MakeConfig() map[string]any {
 										"var": "country_code",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"country_code",
-										"year",
+								"parts": []any{
+									"LongWeekend",
+									"{year}",
+									"{country_code}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"CountryCode": "country_code",
+										"Year": "year",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"LongWeekend",
-									"{year}",
-									"{country_code}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "country_code",
+											"orig": "country_code",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "AT",
+										},
+										map[string]any{
+											"name": "year",
+											"orig": "year",
+											"type": "`$INTEGER`",
+											"kind": "param",
+											"reqd": true,
+											"example": 2026,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"country_code",
+										"year",
+									},
 								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"long_weekend",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"public_holiday": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "counties",
-						"short": "If it is not global you found here the Federal states (ISO-3166-2)",
+						"title": "Counties",
 						"type": "`$ARRAY`",
+						"short": "If it is not global you found here the Federal states (ISO-3166-2)",
 					},
 					map[string]any{
 						"name": "countryCode",
-						"short": "ISO 3166-1 alpha-2 country code",
+						"title": "Country Code",
 						"type": "`$STRING`",
+						"short": "ISO 3166-1 alpha-2 country code",
 					},
 					map[string]any{
-						"format": "date",
 						"name": "date",
-						"short": "The date of the holiday",
+						"title": "Date",
 						"type": "`$STRING`",
+						"short": "The date of the holiday",
+						"format": "date",
 					},
 					map[string]any{
 						"name": "fixed",
-						"short": "Is this public holiday every year on the same date",
+						"title": "Fixed",
 						"type": "`$BOOLEAN`",
+						"short": "Is this public holiday every year on the same date",
 					},
 					map[string]any{
 						"name": "global",
-						"short": "Is this public holiday in every county (federal state)",
+						"title": "Global",
 						"type": "`$BOOLEAN`",
+						"short": "Is this public holiday in every county (federal state)",
 					},
 					map[string]any{
 						"name": "launchYear",
-						"short": "The launch year of the public holiday",
+						"title": "Launch Year",
 						"type": "`$INTEGER`",
+						"short": "The launch year of the public holiday",
 					},
 					map[string]any{
 						"name": "localName",
-						"short": "Local name of the holiday",
+						"title": "Local Name",
 						"type": "`$STRING`",
+						"short": "Local name of the holiday",
 					},
 					map[string]any{
 						"name": "name",
-						"short": "English name of the holiday",
+						"title": "Name",
 						"type": "`$STRING`",
+						"short": "English name of the holiday",
 					},
 					map[string]any{
 						"name": "types",
-						"short": "The types of the public holiday.",
+						"title": "Types",
 						"type": "`$ARRAY`",
+						"short": "The types of the public holiday.",
 					},
 				},
 				"name": "public_holiday",
@@ -382,35 +400,9 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "AT",
-											"kind": "param",
-											"name": "country_code",
-											"orig": "country_code",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 2026,
-											"kind": "param",
-											"name": "year",
-											"orig": "year",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/PublicHolidays/{Year}/{CountryCode}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"CountryCode": "country_code",
-										"Year": "year",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "PublicHolidays",
@@ -422,24 +414,49 @@ func MakeConfig() map[string]any {
 										"var": "country_code",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"country_code",
-										"year",
+								"parts": []any{
+									"PublicHolidays",
+									"{year}",
+									"{country_code}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"CountryCode": "country_code",
+										"Year": "year",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"PublicHolidays",
-									"{year}",
-									"{country_code}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "country_code",
+											"orig": "country_code",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "AT",
+										},
+										map[string]any{
+											"name": "year",
+											"orig": "year",
+											"type": "`$INTEGER`",
+											"kind": "param",
+											"reqd": true,
+											"example": 2026,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"country_code",
+										"year",
+									},
 								},
 							},
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/NextPublicHolidaysWorldwide",
@@ -448,14 +465,16 @@ func MakeConfig() map[string]any {
 										"lit": "NextPublicHolidaysWorldwide",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"NextPublicHolidaysWorldwide",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"NextPublicHolidaysWorldwide",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -464,34 +483,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "AT",
-											"kind": "param",
-											"name": "country_code",
-											"orig": "country_code",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "offset",
-											"orig": "offset",
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/IsTodayPublicHoliday/{CountryCode}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"CountryCode": "country_code",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "IsTodayPublicHoliday",
@@ -500,42 +494,50 @@ func MakeConfig() map[string]any {
 										"var": "country_code",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"country_code",
-										"offset",
+								"parts": []any{
+									"IsTodayPublicHoliday",
+									"{country_code}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"CountryCode": "country_code",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"IsTodayPublicHoliday",
-									"{country_code}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": "AT",
-											"kind": "param",
 											"name": "country_code",
 											"orig": "country_code",
-											"reqd": true,
 											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "AT",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "offset",
+											"orig": "offset",
+											"type": "`$INTEGER`",
+											"kind": "query",
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"country_code",
+										"offset",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/NextPublicHolidays/{CountryCode}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"CountryCode": "country_code",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "NextPublicHolidays",
@@ -544,35 +546,42 @@ func MakeConfig() map[string]any {
 										"var": "country_code",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"country_code",
+								"parts": []any{
+									"NextPublicHolidays",
+									"{country_code}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"CountryCode": "country_code",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"NextPublicHolidays",
-									"{country_code}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "country_code",
+											"orig": "country_code",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "AT",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"country_code",
+									},
 								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"is_today_public_holiday",
-						},
-						[]any{
-							"next_public_holiday",
-						},
-						[]any{
-							"public_holiday",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 		},

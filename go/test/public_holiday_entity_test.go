@@ -158,7 +158,7 @@ func public_holidayBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"public_holiday01", "public_holiday02", "public_holiday03", "is_today_public_holiday01", "is_today_public_holiday02", "is_today_public_holiday03", "next_public_holiday01", "next_public_holiday02", "next_public_holiday03"},
+		[]any{"public_holiday01", "public_holiday02", "public_holiday03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

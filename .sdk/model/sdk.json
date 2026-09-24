@@ -24,28 +24,96 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "available_country": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "countryCode",
-              "req": false,
-              "short": "ISO 3166-1 alpha-2 country code",
-              "type": "`$STRING`"
+          "fields": {
+            "countryCode": {
+              "a": true,
+              "h": "Country Code",
+              "n": "countryCode",
+              "r": false,
+              "sh": "ISO 3166-1 alpha-2 country code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Country name",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Country name",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "available_country",
           "op": {
             "list": {
@@ -53,24 +121,24 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /AvailableCountries",
-                    "json": "{\"operationId\":\"getAvailableCountries\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"name\":{\"description\":\"Country name\",\"example\":\"Austria\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of available countries\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/AvailableCountries",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/AvailableCountries",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "AvailableCountries"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -87,49 +155,55 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "borders",
-              "req": false,
-              "short": "Bordering countries",
-              "type": "`$ARRAY`"
+          "fields": {
+            "borders": {
+              "a": true,
+              "h": "Borders",
+              "n": "borders",
+              "r": false,
+              "sh": "Bordering countries",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "commonName",
-              "req": false,
-              "short": "Common name of the country",
-              "type": "`$STRING`"
+            "commonName": {
+              "a": true,
+              "h": "Common Name",
+              "n": "commonName",
+              "r": false,
+              "sh": "Common name of the country",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "countryCode",
-              "req": false,
-              "short": "ISO 3166-1 alpha-2 country code",
-              "type": "`$STRING`"
+            "countryCode": {
+              "a": true,
+              "h": "Country Code",
+              "n": "countryCode",
+              "r": false,
+              "sh": "ISO 3166-1 alpha-2 country code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "officialName",
-              "req": false,
-              "short": "Official name of the country",
-              "type": "`$STRING`"
+            "officialName": {
+              "a": true,
+              "h": "Official Name",
+              "n": "officialName",
+              "r": false,
+              "sh": "Official name of the country",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "region",
-              "req": false,
-              "short": "Region of the country",
-              "type": "`$STRING`"
+            "region": {
+              "a": true,
+              "h": "Region",
+              "n": "region",
+              "r": false,
+              "sh": "Region of the country",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -141,35 +215,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /CountryInfo/{CountryCode}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "AT",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "country_code",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "AT",
+                        "k": "param",
+                        "n": "id",
+                        "or": "country_code",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /CountryInfo/{CountryCode}",
-                    "json": "{\"operationId\":\"getCountryInfo\",\"parameters\":[{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"borders\":{\"description\":\"Bordering countries\",\"items\":{\"properties\":{\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"name\":{\"description\":\"Country name\",\"example\":\"Austria\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"commonName\":{\"description\":\"Common name of the country\",\"example\":\"Austria\",\"type\":\"string\"},\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"officialName\":{\"description\":\"Official name of the country\",\"example\":\"Republic of Austria\",\"type\":\"string\"},\"region\":{\"description\":\"Region of the country\",\"example\":\"Europe\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with country information\"},\"404\":{\"description\":\"Country not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/CountryInfo/{CountryCode}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/CountryInfo/{CountryCode}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "CountryCode": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "CountryInfo"
                     },
@@ -177,12 +255,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -199,38 +272,42 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "dayCount",
-              "req": false,
-              "short": "Number of days in the long weekend",
-              "type": "`$INTEGER`"
+          "fields": {
+            "dayCount": {
+              "a": true,
+              "h": "Day Count",
+              "n": "dayCount",
+              "r": false,
+              "sh": "Number of days in the long weekend",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "format": "date",
-              "name": "endDate",
-              "req": false,
-              "short": "End date of the long weekend",
-              "type": "`$STRING`"
+            "endDate": {
+              "a": true,
+              "fo": "date",
+              "h": "End Date",
+              "n": "endDate",
+              "r": false,
+              "sh": "End date of the long weekend",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "needBridgeDay",
-              "req": false,
-              "short": "Whether a bridge day is needed",
-              "type": "`$BOOLEAN`"
+            "needBridgeDay": {
+              "a": true,
+              "h": "Need Bridge Day",
+              "n": "needBridgeDay",
+              "r": false,
+              "sh": "Whether a bridge day is needed",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "format": "date",
-              "name": "startDate",
-              "req": false,
-              "short": "Start date of the long weekend",
-              "type": "`$STRING`"
+            "startDate": {
+              "a": true,
+              "fo": "date",
+              "h": "Start Date",
+              "n": "startDate",
+              "r": false,
+              "sh": "Start date of the long weekend",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "long_weekend",
           "op": {
             "list": {
@@ -238,45 +315,50 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /LongWeekend/{Year}/{CountryCode}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "AT",
-                        "kind": "param",
-                        "name": "country_code",
-                        "orig": "country_code",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "AT",
+                        "k": "param",
+                        "n": "country_code",
+                        "or": "country_code",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 2026,
-                        "kind": "param",
-                        "name": "year",
-                        "orig": "year",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 2026,
+                        "k": "param",
+                        "n": "year",
+                        "or": "year",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /LongWeekend/{Year}/{CountryCode}",
-                    "json": "{\"operationId\":\"getLongWeekends\",\"parameters\":[{\"description\":\"The year to retrieve long weekends for\",\"in\":\"path\",\"name\":\"Year\",\"required\":true,\"schema\":{\"example\":2026,\"type\":\"integer\"}},{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"dayCount\":{\"description\":\"Number of days in the long weekend\",\"type\":\"integer\"},\"endDate\":{\"description\":\"End date of the long weekend\",\"format\":\"date\",\"type\":\"string\"},\"needBridgeDay\":{\"description\":\"Whether a bridge day is needed\",\"type\":\"boolean\"},\"startDate\":{\"description\":\"Start date of the long weekend\",\"format\":\"date\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of long weekends\"},\"404\":{\"description\":\"Country not found or no long weekends available\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/LongWeekend/{Year}/{CountryCode}",
+                  "q": {
+                    "exist": [
+                      "country_code",
+                      "year"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/LongWeekend/{Year}/{CountryCode}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "CountryCode": "country_code",
                       "Year": "year"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "LongWeekend"
                     },
@@ -287,13 +369,7 @@
                       "var": "country_code"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "country_code",
-                      "year"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -302,11 +378,7 @@
             }
           },
           "relations": {
-            "ancestors": [
-              [
-                "long_weekend"
-              ]
-            ]
+            "ancestors": []
           }
         },
         "public_holiday": {
@@ -314,72 +386,81 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "counties",
-              "req": false,
-              "short": "If it is not global you found here the Federal states (ISO-3166-2)",
-              "type": "`$ARRAY`"
+          "fields": {
+            "counties": {
+              "a": true,
+              "h": "Counties",
+              "n": "counties",
+              "r": false,
+              "sh": "If it is not global you found here the Federal states (ISO-3166-2)",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "countryCode",
-              "req": false,
-              "short": "ISO 3166-1 alpha-2 country code",
-              "type": "`$STRING`"
+            "countryCode": {
+              "a": true,
+              "h": "Country Code",
+              "n": "countryCode",
+              "r": false,
+              "sh": "ISO 3166-1 alpha-2 country code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date",
-              "name": "date",
-              "req": false,
-              "short": "The date of the holiday",
-              "type": "`$STRING`"
+            "date": {
+              "a": true,
+              "fo": "date",
+              "h": "Date",
+              "n": "date",
+              "r": false,
+              "sh": "The date of the holiday",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "fixed",
-              "req": false,
-              "short": "Is this public holiday every year on the same date",
-              "type": "`$BOOLEAN`"
+            "fixed": {
+              "a": true,
+              "h": "Fixed",
+              "n": "fixed",
+              "r": false,
+              "sh": "Is this public holiday every year on the same date",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "global",
-              "req": false,
-              "short": "Is this public holiday in every county (federal state)",
-              "type": "`$BOOLEAN`"
+            "global": {
+              "a": true,
+              "h": "Global",
+              "n": "global",
+              "r": false,
+              "sh": "Is this public holiday in every county (federal state)",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "launchYear",
-              "req": false,
-              "short": "The launch year of the public holiday",
-              "type": "`$INTEGER`"
+            "launchYear": {
+              "a": true,
+              "h": "Launch Year",
+              "n": "launchYear",
+              "r": false,
+              "sh": "The launch year of the public holiday",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "localName",
-              "req": false,
-              "short": "Local name of the holiday",
-              "type": "`$STRING`"
+            "localName": {
+              "a": true,
+              "h": "Local Name",
+              "n": "localName",
+              "r": false,
+              "sh": "Local name of the holiday",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "English name of the holiday",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "English name of the holiday",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "types",
-              "req": false,
-              "short": "The types of the public holiday.",
-              "type": "`$ARRAY`"
+            "types": {
+              "a": true,
+              "h": "Types",
+              "n": "types",
+              "r": false,
+              "sh": "The types of the public holiday.",
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "name": "public_holiday",
           "op": {
             "list": {
@@ -387,45 +468,50 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /PublicHolidays/{Year}/{CountryCode}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "AT",
-                        "kind": "param",
-                        "name": "country_code",
-                        "orig": "country_code",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "AT",
+                        "k": "param",
+                        "n": "country_code",
+                        "or": "country_code",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 2026,
-                        "kind": "param",
-                        "name": "year",
-                        "orig": "year",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 2026,
+                        "k": "param",
+                        "n": "year",
+                        "or": "year",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /PublicHolidays/{Year}/{CountryCode}",
-                    "json": "{\"operationId\":\"getPublicHolidays\",\"parameters\":[{\"description\":\"The year to retrieve holidays for\",\"in\":\"path\",\"name\":\"Year\",\"required\":true,\"schema\":{\"example\":2026,\"type\":\"integer\"}},{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":[{\"counties\":null,\"countryCode\":\"AT\",\"date\":\"2017-01-01\",\"fixed\":true,\"global\":true,\"launchYear\":1967,\"localName\":\"Neujahr\",\"name\":\"New Year's Day\",\"types\":[\"Public\"]},{\"counties\":null,\"countryCode\":\"AT\",\"date\":\"2017-01-06\",\"fixed\":true,\"global\":true,\"launchYear\":null,\"localName\":\"Heilige Drei Könige\",\"name\":\"Epiphany\",\"types\":[\"Public\"]}],\"schema\":{\"items\":{\"properties\":{\"counties\":{\"description\":\"If it is not global you found here the Federal states (ISO-3166-2)\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"date\":{\"description\":\"The date of the holiday\",\"example\":\"2017-01-01\",\"format\":\"date\",\"type\":\"string\"},\"fixed\":{\"description\":\"Is this public holiday every year on the same date\",\"example\":true,\"type\":\"boolean\"},\"global\":{\"description\":\"Is this public holiday in every county (federal state)\",\"example\":true,\"type\":\"boolean\"},\"launchYear\":{\"description\":\"The launch year of the public holiday\",\"example\":1967,\"nullable\":true,\"type\":\"integer\"},\"localName\":{\"description\":\"Local name of the holiday\",\"example\":\"Neujahr\",\"type\":\"string\"},\"name\":{\"description\":\"English name of the holiday\",\"example\":\"New Year's Day\",\"type\":\"string\"},\"types\":{\"description\":\"The types of the public holiday. Public (Bank holiday, banks and offices are closed), Bank (Bank holiday, banks and offices are closed), School (School holiday, schools are closed), Authorities (Authorities are closed), Optional (Majority of people take a day off), Observance (Optional festivity, no paid day off)\",\"items\":{\"enum\":[\"Public\",\"Bank\",\"School\",\"Authorities\",\"Optional\",\"Observance\"],\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of public holidays\"},\"400\":{\"description\":\"Invalid year or country code format\"},\"404\":{\"description\":\"Country not found or no holidays available for the specified year\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/PublicHolidays/{Year}/{CountryCode}",
+                  "q": {
+                    "exist": [
+                      "country_code",
+                      "year"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/PublicHolidays/{Year}/{CountryCode}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "CountryCode": "country_code",
                       "Year": "year"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "PublicHolidays"
                     },
@@ -436,36 +522,30 @@
                       "var": "country_code"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "country_code",
-                      "year"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /NextPublicHolidaysWorldwide",
-                    "json": "{\"operationId\":\"getNextPublicHolidaysWorldwide\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"counties\":{\"description\":\"If it is not global you found here the Federal states (ISO-3166-2)\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"date\":{\"description\":\"The date of the holiday\",\"example\":\"2017-01-01\",\"format\":\"date\",\"type\":\"string\"},\"fixed\":{\"description\":\"Is this public holiday every year on the same date\",\"example\":true,\"type\":\"boolean\"},\"global\":{\"description\":\"Is this public holiday in every county (federal state)\",\"example\":true,\"type\":\"boolean\"},\"launchYear\":{\"description\":\"The launch year of the public holiday\",\"example\":1967,\"nullable\":true,\"type\":\"integer\"},\"localName\":{\"description\":\"Local name of the holiday\",\"example\":\"Neujahr\",\"type\":\"string\"},\"name\":{\"description\":\"English name of the holiday\",\"example\":\"New Year's Day\",\"type\":\"string\"},\"types\":{\"description\":\"The types of the public holiday. Public (Bank holiday, banks and offices are closed), Bank (Bank holiday, banks and offices are closed), School (School holiday, schools are closed), Authorities (Authorities are closed), Optional (Majority of people take a day off), Observance (Optional festivity, no paid day off)\",\"items\":{\"enum\":[\"Public\",\"Bank\",\"School\",\"Authorities\",\"Optional\",\"Observance\"],\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with next public holidays worldwide\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/NextPublicHolidaysWorldwide",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/NextPublicHolidaysWorldwide",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "NextPublicHolidaysWorldwide"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -477,45 +557,50 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /IsTodayPublicHoliday/{CountryCode}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "AT",
-                        "kind": "param",
-                        "name": "country_code",
-                        "orig": "country_code",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "AT",
+                        "k": "param",
+                        "n": "country_code",
+                        "or": "country_code",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ],
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "offset",
-                        "orig": "offset",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "offset",
+                        "or": "offset",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /IsTodayPublicHoliday/{CountryCode}",
-                    "json": "{\"operationId\":\"isTodayPublicHoliday\",\"parameters\":[{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}},{\"description\":\"Timezone offset in hours\",\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"description\":\"Today is a public holiday\"},\"204\":{\"description\":\"Today is not a public holiday\"},\"404\":{\"description\":\"Country not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/IsTodayPublicHoliday/{CountryCode}",
+                  "q": {
+                    "exist": [
+                      "country_code",
+                      "offset"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/IsTodayPublicHoliday/{CountryCode}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "CountryCode": "country_code"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "IsTodayPublicHoliday"
                     },
@@ -523,47 +608,45 @@
                       "var": "country_code"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "country_code",
-                      "offset"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /NextPublicHolidays/{CountryCode}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "AT",
-                        "kind": "param",
-                        "name": "country_code",
-                        "orig": "country_code",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "AT",
+                        "k": "param",
+                        "n": "country_code",
+                        "or": "country_code",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /NextPublicHolidays/{CountryCode}",
-                    "json": "{\"operationId\":\"getNextPublicHolidays\",\"parameters\":[{\"description\":\"ISO 3166-1 alpha-2 country code\",\"in\":\"path\",\"name\":\"CountryCode\",\"required\":true,\"schema\":{\"example\":\"AT\",\"maxLength\":2,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"counties\":{\"description\":\"If it is not global you found here the Federal states (ISO-3166-2)\",\"items\":{\"type\":\"string\"},\"nullable\":true,\"type\":\"array\"},\"countryCode\":{\"description\":\"ISO 3166-1 alpha-2 country code\",\"example\":\"AT\",\"type\":\"string\"},\"date\":{\"description\":\"The date of the holiday\",\"example\":\"2017-01-01\",\"format\":\"date\",\"type\":\"string\"},\"fixed\":{\"description\":\"Is this public holiday every year on the same date\",\"example\":true,\"type\":\"boolean\"},\"global\":{\"description\":\"Is this public holiday in every county (federal state)\",\"example\":true,\"type\":\"boolean\"},\"launchYear\":{\"description\":\"The launch year of the public holiday\",\"example\":1967,\"nullable\":true,\"type\":\"integer\"},\"localName\":{\"description\":\"Local name of the holiday\",\"example\":\"Neujahr\",\"type\":\"string\"},\"name\":{\"description\":\"English name of the holiday\",\"example\":\"New Year's Day\",\"type\":\"string\"},\"types\":{\"description\":\"The types of the public holiday. Public (Bank holiday, banks and offices are closed), Bank (Bank holiday, banks and offices are closed), School (School holiday, schools are closed), Authorities (Authorities are closed), Optional (Majority of people take a day off), Observance (Optional festivity, no paid day off)\",\"items\":{\"enum\":[\"Public\",\"Bank\",\"School\",\"Authorities\",\"Optional\",\"Observance\"],\"type\":\"string\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with next public holidays\"},\"404\":{\"description\":\"Country not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/NextPublicHolidays/{CountryCode}",
+                  "q": {
+                    "exist": [
+                      "country_code"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/NextPublicHolidays/{CountryCode}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "CountryCode": "country_code"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "NextPublicHolidays"
                     },
@@ -571,12 +654,7 @@
                       "var": "country_code"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "country_code"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -585,17 +663,7 @@
             }
           },
           "relations": {
-            "ancestors": [
-              [
-                "is_today_public_holiday"
-              ],
-              [
-                "next_public_holiday"
-              ],
-              [
-                "public_holiday"
-              ]
-            ]
+            "ancestors": []
           }
         }
       },
@@ -1015,13 +1083,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1041,19 +1109,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "country_info_ref01",
                 "srcdatavar": "country_info_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "country_info01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1073,16 +1141,16 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {
                 "country_code": "country_code01",
                 "year": "year01"
               },
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1102,13 +1170,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1118,19 +1186,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "public_holiday_ref01",
                 "srcdatavar": "public_holiday_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "public_holiday01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

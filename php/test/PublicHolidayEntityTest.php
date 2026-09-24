@@ -115,7 +115,7 @@ function public_holiday_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["public_holiday01", "public_holiday02", "public_holiday03", "is_today_public_holiday01", "is_today_public_holiday02", "is_today_public_holiday03", "next_public_holiday01", "next_public_holiday02", "next_public_holiday03"] as $k) {
+    foreach (["public_holiday01", "public_holiday02", "public_holiday03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

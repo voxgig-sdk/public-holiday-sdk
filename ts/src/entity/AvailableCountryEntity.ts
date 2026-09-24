@@ -19,7 +19,6 @@ import type {
   AvailableCountryListMatch,
 } from '../PublicHolidayTypes'
 
-// TODO: needs Entity superclass
 class AvailableCountryEntity extends PublicHolidayEntityBase<AvailableCountry> {
 
   constructor(client: PublicHolidaySDK, entopts: any) {

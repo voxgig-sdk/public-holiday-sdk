@@ -19,7 +19,6 @@ import type {
   LongWeekendListMatch,
 } from '../PublicHolidayTypes'
 
-// TODO: needs Entity superclass
 class LongWeekendEntity extends PublicHolidayEntityBase<LongWeekend> {
 
   constructor(client: PublicHolidaySDK, entopts: any) {

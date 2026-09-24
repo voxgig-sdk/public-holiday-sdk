@@ -50,19 +50,6 @@ except Exception as err:
     print(f"list failed: {err}")
 ```
 
-### 3. Load a publicholiday
-
-PublicHoliday is nested under country_code, so provide the `country_code`.
-`load()` returns the ENTITY — call data_get() for the record — and raises on error.
-
-```python
-try:
-    publicholiday = client.PublicHoliday().load({"country_code": "example_country_code"})
-    print(publicholiday)
-except Exception as err:
-    print(f"load failed: {err}")
-```
-
 
 ## Error handling
 

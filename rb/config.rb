@@ -102,13 +102,15 @@ module PublicHolidayConfig
           "fields" => [
             {
               "name" => "countryCode",
-              "short" => "ISO 3166-1 alpha-2 country code",
+              "title" => "Country Code",
               "type" => "`$STRING`",
+              "short" => "ISO 3166-1 alpha-2 country code",
             },
             {
               "name" => "name",
-              "short" => "Country name",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Country name",
             },
           ],
           "name" => "available_country",
@@ -118,7 +120,6 @@ module PublicHolidayConfig
               "name" => "list",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/AvailableCountries",
@@ -127,14 +128,16 @@ module PublicHolidayConfig
                       "lit" => "AvailableCountries",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "AvailableCountries",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "AvailableCountries",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -147,32 +150,38 @@ module PublicHolidayConfig
           "fields" => [
             {
               "name" => "borders",
-              "short" => "Bordering countries",
+              "title" => "Borders",
               "type" => "`$ARRAY`",
+              "short" => "Bordering countries",
             },
             {
               "name" => "commonName",
-              "short" => "Common name of the country",
+              "title" => "Common Name",
               "type" => "`$STRING`",
+              "short" => "Common name of the country",
             },
             {
               "name" => "countryCode",
-              "short" => "ISO 3166-1 alpha-2 country code",
+              "title" => "Country Code",
               "type" => "`$STRING`",
+              "short" => "ISO 3166-1 alpha-2 country code",
             },
             {
               "name" => "id",
+              "title" => "Id",
               "type" => "`$STRING`",
             },
             {
               "name" => "officialName",
-              "short" => "Official name of the country",
+              "title" => "Official Name",
               "type" => "`$STRING`",
+              "short" => "Official name of the country",
             },
             {
               "name" => "region",
-              "short" => "Region of the country",
+              "title" => "Region",
               "type" => "`$STRING`",
+              "short" => "Region of the country",
             },
           ],
           "id" => {
@@ -186,26 +195,9 @@ module PublicHolidayConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "example" => "AT",
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "country_code",
-                        "reqd" => true,
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/CountryInfo/{CountryCode}",
-                  "rename" => {
-                    "param" => {
-                      "CountryCode" => "id",
-                    },
-                  },
                   "segments" => [
                     {
                       "lit" => "CountryInfo",
@@ -214,19 +206,36 @@ module PublicHolidayConfig
                       "var" => "id",
                     },
                   ],
-                  "select" => {
-                    "exist" => [
-                      "id",
-                    ],
+                  "parts" => [
+                    "CountryInfo",
+                    "{id}",
+                  ],
+                  "rename" => {
+                    "param" => {
+                      "CountryCode" => "id",
+                    },
                   },
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "CountryInfo",
-                    "{id}",
-                  ],
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "country_code",
+                        "type" => "`$STRING`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => "AT",
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "id",
+                    ],
+                  },
                 },
               ],
             },
@@ -239,25 +248,29 @@ module PublicHolidayConfig
           "fields" => [
             {
               "name" => "dayCount",
-              "short" => "Number of days in the long weekend",
+              "title" => "Day Count",
               "type" => "`$INTEGER`",
+              "short" => "Number of days in the long weekend",
             },
             {
-              "format" => "date",
               "name" => "endDate",
-              "short" => "End date of the long weekend",
+              "title" => "End Date",
               "type" => "`$STRING`",
+              "short" => "End date of the long weekend",
+              "format" => "date",
             },
             {
               "name" => "needBridgeDay",
-              "short" => "Whether a bridge day is needed",
+              "title" => "Need Bridge Day",
               "type" => "`$BOOLEAN`",
+              "short" => "Whether a bridge day is needed",
             },
             {
-              "format" => "date",
               "name" => "startDate",
-              "short" => "Start date of the long weekend",
+              "title" => "Start Date",
               "type" => "`$STRING`",
+              "short" => "Start date of the long weekend",
+              "format" => "date",
             },
           ],
           "name" => "long_weekend",
@@ -267,35 +280,9 @@ module PublicHolidayConfig
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "example" => "AT",
-                        "kind" => "param",
-                        "name" => "country_code",
-                        "orig" => "country_code",
-                        "reqd" => true,
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "example" => 2026,
-                        "kind" => "param",
-                        "name" => "year",
-                        "orig" => "year",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/LongWeekend/{Year}/{CountryCode}",
-                  "rename" => {
-                    "param" => {
-                      "CountryCode" => "country_code",
-                      "Year" => "year",
-                    },
-                  },
                   "segments" => [
                     {
                       "lit" => "LongWeekend",
@@ -307,80 +294,111 @@ module PublicHolidayConfig
                       "var" => "country_code",
                     },
                   ],
+                  "parts" => [
+                    "LongWeekend",
+                    "{year}",
+                    "{country_code}",
+                  ],
+                  "rename" => {
+                    "param" => {
+                      "CountryCode" => "country_code",
+                      "Year" => "year",
+                    },
+                  },
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "country_code",
+                        "orig" => "country_code",
+                        "type" => "`$STRING`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => "AT",
+                      },
+                      {
+                        "name" => "year",
+                        "orig" => "year",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => 2026,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "country_code",
                       "year",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "LongWeekend",
-                    "{year}",
-                    "{country_code}",
-                  ],
                 },
               ],
             },
           },
           "relations" => {
-            "ancestors" => [
-              [
-                "long_weekend",
-              ],
-            ],
+            "ancestors" => [],
           },
         },
         "public_holiday" => {
           "fields" => [
             {
               "name" => "counties",
-              "short" => "If it is not global you found here the Federal states (ISO-3166-2)",
+              "title" => "Counties",
               "type" => "`$ARRAY`",
+              "short" => "If it is not global you found here the Federal states (ISO-3166-2)",
             },
             {
               "name" => "countryCode",
-              "short" => "ISO 3166-1 alpha-2 country code",
+              "title" => "Country Code",
               "type" => "`$STRING`",
+              "short" => "ISO 3166-1 alpha-2 country code",
             },
             {
-              "format" => "date",
               "name" => "date",
-              "short" => "The date of the holiday",
+              "title" => "Date",
               "type" => "`$STRING`",
+              "short" => "The date of the holiday",
+              "format" => "date",
             },
             {
               "name" => "fixed",
-              "short" => "Is this public holiday every year on the same date",
+              "title" => "Fixed",
               "type" => "`$BOOLEAN`",
+              "short" => "Is this public holiday every year on the same date",
             },
             {
               "name" => "global",
-              "short" => "Is this public holiday in every county (federal state)",
+              "title" => "Global",
               "type" => "`$BOOLEAN`",
+              "short" => "Is this public holiday in every county (federal state)",
             },
             {
               "name" => "launchYear",
-              "short" => "The launch year of the public holiday",
+              "title" => "Launch Year",
               "type" => "`$INTEGER`",
+              "short" => "The launch year of the public holiday",
             },
             {
               "name" => "localName",
-              "short" => "Local name of the holiday",
+              "title" => "Local Name",
               "type" => "`$STRING`",
+              "short" => "Local name of the holiday",
             },
             {
               "name" => "name",
-              "short" => "English name of the holiday",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "English name of the holiday",
             },
             {
               "name" => "types",
-              "short" => "The types of the public holiday.",
+              "title" => "Types",
               "type" => "`$ARRAY`",
+              "short" => "The types of the public holiday.",
             },
           ],
           "name" => "public_holiday",
@@ -390,35 +408,9 @@ module PublicHolidayConfig
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "example" => "AT",
-                        "kind" => "param",
-                        "name" => "country_code",
-                        "orig" => "country_code",
-                        "reqd" => true,
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "example" => 2026,
-                        "kind" => "param",
-                        "name" => "year",
-                        "orig" => "year",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/PublicHolidays/{Year}/{CountryCode}",
-                  "rename" => {
-                    "param" => {
-                      "CountryCode" => "country_code",
-                      "Year" => "year",
-                    },
-                  },
                   "segments" => [
                     {
                       "lit" => "PublicHolidays",
@@ -430,24 +422,49 @@ module PublicHolidayConfig
                       "var" => "country_code",
                     },
                   ],
+                  "parts" => [
+                    "PublicHolidays",
+                    "{year}",
+                    "{country_code}",
+                  ],
+                  "rename" => {
+                    "param" => {
+                      "CountryCode" => "country_code",
+                      "Year" => "year",
+                    },
+                  },
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "country_code",
+                        "orig" => "country_code",
+                        "type" => "`$STRING`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => "AT",
+                      },
+                      {
+                        "name" => "year",
+                        "orig" => "year",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => 2026,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "country_code",
                       "year",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "PublicHolidays",
-                    "{year}",
-                    "{country_code}",
-                  ],
                 },
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/NextPublicHolidaysWorldwide",
@@ -456,14 +473,16 @@ module PublicHolidayConfig
                       "lit" => "NextPublicHolidaysWorldwide",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "NextPublicHolidaysWorldwide",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "NextPublicHolidaysWorldwide",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -472,34 +491,9 @@ module PublicHolidayConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "example" => "AT",
-                        "kind" => "param",
-                        "name" => "country_code",
-                        "orig" => "country_code",
-                        "reqd" => true,
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/IsTodayPublicHoliday/{CountryCode}",
-                  "rename" => {
-                    "param" => {
-                      "CountryCode" => "country_code",
-                    },
-                  },
                   "segments" => [
                     {
                       "lit" => "IsTodayPublicHoliday",
@@ -508,42 +502,50 @@ module PublicHolidayConfig
                       "var" => "country_code",
                     },
                   ],
+                  "parts" => [
+                    "IsTodayPublicHoliday",
+                    "{country_code}",
+                  ],
+                  "rename" => {
+                    "param" => {
+                      "CountryCode" => "country_code",
+                    },
+                  },
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "country_code",
+                        "orig" => "country_code",
+                        "type" => "`$STRING`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => "AT",
+                      },
+                    ],
+                    "query" => [
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "country_code",
                       "offset",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "IsTodayPublicHoliday",
-                    "{country_code}",
-                  ],
                 },
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "example" => "AT",
-                        "kind" => "param",
-                        "name" => "country_code",
-                        "orig" => "country_code",
-                        "reqd" => true,
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/NextPublicHolidays/{CountryCode}",
-                  "rename" => {
-                    "param" => {
-                      "CountryCode" => "country_code",
-                    },
-                  },
                   "segments" => [
                     {
                       "lit" => "NextPublicHolidays",
@@ -552,35 +554,42 @@ module PublicHolidayConfig
                       "var" => "country_code",
                     },
                   ],
-                  "select" => {
-                    "exist" => [
-                      "country_code",
-                    ],
+                  "parts" => [
+                    "NextPublicHolidays",
+                    "{country_code}",
+                  ],
+                  "rename" => {
+                    "param" => {
+                      "CountryCode" => "country_code",
+                    },
                   },
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "NextPublicHolidays",
-                    "{country_code}",
-                  ],
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "country_code",
+                        "orig" => "country_code",
+                        "type" => "`$STRING`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => "AT",
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "country_code",
+                    ],
+                  },
                 },
               ],
             },
           },
           "relations" => {
-            "ancestors" => [
-              [
-                "is_today_public_holiday",
-              ],
-              [
-                "next_public_holiday",
-              ],
-              [
-                "public_holiday",
-              ],
-            ],
+            "ancestors" => [],
           },
         },
       },

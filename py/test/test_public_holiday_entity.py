@@ -110,7 +110,7 @@ def _public_holiday_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["public_holiday01", "public_holiday02", "public_holiday03", "is_today_public_holiday01", "is_today_public_holiday02", "is_today_public_holiday03", "next_public_holiday01", "next_public_holiday02", "next_public_holiday03"],
+        ["public_holiday01", "public_holiday02", "public_holiday03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

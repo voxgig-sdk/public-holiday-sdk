@@ -1,7 +1,7 @@
 // Typed models for the PublicHoliday SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,8 +14,6 @@ import (
 
 // AvailableCountry is the typed data model for the available_country entity.
 type AvailableCountry struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Name *string `json:"name,omitempty"`
 }
 
 // AvailableCountryListMatch is the typed request payload for AvailableCountry.ListTyped.
@@ -26,12 +24,6 @@ type AvailableCountryListMatch struct {
 
 // CountryInfo is the typed data model for the country_info entity.
 type CountryInfo struct {
-	Borders *[]any `json:"borders,omitempty"`
-	CommonName *string `json:"commonName,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty"`
-	Id *string `json:"id,omitempty"`
-	OfficialName *string `json:"officialName,omitempty"`
-	Region *string `json:"region,omitempty"`
 }
 
 // CountryInfoLoadMatch is the typed request payload for CountryInfo.LoadTyped.
@@ -41,10 +33,6 @@ type CountryInfoLoadMatch struct {
 
 // LongWeekend is the typed data model for the long_weekend entity.
 type LongWeekend struct {
-	DayCount *int `json:"dayCount,omitempty"`
-	EndDate *string `json:"endDate,omitempty"`
-	NeedBridgeDay *bool `json:"needBridgeDay,omitempty"`
-	StartDate *string `json:"startDate,omitempty"`
 }
 
 // LongWeekendListMatch is the typed request payload for LongWeekend.ListTyped.
@@ -55,15 +43,6 @@ type LongWeekendListMatch struct {
 
 // PublicHoliday is the typed data model for the public_holiday entity.
 type PublicHoliday struct {
-	Counties *[]any `json:"counties,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty"`
-	Date *string `json:"date,omitempty"`
-	Fixed *bool `json:"fixed,omitempty"`
-	Global *bool `json:"global,omitempty"`
-	LaunchYear *int `json:"launchYear,omitempty"`
-	LocalName *string `json:"localName,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Types *[]any `json:"types,omitempty"`
 }
 
 // PublicHolidayLoadMatch is the typed request payload for PublicHoliday.LoadTyped.

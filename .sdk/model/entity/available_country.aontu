@@ -1,0 +1,53 @@
+# Entity: available_country
+
+main: kit: entity: available_country: {
+
+  alias: field: {}
+
+  fields: {
+    countryCode: {
+      h: "Country Code"
+      n: "countryCode"
+      r: false
+      sh: "ISO 3166-1 alpha-2 country code"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Country name"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "available_country"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /AvailableCountries"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/AvailableCountries"
+          s: [
+            {
+              lit: "AvailableCountries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LongWeekendEntity = void 0;
 const PublicHolidayEntityBase_1 = require("../PublicHolidayEntityBase");
-// TODO: needs Entity superclass
 class LongWeekendEntity extends PublicHolidayEntityBase_1.PublicHolidayEntityBase {
     constructor(client, entopts) {
         super(client, entopts);
