@@ -88,7 +88,7 @@ main: kit: entity: public_holiday: {
                 ex: "AT"
                 k: "param"
                 n: "country_code"
-                or: "country_code"
+                or: "CountryCode"
                 r: true
                 t: "`$STRING`"
               }
@@ -96,7 +96,7 @@ main: kit: entity: public_holiday: {
                 ex: 2026
                 k: "param"
                 n: "year"
-                or: "year"
+                or: "Year"
                 r: true
                 t: "`$INTEGER`"
               }
@@ -167,7 +167,7 @@ main: kit: entity: public_holiday: {
                 ex: "AT"
                 k: "param"
                 n: "country_code"
-                or: "country_code"
+                or: "CountryCode"
                 r: true
                 t: "`$STRING`"
               }
@@ -220,7 +220,7 @@ main: kit: entity: public_holiday: {
                 ex: "AT"
                 k: "param"
                 n: "country_code"
-                or: "country_code"
+                or: "CountryCode"
                 r: true
                 t: "`$STRING`"
               }

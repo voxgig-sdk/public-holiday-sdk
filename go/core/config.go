@@ -215,7 +215,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "country_code",
+											"orig": "CountryCode",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -305,7 +305,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "country_code",
-											"orig": "country_code",
+											"orig": "CountryCode",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -313,7 +313,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "year",
-											"orig": "year",
+											"orig": "Year",
 											"type": "`$INTEGER`",
 											"kind": "param",
 											"reqd": true,
@@ -433,7 +433,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "country_code",
-											"orig": "country_code",
+											"orig": "CountryCode",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -441,7 +441,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "year",
-											"orig": "year",
+											"orig": "Year",
 											"type": "`$INTEGER`",
 											"kind": "param",
 											"reqd": true,
@@ -511,7 +511,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "country_code",
-											"orig": "country_code",
+											"orig": "CountryCode",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -563,7 +563,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "country_code",
-											"orig": "country_code",
+											"orig": "CountryCode",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,

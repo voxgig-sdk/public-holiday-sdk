@@ -223,7 +223,7 @@ module PublicHolidayConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "country_code",
+                        "orig" => "CountryCode",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -313,7 +313,7 @@ module PublicHolidayConfig
                     "params" => [
                       {
                         "name" => "country_code",
-                        "orig" => "country_code",
+                        "orig" => "CountryCode",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -321,7 +321,7 @@ module PublicHolidayConfig
                       },
                       {
                         "name" => "year",
-                        "orig" => "year",
+                        "orig" => "Year",
                         "type" => "`$INTEGER`",
                         "kind" => "param",
                         "reqd" => true,
@@ -441,7 +441,7 @@ module PublicHolidayConfig
                     "params" => [
                       {
                         "name" => "country_code",
-                        "orig" => "country_code",
+                        "orig" => "CountryCode",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -449,7 +449,7 @@ module PublicHolidayConfig
                       },
                       {
                         "name" => "year",
-                        "orig" => "year",
+                        "orig" => "Year",
                         "type" => "`$INTEGER`",
                         "kind" => "param",
                         "reqd" => true,
@@ -519,7 +519,7 @@ module PublicHolidayConfig
                     "params" => [
                       {
                         "name" => "country_code",
-                        "orig" => "country_code",
+                        "orig" => "CountryCode",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -571,7 +571,7 @@ module PublicHolidayConfig
                     "params" => [
                       {
                         "name" => "country_code",
-                        "orig" => "country_code",
+                        "orig" => "CountryCode",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,

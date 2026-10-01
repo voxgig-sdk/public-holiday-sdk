@@ -228,7 +228,7 @@
                         "ex": "AT",
                         "k": "param",
                         "n": "id",
-                        "or": "country_code",
+                        "or": "CountryCode",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -328,7 +328,7 @@
                         "ex": "AT",
                         "k": "param",
                         "n": "country_code",
-                        "or": "country_code",
+                        "or": "CountryCode",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -337,7 +337,7 @@
                         "ex": 2026,
                         "k": "param",
                         "n": "year",
-                        "or": "year",
+                        "or": "Year",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -481,7 +481,7 @@
                         "ex": "AT",
                         "k": "param",
                         "n": "country_code",
-                        "or": "country_code",
+                        "or": "CountryCode",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -490,7 +490,7 @@
                         "ex": 2026,
                         "k": "param",
                         "n": "year",
-                        "or": "year",
+                        "or": "Year",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -570,7 +570,7 @@
                         "ex": "AT",
                         "k": "param",
                         "n": "country_code",
-                        "or": "country_code",
+                        "or": "CountryCode",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -627,7 +627,7 @@
                         "ex": "AT",
                         "k": "param",
                         "n": "country_code",
-                        "or": "country_code",
+                        "or": "CountryCode",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1248,7 +1248,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

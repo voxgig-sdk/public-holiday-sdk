@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 PublicHolidayUtility.registrar = ->(u) {
   u.clean = PublicHolidayUtilities::Clean
+  u.clean_add = PublicHolidayUtilities::CleanAdd
+  u.clean_explain = PublicHolidayUtilities::CleanExplain
   u.done = PublicHolidayUtilities::Done
   u.make_error = PublicHolidayUtilities::MakeError
   u.feature_add = PublicHolidayUtilities::FeatureAdd

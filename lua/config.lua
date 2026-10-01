@@ -211,7 +211,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "id",
-                      ["orig"] = "country_code",
+                      ["orig"] = "CountryCode",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -301,7 +301,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "country_code",
-                      ["orig"] = "country_code",
+                      ["orig"] = "CountryCode",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -309,7 +309,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "year",
-                      ["orig"] = "year",
+                      ["orig"] = "Year",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -429,7 +429,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "country_code",
-                      ["orig"] = "country_code",
+                      ["orig"] = "CountryCode",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -437,7 +437,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "year",
-                      ["orig"] = "year",
+                      ["orig"] = "Year",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -507,7 +507,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "country_code",
-                      ["orig"] = "country_code",
+                      ["orig"] = "CountryCode",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -559,7 +559,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "country_code",
-                      ["orig"] = "country_code",
+                      ["orig"] = "CountryCode",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,

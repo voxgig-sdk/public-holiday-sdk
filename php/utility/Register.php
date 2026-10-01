@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 PublicHolidayUtility::setRegistrar(function (PublicHolidayUtility $u): void {
     $u->clean = [PublicHolidayClean::class, 'call'];
+    $u->clean_add = [PublicHolidayClean::class, 'add'];
+    $u->clean_explain = [PublicHolidayDone::class, 'clean_explain'];
     $u->done = [PublicHolidayDone::class, 'call'];
     $u->make_error = [PublicHolidayMakeError::class, 'call'];
     $u->feature_add = [PublicHolidayFeatureAdd::class, 'call'];

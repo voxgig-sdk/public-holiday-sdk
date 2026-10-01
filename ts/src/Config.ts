@@ -262,7 +262,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "country_code",
+                    "orig": "CountryCode",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -352,7 +352,7 @@ class Config {
                 "params": [
                   {
                     "name": "country_code",
-                    "orig": "country_code",
+                    "orig": "CountryCode",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -360,7 +360,7 @@ class Config {
                   },
                   {
                     "name": "year",
-                    "orig": "year",
+                    "orig": "Year",
                     "type": "`$INTEGER`",
                     "kind": "param",
                     "reqd": true,
@@ -480,7 +480,7 @@ class Config {
                 "params": [
                   {
                     "name": "country_code",
-                    "orig": "country_code",
+                    "orig": "CountryCode",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -488,7 +488,7 @@ class Config {
                   },
                   {
                     "name": "year",
-                    "orig": "year",
+                    "orig": "Year",
                     "type": "`$INTEGER`",
                     "kind": "param",
                     "reqd": true,
@@ -558,7 +558,7 @@ class Config {
                 "params": [
                   {
                     "name": "country_code",
-                    "orig": "country_code",
+                    "orig": "CountryCode",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -610,7 +610,7 @@ class Config {
                 "params": [
                   {
                     "name": "country_code",
-                    "orig": "country_code",
+                    "orig": "CountryCode",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
