@@ -9,8 +9,39 @@ require_once __DIR__ . '/Runner.php';
 use PHPUnit\Framework\TestCase;
 use Voxgig\Struct\Struct as Vs;
 
+class PublicHolidayEntityTestFailHook extends PublicHolidayBaseFeature
+{
+    public int $unexpected = 0;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->name = 'failhook';
+    }
+
+    public function init(PublicHolidayContext $ctx, array $options): void
+    {
+    }
+
+    public function PreSpec(PublicHolidayContext $ctx): void
+    {
+        throw new \RuntimeException('public_holiday hook failed');
+    }
+
+    public function PreUnexpected(PublicHolidayContext $ctx): void
+    {
+        $this->unexpected++;
+    }
+}
+
 class PublicHolidayEntityTest extends TestCase
 {
+    // main.kit.test.live.strict is true (the default is true): a live
+    // request that fails, or a live test missing an input it needs,
+    // fails the test.
+    // An account with no record for a test to read skips it either way.
+    private const LIVE_STRICT = true;
+
     public function test_create_instance(): void
     {
         $testsdk = PublicHolidaySDK::test(null, null);
@@ -57,23 +88,136 @@ class PublicHolidayEntityTest extends TestCase
         }
     }
 
+    public function test_stream_error(): void
+    {
+        $offline = ["net" => ["offline" => true]];
+        $streamerr = null;
+        try {
+            iterator_to_array(PublicHolidaySDK::test($offline, null)->PublicHoliday(null)
+                ->stream("list", null, null), false);
+        } catch (\Throwable $e) {
+            $streamerr = $e;
+        }
+        $this->assertNotNull($streamerr, 'the stream should raise the transport failure');
+        $this->assertStringContainsString('offline', $streamerr->getMessage());
+
+        iterator_to_array(PublicHolidaySDK::test($offline, null)->PublicHoliday(null)
+            ->stream("list", null, ["ctrl" => ["throw" => false]]), false);
+
+        $cfg = PublicHolidayConfig::shared_config();
+        if (isset($cfg["feature"]["rbac"])) {
+            $denied = PublicHolidaySDK::test(null, ["feature" => ["rbac" => ["active" => true, "deny" => true]]]);
+            $denyerr = null;
+            try {
+                iterator_to_array($denied->PublicHoliday(null)->stream("list", null, null), false);
+            } catch (\Throwable $e) {
+                $denyerr = $e;
+            }
+            $this->assertSame('rbac_denied', $denyerr->sdk_code ?? null);
+        }
+    }
+
+    public function test_stream_ctrl(): void
+    {
+        $ctrl = ["explain" => []];
+        iterator_to_array(PublicHolidaySDK::test(null, null)->PublicHoliday(null)
+            ->stream("list", null, ["ctrl" => $ctrl]), false);
+        $this->assertSame(["explain"], array_keys($ctrl));
+    }
+
+    public function test_unexpected(): void
+    {
+        $hook = new PublicHolidayEntityTestFailHook();
+        $client = new PublicHolidaySDK(["feature" => ["test" => ["active" => true]], "extend" => [$hook]]);
+
+        $err = null;
+        try {
+            $client->PublicHoliday(null)->list(null, null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertNotNull($err, 'the throwing hook should fail the operation');
+        $this->assertStringContainsString('hook failed', $err->getMessage());
+        $this->assertGreaterThan(0, $hook->unexpected, 'PreUnexpected did not fire');
+
+        $fired = $hook->unexpected;
+        $this->assertNull($client->PublicHoliday(null)->list(null, ["throw" => false]));
+        $this->assertGreaterThan($fired, $hook->unexpected, 'PreUnexpected did not fire');
+    }
+
+    public function test_cost_commits_a_throwing_transport(): void
+    {
+        $cfg = PublicHolidayConfig::shared_config();
+        if (!isset($cfg["feature"]["cost"])) {
+            $this->markTestSkipped('feature not present in this SDK: cost');
+        }
+        $client = new PublicHolidaySDK([
+            "test" => ["active" => true],
+            "feature" => ["cost" => ["active" => true, "unit" => 1]],
+            "utility" => ["fetcher" => function ($ctx, $url, $fetchdef) {
+                throw new \RuntimeException('public_holiday transport failed');
+            }],
+        ]);
+
+        $err = null;
+        try {
+            $client->PublicHoliday(null)->list(null, null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertInstanceOf(PublicHolidayError::class, $err);
+        $this->assertStringContainsString('transport failed', $err->getMessage());
+
+        $client->PublicHoliday(null)->list(null, ["throw" => false]);
+        $this->assertSame(2, $client->_cost["total"]["calls"]);
+        $this->assertSame(2, $client->_cost["total"]["attempts"]);
+    }
+
+    public function test_validate_list_response(): void
+    {
+        $cfg = PublicHolidayConfig::shared_config();
+        if (!isset($cfg["feature"]["validate"])) {
+            $this->markTestSkipped('feature not present in this SDK: validate');
+        }
+        $opts = ["feature" => ["validate" => ["active" => true, "request" => false, "response" => true]]];
+        $listed = PublicHolidaySDK::test(['entity' => ['public_holiday' => ['v1' => []]]], $opts)->PublicHoliday(null)->list(null, null);
+        $this->assertSame(['v1'], array_map(fn($ent) => $ent->data_get()['id'] ?? null, $listed));
+        $err = null;
+        try {
+            PublicHolidaySDK::test(['entity' => ['public_holiday' => ['v1' => ['countryCode' => 1]]]], $opts)->PublicHoliday(null)->list(null, null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertSame('validate_failed', $err->sdk_code ?? null);
+    }
+
+    public function test_validate(): void
+    {
+        $cfg = PublicHolidayConfig::shared_config();
+        if (!isset($cfg["feature"]["validate"])) {
+            $this->markTestSkipped('feature not present in this SDK: validate');
+        }
+        $client = PublicHolidaySDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
+        $err = null;
+        try {
+            $client->PublicHoliday(null)->list(["country_code" => 1, "year" => 1], null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertSame('validate_failed', $err->sdk_code ?? null);
+    }
+
     public function test_basic_flow(): void
     {
         $setup = public_holiday_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["list", "load"] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "public_holiday." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
                 return;
             }
-        }
-        // The basic flow consumes synthetic IDs from the fixture. In live mode
-        // without an *_ENTID env override, those IDs hit the live API and 4xx.
-        if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set PUBLIC_HOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID JSON to run live");
-            return;
         }
         $client = $setup["client"];
 
@@ -91,11 +235,6 @@ class PublicHolidayEntityTest extends TestCase
 
         $public_holiday_ref01_list_result = $public_holiday_ref01_ent->list($public_holiday_ref01_match, null);
         $this->assertIsArray($public_holiday_ref01_list_result);
-
-        // LOAD
-        $public_holiday_ref01_match_dt0 = [];
-        $public_holiday_ref01_data_dt0_loaded = $public_holiday_ref01_ent->load($public_holiday_ref01_match_dt0, null);
-        $this->assertNotNull($public_holiday_ref01_data_dt0_loaded);
 
     }
 }
@@ -119,9 +258,8 @@ function public_holiday_basic_setup($extra)
         $idmap[$k] = strtoupper($k);
     }
 
-    // Detect ENTID env override before envOverride consumes it. When live
-    // mode is on without a real override, the basic test runs against synthetic
-    // IDs from the fixture and 4xx's. Surface this so the test can skip.
+    // Whether *_ENTID supplied the idmap, read before env_override consumes
+    // it: without it, the ids a live flow binds are the fixture's synthetic ones.
     $entid_env_raw = getenv("PUBLIC_HOLIDAY_TEST_PUBLIC_HOLIDAY_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 

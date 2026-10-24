@@ -20,7 +20,7 @@ export PUBLIC_HOLIDAY_APIKEY=sk_live_xxx
 
 # 4. Each command line is ONE boru expression, run against the API:
 ./public-holiday-cli list available_country
-./public-holiday-cli list country_info
+./public-holiday-cli list long_weekend
 
 # 5. Override the API base URL for a single call
 PUBLIC_HOLIDAY_BASE=https://api.example.com ./public-holiday-cli list available_country

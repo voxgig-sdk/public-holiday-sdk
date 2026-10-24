@@ -116,6 +116,10 @@ main: kit: entity: public_holiday: {
               Year: "year"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "PublicHolidays"
@@ -140,6 +144,10 @@ main: kit: entity: public_holiday: {
           }
           m: "GET"
           o: "/NextPublicHolidaysWorldwide"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "NextPublicHolidaysWorldwide"
@@ -187,7 +195,6 @@ main: kit: entity: public_holiday: {
           q: {
             exist: [
               "country_code"
-              "offset"
             ]
           }
           r: {
@@ -237,6 +244,10 @@ main: kit: entity: public_holiday: {
             param: {
               CountryCode: "country_code"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

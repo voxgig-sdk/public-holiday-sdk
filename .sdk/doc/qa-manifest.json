@@ -3,5 +3,33 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "An API for public holiday data. Supports over 100 countries. Provides information on holidays and long weekends. The API provides a simple way to query the holidays of over 100 countries, including long weekends. For IoT devices, there&#39;s an endpoint to check if today is a holiday.",
+      "Bordering countries",
+      "Common name of the country",
+      "Country name",
+      "End date of the long weekend",
+      "ISO 3166-1 alpha-2 country code",
+      "If it is not global you found here the Federal states (ISO-3166-2)",
+      "Is this public holiday every year on the same date",
+      "Is this public holiday in every county (federal state)",
+      "Number of days in the long weekend",
+      "Official name of the country",
+      "Production server",
+      "Region of the country",
+      "Start date of the long weekend",
+      "Successful response with country information",
+      "Successful response with list of available countries",
+      "Successful response with list of long weekends",
+      "Successful response with list of public holidays",
+      "Successful response with next public holidays",
+      "Successful response with next public holidays worldwide",
+      "The date of the holiday",
+      "Today is a public holiday",
+      "Today is not a public holiday",
+      "Whether a bridge day is needed"
+    ]
+  }
 }

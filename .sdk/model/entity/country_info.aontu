@@ -88,6 +88,10 @@ main: kit: entity: country_info: {
               CountryCode: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "CountryInfo"

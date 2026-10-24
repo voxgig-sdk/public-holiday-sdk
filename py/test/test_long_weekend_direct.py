@@ -9,6 +9,18 @@ from publicholiday_sdk.core import helpers
 from test import runner
 
 
+# main.kit.test.live.strict is true (the default is true): a live
+# request that fails, or a live test missing an input it needs,
+# fails the test.
+# An account with no record for a test to read skips it either way.
+LIVE_STRICT = True
+
+
+def _live_ok(result):
+    status = helpers.to_int(result.get("status"))
+    return result.get("err") is None and bool(result.get("ok")) and 200 <= status < 300
+
+
 class TestLongWeekendDirect:
 
     def test_should_direct_list_long_weekend(self):
@@ -18,27 +30,24 @@ class TestLongWeekendDirect:
         ])
         _skip, _reason = runner.is_control_skipped("direct", "direct-list-long_weekend", "live" if setup["live"] else "unit")
         if _skip:
-            # pytest already imported at module scope
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
         if setup["live"]:
             for _live_key in ["country_code01", "year01"]:
                 if setup["idmap"].get(_live_key) is None:
-                    # pytest already imported at module scope
-                    pytest.skip(f"live test needs {_live_key} via *_ENTID env var (synthetic IDs only)")
-                    return
+                    runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via PUBLIC_HOLIDAY_TEST_LONG_WEEKEND_ENTID")
 
         client = setup["client"]
 
         params = {}
         if setup["live"]:
-            params["country_code"] = setup["idmap"]["country_code01"]
+            params["country_code"] = setup["idmap"].get("country_code01")
         else:
             params["country_code"] = "direct01"
         if setup["live"]:
-            params["year"] = setup["idmap"]["year01"]
+            params["year"] = setup["idmap"].get("year01")
         else:
-            params["year"] = "direct01"
+            params["year"] = "direct02"
 
         result = client.direct({
             "path": "LongWeekend/{year}/{country_code}",
@@ -46,19 +55,10 @@ class TestLongWeekendDirect:
             "params": params,
         })
         if setup["live"]:
-            # Live mode is lenient: synthetic IDs frequently 4xx and the
-            # list-response shape varies wildly across public APIs. Skip
-            # rather than fail when the call doesn't return a usable list.
-            if result.get("err") is not None:
-                pytest.skip(f"list call failed (likely synthetic IDs against live API): {result.get('err')}")
-                return
-            if not result.get("ok"):
-                pytest.skip("list call not ok (likely synthetic IDs against live API)")
-                return
-            status = helpers.to_int(result["status"])
-            if status < 200 or status >= 300:
-                pytest.skip(f"expected 2xx status, got {status}")
-                return
+            if not _live_ok(result):
+                runner.live_miss(LIVE_STRICT, "Live list failed: " + runner.live_describe(result))
+            if runner.live_list(result.get("data")) is None:
+                runner.live_miss(LIVE_STRICT, "Live list returned no list: " + runner.live_describe(result))
         else:
             assert result["ok"] is True
             assert helpers.to_int(result["status"]) == 200
@@ -87,11 +87,12 @@ def _long_weekend_direct_setup(mockres):
         merged_opts.update({
         })
         client = PublicHolidaySDK(merged_opts)
+        idmap = env.get("PUBLIC_HOLIDAY_TEST_LONG_WEEKEND_ENTID")
         return {
             "client": client,
             "calls": calls,
             "live": True,
-            "idmap": {},
+            "idmap": idmap if isinstance(idmap, dict) else {},
         }
 
     def mock_fetch(url, init):

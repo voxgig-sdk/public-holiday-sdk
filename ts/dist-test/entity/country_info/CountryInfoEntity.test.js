@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.CountryInfo();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.PublicHolidaySDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.CountryInfo().load({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.PUBLIC_HOLIDAY_TEST_LIVE;
         for (const op of ['load']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "borders": { "a": true, "h": "Borders", "n": "borders", "r": false, "sh": "Bordering countries", "t": "`$ARRAY`", "key$": "borders", "index$": 0 }, "commonName": { "a": true, "h": "Common Name", "n": "commonName", "r": false, "sh": "Common name of the country", "t": "`$STRING`", "key$": "commonName", "index$": 1 }, "countryCode": { "a": true, "h": "Country Code", "n": "countryCode", "r": false, "sh": "ISO 3166-1 alpha-2 country code", "t": "`$STRING`", "key$": "countryCode", "index$": 2 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 3 }, "officialName": { "a": true, "h": "Official Name", "n": "officialName", "r": false, "sh": "Official name of the country", "t": "`$STRING`", "key$": "officialName", "index$": 4 }, "region": { "a": true, "h": "Region", "n": "region", "r": false, "sh": "Region of the country", "t": "`$STRING`", "key$": "region", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "country_info", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /CountryInfo/{CountryCode}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "AT", "k": "param", "n": "id", "or": "CountryCode", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/CountryInfo/{CountryCode}", "q": { "exist": ["id"] }, "r": { "param": { "CountryCode": "id" } }, "s": [{ "lit": "CountryInfo" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "country_info", "name__orig": "country_info", "Name": "CountryInfo", "name_": "country_info", "name-": "country-info", "NAME": "COUNTRY_INFO", "index$": 1 }, { "active": true, "entity": "country_info", "key$": "BasicCountryInfoFlow", "kind": "basic", "name": "BasicCountryInfoFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "country_info_ref01", "srcdatavar": "country_info_ref01_data", "suffix": "_dt0" }, "m": { "id": "country_info01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-country_info_ref01" } }], "index$": 0 }] }, 'CountryInfo', { "GET /CountryInfo/{CountryCode}": { "protocol": "http", "parameters": [{ "name": "CountryCode", "in": "path", "description": "ISO 3166-1 alpha-2 country code", "required": true, "schema": { "type": "string", "minLength": 2, "maxLength": 2, "example": "AT" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "borders": { "a": true, "h": "Borders", "n": "borders", "r": false, "sh": "Bordering countries", "t": "`$ARRAY`", "key$": "borders", "index$": 0 }, "commonName": { "a": true, "h": "Common Name", "n": "commonName", "r": false, "sh": "Common name of the country", "t": "`$STRING`", "key$": "commonName", "index$": 1 }, "countryCode": { "a": true, "h": "Country Code", "n": "countryCode", "r": false, "sh": "ISO 3166-1 alpha-2 country code", "t": "`$STRING`", "key$": "countryCode", "index$": 2 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 3 }, "officialName": { "a": true, "h": "Official Name", "n": "officialName", "r": false, "sh": "Official name of the country", "t": "`$STRING`", "key$": "officialName", "index$": 4 }, "region": { "a": true, "h": "Region", "n": "region", "r": false, "sh": "Region of the country", "t": "`$STRING`", "key$": "region", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "country_info", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /CountryInfo/{CountryCode}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "AT", "k": "param", "n": "id", "or": "CountryCode", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/CountryInfo/{CountryCode}", "q": { "exist": ["id"] }, "r": { "param": { "CountryCode": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "CountryInfo" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "country_info", "name__orig": "country_info", "Name": "CountryInfo", "name_": "country_info", "name-": "country-info", "NAME": "COUNTRY_INFO", "index$": 1 }, { "active": true, "entity": "country_info", "key$": "BasicCountryInfoFlow", "kind": "basic", "name": "BasicCountryInfoFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "country_info_ref01", "srcdatavar": "country_info_ref01_data", "suffix": "_dt0" }, "m": { "id": "country_info01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-country_info_ref01" } }], "index$": 0 }] }, 'CountryInfo', { "GET /CountryInfo/{CountryCode}": { "protocol": "http", "parameters": [{ "name": "CountryCode", "in": "path", "description": "ISO 3166-1 alpha-2 country code", "required": true, "schema": { "type": "string", "minLength": 2, "maxLength": 2, "example": "AT" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -77,6 +85,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(country_info_ref01_data_dt0.id === country_info_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

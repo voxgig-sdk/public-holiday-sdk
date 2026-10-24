@@ -51,15 +51,17 @@ class LongWeekendListMatch(TypedDict):
     year: int
 
 
-class PublicHoliday(TypedDict, total=False):
-    counties: list
-    countryCode: str
-    date: str
-    fixed: bool
-    launchYear: int
-    localName: str
-    name: str
-    types: list
+PublicHoliday = TypedDict('PublicHoliday', {
+    "counties": list,
+    "countryCode": str,
+    "date": str,
+    "fixed": bool,
+    "global": bool,
+    "launchYear": int,
+    "localName": str,
+    "name": str,
+    "types": list,
+}, total=False)
 
 
 class PublicHolidayLoadMatchRequired(TypedDict):

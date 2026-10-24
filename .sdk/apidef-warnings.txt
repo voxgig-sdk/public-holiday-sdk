@@ -1,0 +1,11 @@
+{
+  point: "warning"
+  note: "Points GET /IsTodayPublicHoliday/{CountryCode} and GET /NextPublicHolidays/{CountryCode} on entity=public_holiday op=load have the same selector (exist: country_code), so only GET /IsTodayPublicHoliday/{CountryCode} is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "public_holiday"
+  op: "load"
+  points: [
+    "GET /IsTodayPublicHoliday/{CountryCode}"
+    "GET /NextPublicHolidays/{CountryCode}"
+  ]
+
+}

@@ -3,11 +3,16 @@ declare(strict_types=1);
 
 // PublicHoliday SDK utility: prepare_body
 
+require_once __DIR__ . '/Media.php';
+
 class PublicHolidayPrepareBody
 {
     public static function call(PublicHolidayContext $ctx): mixed
     {
         if ($ctx->op->input === 'data') {
+            if (PublicHolidayMedia::isRawRequest($ctx->point)) {
+                return PublicHolidayMedia::rawBody($ctx->reqdata);
+            }
             $body = ($ctx->utility->transform_request)($ctx);
             // PHP cannot tell an empty map from an empty list, and this
             // vendored struct answers [] where the canonical transform

@@ -79,6 +79,7 @@ module PublicHolidayConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -138,6 +139,10 @@ module PublicHolidayConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -235,6 +240,10 @@ module PublicHolidayConfig
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -334,6 +343,10 @@ module PublicHolidayConfig
                       "country_code",
                       "year",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -463,6 +476,10 @@ module PublicHolidayConfig
                       "year",
                     ],
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -483,6 +500,10 @@ module PublicHolidayConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -538,7 +559,6 @@ module PublicHolidayConfig
                   "select" => {
                     "exist" => [
                       "country_code",
-                      "offset",
                     ],
                   },
                 },
@@ -583,6 +603,10 @@ module PublicHolidayConfig
                     "exist" => [
                       "country_code",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

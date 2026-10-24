@@ -93,6 +93,7 @@ class PublicHolidayConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -152,6 +153,10 @@ class PublicHolidayConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -249,6 +254,10 @@ class PublicHolidayConfig
                     'exist' => [
                       'id',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -348,6 +357,10 @@ class PublicHolidayConfig
                       'country_code',
                       'year',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -477,6 +490,10 @@ class PublicHolidayConfig
                       'year',
                     ],
                   ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
                 [
                   'kind' => 'http',
@@ -497,6 +514,10 @@ class PublicHolidayConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -552,7 +573,6 @@ class PublicHolidayConfig
                   'select' => [
                     'exist' => [
                       'country_code',
-                      'offset',
                     ],
                   ],
                 ],
@@ -597,6 +617,10 @@ class PublicHolidayConfig
                     'exist' => [
                       'country_code',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],

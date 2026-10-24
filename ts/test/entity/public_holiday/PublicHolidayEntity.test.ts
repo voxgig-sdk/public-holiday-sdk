@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { PublicHolidaySDK, BaseFeature, stdutil } from '../../..'
+import { PublicHolidaySDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,17 +41,75 @@ describe('PublicHolidayEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('public_holiday hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of PublicHolidaySDK.test(offline).PublicHoliday().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of PublicHolidaySDK.test(offline).PublicHoliday()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = PublicHolidaySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.PublicHoliday().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of PublicHolidaySDK.test().PublicHoliday().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new PublicHolidaySDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.PublicHoliday().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.PublicHoliday().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = PublicHolidaySDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.PublicHoliday().list({"country_code":1,"year":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.PUBLIC_HOLIDAY_TEST_LIVE
-    for (const op of ['list', 'load']) {
+    for (const op of ['list']) {
       if (!live && maybeSkipControl(t, 'entityOp', 'public_holiday.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"counties":{"a":true,"h":"Counties","n":"counties","r":false,"sh":"If it is not global you found here the Federal states (ISO-3166-2)","t":"`$ARRAY`","key$":"counties","index$":0},"countryCode":{"a":true,"h":"Country Code","n":"countryCode","r":false,"sh":"ISO 3166-1 alpha-2 country code","t":"`$STRING`","key$":"countryCode","index$":1},"date":{"a":true,"fo":"date","h":"Date","n":"date","r":false,"sh":"The date of the holiday","t":"`$STRING`","key$":"date","index$":2},"fixed":{"a":true,"h":"Fixed","n":"fixed","r":false,"sh":"Is this public holiday every year on the same date","t":"`$BOOLEAN`","key$":"fixed","index$":3},"global":{"a":true,"h":"Global","n":"global","r":false,"sh":"Is this public holiday in every county (federal state)","t":"`$BOOLEAN`","key$":"global","index$":4},"launchYear":{"a":true,"h":"Launch Year","n":"launchYear","r":false,"sh":"The launch year of the public holiday","t":"`$INTEGER`","key$":"launchYear","index$":5},"localName":{"a":true,"h":"Local Name","n":"localName","r":false,"sh":"Local name of the holiday","t":"`$STRING`","key$":"localName","index$":6},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"English name of the holiday","t":"`$STRING`","key$":"name","index$":7},"types":{"a":true,"h":"Types","n":"types","r":false,"sh":"The types of the public holiday.","t":"`$ARRAY`","key$":"types","index$":8}},"name":"public_holiday","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /PublicHolidays/{Year}/{CountryCode}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"AT","k":"param","n":"country_code","or":"CountryCode","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":2026,"k":"param","n":"year","or":"Year","r":true,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/PublicHolidays/{Year}/{CountryCode}","q":{"exist":["country_code","year"]},"r":{"param":{"CountryCode":"country_code","Year":"year"}},"s":[{"lit":"PublicHolidays"},{"var":"year"},{"var":"country_code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /NextPublicHolidaysWorldwide","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/NextPublicHolidaysWorldwide","q":{},"r":{},"s":[{"lit":"NextPublicHolidaysWorldwide"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /IsTodayPublicHoliday/{CountryCode}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"AT","k":"param","n":"country_code","or":"CountryCode","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/IsTodayPublicHoliday/{CountryCode}","q":{"exist":["country_code","offset"]},"r":{"param":{"CountryCode":"country_code"}},"s":[{"lit":"IsTodayPublicHoliday"},{"var":"country_code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /NextPublicHolidays/{CountryCode}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"AT","k":"param","n":"country_code","or":"CountryCode","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/NextPublicHolidays/{CountryCode}","q":{"exist":["country_code"]},"r":{"param":{"CountryCode":"country_code"}},"s":[{"lit":"NextPublicHolidays"},{"var":"country_code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"public_holiday","name__orig":"public_holiday","Name":"PublicHoliday","name_":"public_holiday","name-":"public-holiday","NAME":"PUBLIC_HOLIDAY","index$":3}, {"active":true,"entity":"public_holiday","key$":"BasicPublicHolidayFlow","kind":"basic","name":"BasicPublicHolidayFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"public_holiday_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"public_holiday_ref01","srcdatavar":"public_holiday_ref01_data","suffix":"_dt0"},"m":{"id":"public_holiday01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-public_holiday_ref01"}}],"index$":1}]}, 'PublicHoliday', {"GET /PublicHolidays/{Year}/{CountryCode}":{"protocol":"http","parameters":[{"name":"Year","in":"path","description":"The year to retrieve holidays for","required":true,"schema":{"type":"integer","example":2026},"index$":0},{"name":"CountryCode","in":"path","description":"ISO 3166-1 alpha-2 country code","required":true,"schema":{"type":"string","minLength":2,"maxLength":2,"example":"AT"},"index$":1}]},"GET /NextPublicHolidaysWorldwide":{"protocol":"http","parameters":[]},"GET /IsTodayPublicHoliday/{CountryCode}":{"protocol":"http","parameters":[{"name":"CountryCode","in":"path","description":"ISO 3166-1 alpha-2 country code","required":true,"schema":{"type":"string","minLength":2,"maxLength":2,"example":"AT"},"index$":0},{"name":"offset","in":"query","description":"Timezone offset in hours","required":false,"schema":{"type":"integer"},"index$":1}]},"GET /NextPublicHolidays/{CountryCode}":{"protocol":"http","parameters":[{"name":"CountryCode","in":"path","description":"ISO 3166-1 alpha-2 country code","required":true,"schema":{"type":"string","minLength":2,"maxLength":2,"example":"AT"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"counties":{"a":true,"h":"Counties","n":"counties","r":false,"sh":"If it is not global you found here the Federal states (ISO-3166-2)","t":"`$ARRAY`","key$":"counties","index$":0},"countryCode":{"a":true,"h":"Country Code","n":"countryCode","r":false,"sh":"ISO 3166-1 alpha-2 country code","t":"`$STRING`","key$":"countryCode","index$":1},"date":{"a":true,"fo":"date","h":"Date","n":"date","r":false,"sh":"The date of the holiday","t":"`$STRING`","key$":"date","index$":2},"fixed":{"a":true,"h":"Fixed","n":"fixed","r":false,"sh":"Is this public holiday every year on the same date","t":"`$BOOLEAN`","key$":"fixed","index$":3},"global":{"a":true,"h":"Global","n":"global","r":false,"sh":"Is this public holiday in every county (federal state)","t":"`$BOOLEAN`","key$":"global","index$":4},"launchYear":{"a":true,"h":"Launch Year","n":"launchYear","r":false,"sh":"The launch year of the public holiday","t":"`$INTEGER`","key$":"launchYear","index$":5},"localName":{"a":true,"h":"Local Name","n":"localName","r":false,"sh":"Local name of the holiday","t":"`$STRING`","key$":"localName","index$":6},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"English name of the holiday","t":"`$STRING`","key$":"name","index$":7},"types":{"a":true,"h":"Types","n":"types","r":false,"sh":"The types of the public holiday.","t":"`$ARRAY`","key$":"types","index$":8}},"name":"public_holiday","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /PublicHolidays/{Year}/{CountryCode}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"AT","k":"param","n":"country_code","or":"CountryCode","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":2026,"k":"param","n":"year","or":"Year","r":true,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/PublicHolidays/{Year}/{CountryCode}","q":{"exist":["country_code","year"]},"r":{"param":{"CountryCode":"country_code","Year":"year"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"PublicHolidays"},{"var":"year"},{"var":"country_code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /NextPublicHolidaysWorldwide","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/NextPublicHolidaysWorldwide","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"NextPublicHolidaysWorldwide"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /IsTodayPublicHoliday/{CountryCode}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"AT","k":"param","n":"country_code","or":"CountryCode","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/IsTodayPublicHoliday/{CountryCode}","q":{"exist":["country_code"]},"r":{"param":{"CountryCode":"country_code"}},"s":[{"lit":"IsTodayPublicHoliday"},{"var":"country_code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /NextPublicHolidays/{CountryCode}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"AT","k":"param","n":"country_code","or":"CountryCode","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/NextPublicHolidays/{CountryCode}","q":{"exist":["country_code"]},"r":{"param":{"CountryCode":"country_code"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"NextPublicHolidays"},{"var":"country_code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"public_holiday","name__orig":"public_holiday","Name":"PublicHoliday","name_":"public_holiday","name-":"public-holiday","NAME":"PUBLIC_HOLIDAY","index$":3}, {"active":true,"entity":"public_holiday","key$":"BasicPublicHolidayFlow","kind":"basic","name":"BasicPublicHolidayFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"public_holiday_ref01"}}],"index$":0},{"a":false,"d":{},"i":{"ref":"public_holiday_ref01","srcdatavar":"public_holiday_ref01_data","suffix":"_dt0"},"m":{"id":"public_holiday01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-public_holiday_ref01"}}],"unreachable":true}]}, 'PublicHoliday', {"GET /PublicHolidays/{Year}/{CountryCode}":{"protocol":"http","parameters":[{"name":"Year","in":"path","description":"The year to retrieve holidays for","required":true,"schema":{"type":"integer","example":2026},"index$":0},{"name":"CountryCode","in":"path","description":"ISO 3166-1 alpha-2 country code","required":true,"schema":{"type":"string","minLength":2,"maxLength":2,"example":"AT"},"index$":1}]},"GET /NextPublicHolidaysWorldwide":{"protocol":"http","parameters":[]},"GET /IsTodayPublicHoliday/{CountryCode}":{"protocol":"http","parameters":[{"name":"CountryCode","in":"path","description":"ISO 3166-1 alpha-2 country code","required":true,"schema":{"type":"string","minLength":2,"maxLength":2,"example":"AT"},"index$":0},{"name":"offset","in":"query","description":"Timezone offset in hours","required":false,"schema":{"type":"integer"},"index$":1}]},"GET /NextPublicHolidays/{CountryCode}":{"protocol":"http","parameters":[{"name":"CountryCode","in":"path","description":"ISO 3166-1 alpha-2 country code","required":true,"schema":{"type":"string","minLength":2,"maxLength":2,"example":"AT"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -68,11 +126,16 @@ describe('PublicHolidayEntity', async () => {
     const public_holiday_ref01_list = (await public_holiday_ref01_ent.list(public_holiday_ref01_match)).map((e: any) => e.data())
 
 
-
   })
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

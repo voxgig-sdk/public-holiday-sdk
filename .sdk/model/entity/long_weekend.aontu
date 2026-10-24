@@ -82,6 +82,10 @@ main: kit: entity: long_weekend: {
               Year: "year"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "LongWeekend"

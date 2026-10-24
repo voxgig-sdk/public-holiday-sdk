@@ -34,6 +34,10 @@ main: kit: entity: available_country: {
           }
           m: "GET"
           o: "/AvailableCountries"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "AvailableCountries"

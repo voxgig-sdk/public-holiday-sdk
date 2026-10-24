@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/public-holiday-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/public-holiday-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -131,7 +131,7 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = PublicHolidaySDK::test([
-    "entity" => ["countryinfo" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["country_info" => ["test01" => ["id" => "test01"]]],
 ]);
 
 // Entity ops return the ENTITY (throws on error);
@@ -227,8 +227,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `list` | `(?array $reqmatch = null, $ctrl): mixed` | List entities matching the criteria (call with no argument to list all), one per record. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -238,9 +238,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -338,7 +338,7 @@ Create an instance: `$available_country = $client->AvailableCountry();`
 #### Example: List
 
 ```php
-// list() returns an array of AvailableCountry records (throws on error).
+// list() returns an array of AvailableCountry entities, one per record (throws on error).
 $available_countrys = $client->AvailableCountry()->list();
 ```
 
@@ -394,8 +394,8 @@ Create an instance: `$long_weekend = $client->LongWeekend();`
 #### Example: List
 
 ```php
-// list() returns an array of LongWeekend records (throws on error).
-$long_weekends = $client->LongWeekend()->list();
+// list() returns an array of LongWeekend entities, one per record (throws on error).
+$long_weekends = $client->LongWeekend()->list(["country_code" => "example", "year" => 1]);
 ```
 
 
@@ -434,8 +434,8 @@ $public_holiday = $client->PublicHoliday()->load(["country_code" => "country_cod
 #### Example: List
 
 ```php
-// list() returns an array of PublicHoliday records (throws on error).
-$public_holidays = $client->PublicHoliday()->list();
+// list() returns an array of PublicHoliday entities, one per record (throws on error).
+$public_holidays = $client->PublicHoliday()->list(["country_code" => "example", "year" => 1]);
 ```
 
 ## Features

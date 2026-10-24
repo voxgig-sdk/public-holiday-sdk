@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/public-holiday-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/public-holiday-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -43,10 +43,11 @@ client = PublicHolidaySDK.new
 
 ```ruby
 begin
-  # list returns an Array of AvailableCountry records — iterate directly.
+  # list returns an Array of AvailableCountry entities, one per record; data_get reads the record.
   availablecountrys = client.AvailableCountry.list
   availablecountrys.each do |item|
-    puts "#{item["countryCode"]}"
+    record = item.data_get
+    puts "#{record["countryCode"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -128,13 +129,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = PublicHolidaySDK.test({
-  "entity" => { "countryinfo" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "country_info" => { "test01" => { "id" => "test01" } } },
 })
 
 # Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
+# data_get reads its mock record.
 countryinfo = client.CountryInfo.load({ "id" => "test01" })
-puts countryinfo
+puts countryinfo.data_get
 ```
 
 ### Use a custom fetch function
@@ -221,8 +222,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -232,9 +233,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `PublicHolidayError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`PublicHolidayError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -331,8 +333,9 @@ Create an instance: `available_country = client.AvailableCountry`
 #### Example: List
 
 ```ruby
-# list returns an Array of AvailableCountry records (raises on error).
+# list returns an Array of AvailableCountry entities, one per record (raises on error).
 available_countrys = client.AvailableCountry.list
+available_countrys.each { |item| puts item.data_get }
 ```
 
 
@@ -387,8 +390,9 @@ Create an instance: `long_weekend = client.LongWeekend`
 #### Example: List
 
 ```ruby
-# list returns an Array of LongWeekend records (raises on error).
-long_weekends = client.LongWeekend.list
+# list returns an Array of LongWeekend entities, one per record (raises on error).
+long_weekends = client.LongWeekend.list({ "country_code" => "example", "year" => 1 })
+long_weekends.each { |item| puts item.data_get }
 ```
 
 
@@ -427,8 +431,9 @@ public_holiday = client.PublicHoliday.load({ "country_code" => "country_code" })
 #### Example: List
 
 ```ruby
-# list returns an Array of PublicHoliday records (raises on error).
-public_holidays = client.PublicHoliday.list
+# list returns an Array of PublicHoliday entities, one per record (raises on error).
+public_holidays = client.PublicHoliday.list({ "country_code" => "example", "year" => 1 })
+public_holidays.each { |item| puts item.data_get }
 ```
 
 ## Features

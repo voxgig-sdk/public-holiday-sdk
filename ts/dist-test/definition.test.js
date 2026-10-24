@@ -17,7 +17,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": [
@@ -43,7 +48,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
@@ -80,7 +90,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": [
@@ -113,7 +128,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": [
@@ -155,69 +175,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
-        "auth": null,
-        "status": 200,
-        "sample": [
-            {
-                "date": "2017-01-01",
-                "localName": "Neujahr",
-                "name": "New Year's Day",
-                "countryCode": "AT",
-                "fixed": true,
-                "global": true,
-                "counties": [
-                    "x"
-                ],
-                "launchYear": 1967,
-                "types": [
-                    "Public"
-                ]
-            }
-        ],
-        "idField": "id"
-    },
-    {
-        "entity": "public_holiday",
-        "accessor": "PublicHoliday",
-        "op": "load",
-        "method": "GET",
-        "path": "/IsTodayPublicHoliday/{CountryCode}",
-        "args": [
-            {
-                "name": "country_code",
-                "wire": "CountryCode",
-                "value": "AT"
-            }
-        ],
-        "select": {
-            "offset": "v1"
-        },
-        "headers": [],
-        "query": [
-            "offset"
-        ],
-        "auth": null,
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "public_holiday",
-        "accessor": "PublicHoliday",
-        "op": "load",
-        "method": "GET",
-        "path": "/NextPublicHolidays/{CountryCode}",
-        "args": [
-            {
-                "name": "country_code",
-                "wire": "CountryCode",
-                "value": "AT"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": [

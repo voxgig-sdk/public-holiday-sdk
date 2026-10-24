@@ -102,6 +102,7 @@ class Config {
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -176,7 +177,11 @@ class Config {
                 "res": "`body`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         }
@@ -274,6 +279,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -373,6 +382,10 @@ class Config {
                   "country_code",
                   "year"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -501,6 +514,10 @@ class Config {
                   "country_code",
                   "year"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -521,7 +538,11 @@ class Config {
                 "res": "`body`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         },
@@ -576,8 +597,7 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "country_code",
-                  "offset"
+                  "country_code"
                 ]
               }
             },
@@ -622,6 +642,10 @@ class Config {
                 "exist": [
                   "country_code"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
